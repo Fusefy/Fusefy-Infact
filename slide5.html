@@ -1,288 +1,603 @@
-<section class="ai-solution-card-deck" data-auto-animate data-transition="zoom">
+<section class="ai-adoption-slide" data-transition="zoom">
   <style>
-    .ai-solution-card-deck {
-      background: linear-gradient(160deg, #FDFEFE 0%, #EDF2F7 100%);
-      padding: 4vh 5vw;
-      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
-      --wins-blue: #3A86FF;
-      --risks-orange: #FF6B35;
-      --text-heading: #0A2540;
-      --text-primary: #1A202C;
-      --text-secondary: #334155;
-      --card-bg: rgba(255, 255, 255, 0.8);
-      --card-border: rgba(226, 232, 240, 0.7);
-      --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-      
-      --fusefy-blue-bg: linear-gradient(135deg, #012190 0%, #00176D 100%);
-      --fusefy-text-light: #E0E7FF;
-      --fusefy-cyan-accent: #7DF9FF;
-    }
-    
-    .ai-solution-card-deck * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    .slide-layout-container {
-      width: 100%; height: 100%;
-      display: flex; flex-direction: column; gap: 2rem;
-      max-height: 90vh;
-      margin: auto;
-    }
-    
-    .main-header {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 0.5rem 0;
-    }
-    .main-header h1 { 
-      font-size: 2rem; 
-      font-weight: 800; 
-      background: linear-gradient(90deg, var(--text-heading) 0%, var(--wins-blue) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: -0.5px;
-    }
-    .main-logo { 
-      width: 40px; height: 40px; 
-      stroke: var(--wins-blue); 
-      stroke-width: 1.8;
-      transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
-    .main-logo:hover { transform: rotate(360deg); }
-
-    .top-panel {
-      display: flex; gap: 2rem;
-      padding: 0 1rem;
-      flex-grow: 0.5;
+    /* BG style for whole slide */
+    .ai-adoption-slide {
+      background: url('./images/BG-2-Slide5.png') no-repeat center center / cover;
+      /* Optional: fallback color if image fails to load */
+      background-color: #f9fafb;
     }
 
-    .content-column-deck { 
-      flex: 1;
-      transition: all 0.5s ease;
-      max-width: calc(50% - 1.5rem);
-    }
-
-    .info-card-deck {
-      background: var(--card-bg);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      box-shadow: var(--shadow);
+    .content-set {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
       height: 100%;
-      display: flex; flex-direction: column;
-      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-      position: relative;
       overflow: hidden;
-      max-height: 85vh;
-    }
-    .info-card-deck:hover { 
-      transform: translateY(-5px); 
-      box-shadow: 0 12px 25px rgba(0,0,0,0.1); 
     }
 
-    /* Gradient Border and Background Effects */
-    .card-wins { 
-      border-top: 5px solid var(--wins-blue);
-      background: linear-gradient(135deg, rgba(58, 134, 255, 0.1) 0%, rgba(239, 246, 255, 0.6) 100%);
-      backdrop-filter: blur(8px);
-    }
-    .card-risks { 
-      border-top: 5px solid var(--risks-orange);
-      background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 247, 237, 0.6) 100%);
-      backdrop-filter: blur(8px);
+    .clickable-image {
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+      position: relative;
+      z-index: 10;
+      cursor: pointer;
     }
 
-    .card-header-deck {
-      display: flex; align-items: center; gap: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--card-border);
-      margin-bottom: 0.8rem;
+    .clickable-image:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
-    .card-icon-deck {
-      width: 40px; height: 40px;
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      transition: all 0.3s ease;
-    }
-    .icon-bg-wins { 
-      background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
-      box-shadow: 0 3px 8px rgba(58, 134, 255, 0.2);
-    }
-    .icon-bg-risks { 
-      background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
-      box-shadow: 0 3px 8px rgba(255, 107, 53, 0.2);
-    }
-    .card-icon-deck svg { width: 20px; height: 20px; stroke-width: 2; }
-    .icon-wins-color { stroke: var(--wins-blue); }
-    .icon-risks-color { stroke: var(--risks-orange); }
-
-    .card-title-deck { 
-      font-size: 1.25rem; 
-      font-weight: 700; 
-      color: var(--text-heading);
+    .navigation-button {
+      position: relative;
+      z-index: 20;
+      transition: transform 0.2s ease;
+      background-color: white;
+      color: blue;
+      border: none;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
     }
 
-    .impact-list-deck {
-      list-style: none;
-      display: flex; flex-direction: column;
-      gap: 1.2rem;
-      line-height: 1.6;
-      height: 100%;
-      justify-content: space-around;
+    .navigation-button:hover {
+      transform: scale(1.05);
     }
-    .impact-item-deck {
-      display: flex; align-items: center; gap: 0.6rem;
-      font-size: 16px; font-weight: 600;
-      color: var(--text-secondary);
+
+    /* --- Zoom Overlay Styles (UNCHANGED) --- */
+    .zoom-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0s linear 0.3s;
     }
-    .impact-icon-deck {
-      width: 18px; height: 18px;
-      flex-shrink: 0; 
-      stroke-width: 2;
-      transition: all 0.3s ease;
+
+    .zoom-overlay.active {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.3s ease;
     }
-    .impact-item-deck:hover .impact-icon-deck { transform: scale(1.2) rotate(-10deg); }
-    .impact-icon-wins { stroke: var(--wins-blue); }
-    .impact-icon-risks { stroke: var(--risks-orange); }
+
+    .zoom-image {
+      max-width: 80%;
+      max-height: 80%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      transform: scale(0.8);
+      transition: transform 0.3s cubic-bezier(0.26, 0.86, 0.44, 0.985);
+    }
+
+    .zoom-overlay.active .zoom-image {
+      transform: scale(1);
+    }
+
+    .close-zoom {
+      position: fixed;
+      top: 30px;
+      right: 40px;
+      font-size: 30px;
+      color: #002060;
+      cursor: pointer;
+      background: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      z-index: 2100;
+    }
+
+    /* --- Reveal.js Fragment Animation Styles (UNCHANGED) --- */
+    .reveal .slides section .fragment.fade-in-up {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease, visibility 0s linear 0.6s;
+    }
+
+    .reveal .slides section .fragment.fade-in-up.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition-delay: 0s;
+    }
+
+    /* --- PAGE 1: UPDATED STYLES for "A Glimpse Into the Future" --- */
+    .future-title {
+      color: #0021f3;
+      font-weight: bold;
+      font-size: small;
+      text-align: center;
+      margin-bottom: 20px; /* Increased margin */
+      text-transform: uppercase;
+    }
+
+    .future-title .gold-text {
+      color: #f5b01b;
+      /* Gold/Yellow */
+    }
+
+    /* UPDATED: This is now a container for rows */
+    .future-grid-container {
+      display: flex;
+      flex-direction: column;
+      gap: 25px; /* Spacing between rows */
+      width: 90%; /* <-- REDUCED WIDTH FROM 100% */
+      margin: 0 auto; /* <-- ADDED TO CENTER THE CONTAINER */
+    }
     
-    /* --- BOTTOM FUSEFY PANEL --- */
-    .fusefy-solution-panel {
-      background: var(--fusefy-blue-bg); 
-      border-radius: 20px;
-      padding: 1.5rem 2.5rem;
-      margin: 0rem 4rem;
-      box-shadow: 0 15px 40px rgba(1, 33, 144, 0.4);
+    /* NEW: Row container for title + cards */
+    .future-row {
+        display: flex;
+        align-items: center;
+        gap: 20px; /* Space between title and the cards block */
     }
-    .panel-header h3 { font-size: 1.2rem; font-weight: 700; color: white; margin-bottom: 1rem !important; }
-    .solution-items-grid { display: flex; justify-content: space-around; gap: 1.5rem; }
-    .solution-item { text-align: center; color: var(--fusefy-text-light); }
-    .solution-icon {
-        width: 40px; height: 40px;
-        margin: 0 auto 0.5rem auto;
-        display: flex; align-items: center; justify-content: center;
-        background: rgba(125, 249, 255, 0.1);
-        border: 1px solid rgba(125, 249, 255, 0.2);
-        border-radius: 10px;
-        transition: all 0.3s ease;
-    }
-    .solution-icon:hover {
-      background: rgba(125, 249, 255, 0.2);
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 0 15px rgba(125, 249, 255, 0.3);
-    }
-    .solution-icon svg { stroke: var(--fusefy-cyan-accent); stroke-width: 1.8; width: 20px; height: 20px; }
-    .solution-item p { font-size: 0.8rem; font-weight: 500; line-height: 1.3; max-width: 110px; margin: 0 auto; }
 
-    /* Fragment Animations */
-    .fragment.fade-in-card { opacity: 0; transform: translateY(30px) scale(0.98); transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); }
-    .fragment.fade-in-card.visible { opacity: 1; transform: translateY(0) scale(1); }
-    .fragment.zoom-in { opacity: 0; transform: scale(0.8); transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1); }
-    .fragment.zoom-in.visible { opacity: 1; transform: scale(1); }
-    .fragment.fade-right { opacity: 0; transform: translateX(30px); transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1); }
-    .fragment.fade-right.visible { opacity: 1; transform: translateX(0); }
-    .fragment.fade-up { opacity: 0; transform: translateY(20px); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
-    .fragment.fade-up.visible { opacity: 1; transform: translateY(0); }
+    /* UPDATED: Styles for the title on the left */
+    .future-row-title {
+        flex: 0 0 240px; /* UPDATED: Increased width to keep title on one line */
+        font-size: medium;
+        font-weight: 900;
+        color: #333;
+        text-align: left;
+        text-transform: uppercase;
+    }
+
+    /* NEW: Container for the 3 cards */
+    .cards-container {
+        flex-grow: 1; /* Take up the remaining space */
+        display: flex;
+        gap: 20px; /* Space between individual cards */
+    }
+
+    /* UPDATED: Card styles */
+    .future-card {
+      position: relative;
+      background: #f9fafb;
+      border-radius: 17px;
+      padding: 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+      /* --- KEY CHANGES FOR ALIGNMENT & SIZE --- */
+      flex: 1; /* This makes the cards share space and grow wider */
+      height: 130px; /* Increased height for better proportion */
+    }
+
+
+    .future-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      /* cover full card */
+      border-radius: 17px;
+      /* match parent */
+      padding: 2px;
+      /* thickness of border */
+      background: linear-gradient(90deg, #c2a159 0%, #5a7ada 100%);
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+      pointer-events: none;
+      /* doesn’t block clicks */
+    }
+
+
+    .future-card-img-container {
+      width: 100%;
+      height: 70px; /* Increased height for the image area */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      gap: 10px;
+    }
+
+    .future-card-img {
+      max-width: 45%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .future-card-title {
+      font-size: small;
+      font-weight: bold;
+      color: #111827;
+      margin: 0;
+      line-height: 1.2;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .future-card-title:hover {
+      color: #0021f3;
+    }
+
+    .future-card-desc {
+      display: none;
+    }
+
+    /* Hide description text */
+    .next-button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding-top: 10px;
+    }
+
+    /* Explanation Popup Styles */
+    .explanation-popup {
+      position: absolute;
+      left: -230px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 220px;
+      background: #000;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+    }
+
+    .explanation-popup.active {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.2s ease;
+    }
+
+    .explanation-popup ul {
+      margin: 0;
+      padding-left: 16px;
+      font-size: 12px;
+      line-height: 1.4;
+      color: #fff;
+    }
+
+    .explanation-popup li {
+      margin-bottom: 6px;
+    }
+
+    .explanation-popup::after {
+      content: '';
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 10px solid #000;
+    }
+
+    /* --- PAGE 2: Custom JS-triggered Animation Styles (UNCHANGED) --- */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-on-show {
+      opacity: 1;
+      transform: translateY(20px);
+    }
+
+    .animate-on-show.start-animation {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .services-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .services-title {
+      font-size: small;
+      font-weight: 900;
+      color: #0021F3;
+    }
+
+    .service-box {
+      flex: 1;
+      border: 1px solid #002060;
+      border-radius: 6px;
+      padding: 15px;
+      text-align: left;
+      background-color: #f8faff;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-box p {
+      font-weight: bold;
+      color: #002060;
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: small;
+    }
+
+    .service-box ul {
+      font-size: small;
+      line-height: 1.4;
+      margin: 0;
+      padding-left: 16px;
+      color: #333;
+    }
   </style>
 
-  <div class="slide-layout-container">
+  <!-- Zoom Overlay (UNCHANGED) -->
+  <div class="zoom-overlay" id="zoomOverlay">
+    <div class="close-zoom">×</div>
+    <img class="zoom-image" id="zoomedImage" src="" alt="Zoomed Image" />
+  </div>
+
+  <div class="slide-padding">
+    <!-- Slide Header (UNCHANGED) -->
     <header class="slide-header">
-      <h1>Hidden Risks in Intelligent Automation</h1>
+      <h1>What is AI Adoption as a Service?</h1>
       <img src="./images/Logo.png" alt="Company Logo" class="company-logo">
     </header>
 
-    <div class="top-panel">
-      <!-- VISIBLE WINS CARD -->
-      <div class="content-column-deck">
-        <div class="info-card-deck card-wins fragment fade-in-card" data-fragment-index="1">
-          
-          <!-- CARD HEADER: Aligned title and animated tech icons -->
-          <div class="card-header-deck" style="margin-bottom: 1.2rem; display: flex; align-items: center; gap: 1rem;">
-            <div class="card-icon-deck icon-bg-wins"><svg class="icon-wins-color" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
-            <h3 class="card-title-deck" style="font-size: 20px; font-weight: 800; color: #00176D; margin-bottom: 0;">AI Hype</h3>
-            
-            <!-- Spacer to push icons to the right -->
-            <div style="flex-grow: 1;"></div>
+    <!-- Page 1 (UPDATED HTML STRUCTURE) -->
+    <div id="content-set-1" class="content-set">
+      <h2 class="future-title fragment fade-in-up" data-fragment-index="0">A Glimpse Into The <span
+          class="gold-text">Future</span></h2>
 
-            <!-- Wrapper for tech icons to group them -->
-            <div class="tech-icons-wrapper" style="display: flex; gap: 0.5rem; align-items: center;">
-              <!-- ChatGPT: Added fade-up class, unified fragment index, and set base transition delay -->
-              <div class="card-icon-deck fragment fade-up" style="background: linear-gradient(135deg, #1097700d 0%, #10977015 100%); position: relative; transform: scale(0.8);" title="ChatGPT" data-fragment-index="1">
-                <svg class="icon-wins-color" fill="none" viewBox="0 0 24 24" style="stroke: #109770;">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
-                </svg>
-                <span style="position: absolute; bottom: -18px; font-size: 10px; white-space: nowrap; font-weight: 600;">ChatGPT</span>
+      <div class="future-grid-container">
+        <!-- Row 1: AI INVENTORY -->
+        <div class="future-row fragment fade-in-up" data-fragment-index="1">
+          <h3 style="font-size: 26px;" class="future-row-title">AI Inventory</h3>
+          <div class="cards-container">
+            <div class="future-card">
+              <div class="future-card-img-container">
+                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/Heatmap.png"
+                  alt="AI Adoption Insights" class="future-card-img clickable-image" data-src="./images/Heatmap.png" />
+                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/AI Inventory.png"
+                  alt="AI Adoption Insights" class="future-card-img clickable-image"
+                  data-src="./images/AI Inventory.png" />
               </div>
-              <!-- LangChain: Added fade-up class, unified fragment index, and a 100ms delay -->
-              <div class="card-icon-deck fragment fade-up" style="background: linear-gradient(135deg, #0254531a 0%, #02545310 100%); position: relative; transform: scale(0.8); transition-delay: 100ms;" title="LangChain" data-fragment-index="1">
-                <svg class="icon-wins-color" fill="none" viewBox="0 0 24 24" style="stroke: #025453;">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.152 6.896l-2.304-2.304M20.208 13.952l-2.304-2.304M13.152 17.104l-2.304 2.304M3.792 10.048l2.304 2.304M6.096 6.896L3.792 4.592M17.904 18.704l-2.304-2.304M20.208 4.592l-2.304 2.304M8.4 18.704l2.304 2.304"/>
-                  <circle cx="12" cy="12" r="3"/>
-                </svg>
-                <span style="position: absolute; bottom: -18px; font-size: 10px; white-space: nowrap; font-weight: 600;">LangChain</span>
+              <h4 class="future-card-title" style="font-size: small;" data-explanation="Neural Networks">AI Inventory -
+                Heatmap</h4>
+              <div class="explanation-popup">
+                <ul>
+                  <p>Evaluates AI use cases by factors like compliance, redundancy, data quality, and strategic fit.
+                    Color-coded scores with hover insights help quickly prioritize high-impact, low-risk use cases.</p>
+                </ul>
               </div>
-              <!-- CrewAI: Added fade-up class, unified fragment index, and a 200ms delay -->
-              <div class="card-icon-deck fragment fade-up" style="background: linear-gradient(135deg, #ff44000d 0%, #ff440015 100%); position: relative; transform: scale(0.8); transition-delay: 200ms;" title="CrewAI" data-fragment-index="1">
-                <svg class="icon-wins-color" fill="none" viewBox="0 0 24 24" style="stroke: #ff4400;">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/>
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 12a3 3 0 100-6 3 3 0 000 6z"/>
-                </svg>
-                <span style="position: absolute; bottom: -18px; font-size: 10px; white-space: nowrap; font-weight: 600;">CrewAI</span>
+            </div>
+            <div class="future-card">
+              <div class="future-card-img-container">
+                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/TCO-1.png"
+                  alt="Robotic Process Automation" class="future-card-img clickable-image"
+                  data-src="./images/TCO-1.png" />
+                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/TCO-NEW-2.png"
+                  alt="Robotic Process Automation" class="future-card-img clickable-image"
+                  data-src="./images/TCO-NEW-2.png" />
               </div>
-              <!-- Claude: Added fade-up class, unified fragment index, and a 300ms delay -->
-              <div class="card-icon-deck fragment fade-up" style="background: linear-gradient(135deg, #5436DA0d 0%, #5436DA15 100%); position: relative; transform: scale(0.8); transition-delay: 300ms;" title="Claude" data-fragment-index="1">
-                <svg class="icon-wins-color" fill="none" viewBox="0 0 24 24" style="stroke: #5436DA;">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082c.25-.023.5-.054.75-.082M9.75 3.104c.251.023.501.05.75.082m-1.5 0L3 14.5m6.75-11.396c.386.198.74.469.972.822.23.353.28.762.28 1.174V21"/>
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 3.104c.251.023.501.05.75.082M14.25 3.104c-.251.023-.501.05-.75.082m.75-.082c.386.198.74.469.972.822.23.353.28.762.28 1.174V21"/>
-                </svg>
-                <span style="position: absolute; bottom: -18px; font-size: 10px; white-space: nowrap; font-weight: 600;">Claude</span>
+              <h4 class="future-card-title" style="font-size: medium;" data-explanation="Robotic Process Automation">TCO
+              </h4>
+              <div class="explanation-popup">
+                <ul>
+                  <p>TCO breaks down total cost across five key factors, visualized in chart segments.
+                    Includes usability costs like training and support to highlight major expense areas for better
+                    planning.</p>
+                </ul>
+              </div>
+            </div>
+            <div class="future-card">
+              <div class="future-card-img-container">
+                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/ROI-1.png"
+                  alt="Generative Companions" class="future-card-img clickable-image" data-src="./images/ROI-1.png" />
+                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/ROI-G.png"
+                  alt="Generative Companions" class="future-card-img clickable-image" data-src="./images/ROI-G.png" />
+              </div>
+              <h4 class="future-card-title" style="font-size: medium;" data-explanation="Generative Companions">ROI</h4>
+              <div class="explanation-popup">
+                <ul>
+                  <p>Cumulative Benefits (blue) grow steadily over 5 years, while Costs (red) rise more slowly.
+                    Net Gain (green) shows profit over time, with ROI improving year by year.</p>
+                </ul>
               </div>
             </div>
           </div>
-          
-          <ul class="impact-list-deck" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.2rem 0.5rem;">
-            <li class="impact-item-deck fragment zoom-in" data-fragment-index="2"><svg class="impact-icon-deck impact-icon-wins" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.58 3H8.42L3 8.42v7.16L8.42 21h7.16L21 15.58V8.42L15.58 3zM12 8v5M12 16.01l.01-.011M9 12l3 3 3-3M12 17v-1"/></svg><span>Faster Processes</span></li>
-            <li class="impact-item-deck fragment zoom-in" data-fragment-index="2"><svg class="impact-icon-deck impact-icon-wins" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM12 3v2M3 12h2M12 19v2M19 12h2M18.364 5.636l-1.414 1.414M6.343 17.657l-1.414 1.414M5.636 5.636l1.414 1.414M17.657 17.657l1.414 1.414"/></svg><span>Improved Response Time</span></li>
-            <li class="impact-item-deck fragment zoom-in" data-fragment-index="2"><svg class="impact-icon-deck impact-icon-wins" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7h-7.333L9.333 3H4C2.897 3 2 3.897 2 5v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V9c0-1.103-.897-2-2-2zM12 18c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 12v4M14 14h-4"/></svg><span>Reduced Headcount Costs</span></li>
-            <li class="impact-item-deck fragment zoom-in" data-fragment-index="2"><svg class="impact-icon-deck impact-icon-wins" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><span>Intelligent Automation</span></li>
-            <li class="impact-item-deck fragment zoom-in" data-fragment-index="2"><svg class="impact-icon-deck impact-icon-wins" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg><span>Increased Revenue</span></li>
-            <li class="impact-item-deck fragment zoom-in" data-fragment-index="2"><svg class="impact-icon-deck impact-icon-wins" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg><span>Scalable Solutions</span></li>
-          </ul>
         </div>
-      </div>
 
-      <!-- HIDDEN RISKS CARD -->
-      <div class="content-column-deck" style="flex: 1.5;">
-        <div class="info-card-deck card-risks fragment fade-in-card" data-fragment-index="3">
-          <div class="card-header-deck">
-            <div class="card-icon-deck icon-bg-risks"><svg class="icon-risks-color" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></div>
-            <h3 class="card-title-deck" style="font-size: 20px; font-weight: 800; color: #00176D;">Hidden Risks</h3>
+        <!-- Row 2: AI FOUNDRY -->
+        <div class="future-row fragment fade-in-up" data-fragment-index="2">
+          <h3 style="font-size: 26px;" class="future-row-title">AI foundry</h3>
+          <div class="cards-container">
+            <div class="future-card">
+              <div class="future-card-img-container">
+                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/ARC-Foundary.png"
+                  alt="CRISPR Gene Editing" class="future-card-img clickable-image"
+                  data-src="./images/ARC-Foundary.png" />
+              </div>
+              <h4 class="future-card-title" style="font-size: small ;" data-explanation="CRISPR Gene Editing">AI Foundry
+                Platform Architecture</h4>
+              <div class="explanation-popup">
+                <ul>
+                  <p>The flow starts with users providing cloud and framework details. Git repositories are then fetched
+                    for analysis. Based on repo data and Jira stories, code is generated. This code goes through automated
+                    testing, and if it passes, it’s deployed to the target environment.</p>
+                </ul>
+              </div>
+            </div>
+            <div class="future-card">
+              <div class="future-card-img-container">
+                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/AI Foundary-1.png"
+                  alt="CRISPR Gene Editing" class="future-card-img clickable-image"
+                  data-src="./images/AI Foundary-1.png" />
+                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/AI Foundary-2.png"
+                  alt="CRISPR Gene Editing" class="future-card-img clickable-image"
+                  data-src="./images/AI Foundary-2.png" />
+              </div>
+              <h4 class="future-card-title" style="font-size: small;" data-explanation="3D Bioprinting">Use case selection
+                and Service Choice</h4>
+              <div class="explanation-popup">
+                <ul>
+                  <p>AI Foundry lets you pick a use case, build agents instantly, choose a cloud provider, and integrate
+                    with frameworks like LangChain.</p>
+                </ul>
+              </div>
+            </div>
+            <div class="future-card">
+              <div class="future-card-img-container">
+                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/AI Foundary-3.png"
+                  alt="3D Bioprinting" class="future-card-img clickable-image" data-src="./images/AI Foundary-3.png" />
+                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/AI Foundary-3a.png"
+                  alt="3D Bioprinting" class="future-card-img clickable-image" data-src="./images/AI Foundary-3a.png" />
+              </div>
+              <h4 class="future-card-title" style="font-size: small;" data-explanation="Personalized Medicine">Source code
+                generation & testing</h4>
+              <div class="explanation-popup">
+                <ul>
+                  <p>Fusefy generates project code with key files like app.py and `Dockerfile.
+                    Built-in tests verify functions like topic handling and exit commands.</p>
+                </ul>
+              </div>
+            </div>
           </div>
-          <ul class="impact-list-deck" style="display: grid; grid-template-columns: 1fr 1fr;  gap: 0.2rem 0.5rem;">
-            <li class="impact-item-deck fragment fade-right" data-fragment-index="4"><svg class="impact-icon-deck impact-icon-risks" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zM4 13h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1z"/><path stroke-linecap="round" stroke-linejoin="round" d="M8 8h.01M12 8h.01M16 8h.01M8 16h.01M12 16h.01M16 16h.01"/></svg><span>RPA Silos with No Orchestration</span></li>
-            <li class="impact-item-deck fragment fade-right" data-fragment-index="4"><svg class="impact-icon-deck impact-icon-risks" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01"/></svg><span>Privacy and Compliance Gaps</span></li>
-            <li class="impact-item-deck fragment fade-right" data-fragment-index="4"><svg class="impact-icon-deck impact-icon-risks" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M12 14v.01M12 10a2 2 0 110-4 2 2 0 010 4zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 16l-2-2 2-2 2 2-2 2z"/></svg><span>GenAI Hallucinations</span></li>
-            <li class="impact-item-deck fragment fade-right" data-fragment-index="4"><svg class="impact-icon-deck impact-icon-risks" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M12 3v3M3 12h3M21 12h-3M12 21v-3M18.364 5.636l-2.122 2.121M5.636 18.364l2.121-2.121M5.636 5.636l2.121 2.121M18.364 18.364l-2.122-2.121"/></svg><span>Lack of Explainability</span></li>
-            <li class="impact-item-deck fragment fade-right" data-fragment-index="4"><svg class="impact-icon-deck impact-icon-risks" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75L9 12.75M15 6.75L15 12.75M4.5 9.75L19.5 9.75"/><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M12 6.75v-4.5M12 2.25l4.5 4.5-4.5-4.5zm0 0L7.5 6.75l4.5-4.5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 15.75V21M12 21l-4.5-4.5L12 21zm0 0l4.5-4.5L12 21z"/><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 12.75a8.25 8.25 0 01-16.5 0"/></svg><span>Data Flow Security Risks</span></li>
-            <li class="impact-item-deck fragment fade-right" data-fragment-index="4"><svg class="impact-icon-deck impact-icon-risks" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h.5A2.5 2.5 0 0020 5.5V3.935M3.055 11a9 9 0 019-9c4.125 0 7.665 2.578 8.945 6.165"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 12v.01M8 12v.01M16 12v.01"/></svg><span>Fragmented Tooling</span></li>
-            <li class="impact-item-deck fragment fade-right" data-fragment-index="4"><svg class="impact-icon-deck impact-icon-risks" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg><span>Skill Shortages</span></li>
-            
-          </ul>
+        </div>
+
+        <!-- Row 3: AUDIT SUITE -->
+        <div class="future-row fragment fade-in-up" data-fragment-index="3">
+          <h3 style="font-size: 26px;" class="future-row-title">Audit suite</h3>
+          <div class="cards-container">
+            <div class="future-card">
+              <div class="future-card-img-container">
+                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/validation1.png"
+                  alt="Fusion Power" class="future-card-img clickable-image" data-src="./images/validation1.png" />
+                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/validation2.png"
+                  alt="Fusion Power" class="future-card-img clickable-image" data-src="./images/validation2.png" />
+              </div>
+              <h4 class="future-card-title" style="font-size: small;" data-explanation="Fusion Power">Model validation
+              </h4>
+              <div class="explanation-popup">
+                <ul>
+                  <p>The Audit Suite validates model runs with metrics like accuracy, drift, and data quality.It
+                    highlights issues, tracks performance over time, and flags models needing attention.</p>
+                </ul>
+              </div>
+            </div>
+            <div class="future-card">
+              <div class="future-card-img-container">
+                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/Model Validatio-1.png"
+                  alt="Asteroid Mining" class="future-card-img clickable-image"
+                  data-src="./images/Model Validatio-1.png" />
+                <img style="width: 50%;border: 1.3px solid grey !important; " src="./images/Model Validation-2.png"
+                  alt="Asteroid Mining" class="future-card-img clickable-image"
+                  data-src="./images/Model Validation-2.png" />
+              </div>
+              <h4 class="future-card-title" style="font-size: small;" data-explanation="Asteroid Mining">Model Monitoring
+              </h4>
+              <div class="explanation-popup">
+                <ul>
+                  <p>The Monitoring module tracks deployed models in real-time using metrics like accuracy, precision, and
+                    F1-score.
+                    It detects performance drops, data drift, and library vulnerabilities to ensure ongoing model
+                    reliability.</p>
+                </ul>
+              </div>
+            </div>
+            <div class="future-card">
+              <div class="future-card-img-container">
+                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/risk.png"
+                  alt="Next-Gen Space Telescopes" class="future-card-img clickable-image" data-src="./images/risk.png" />
+              </div>
+              <h4 class="future-card-title" style="font-size: small;" data-explanation="Next-Gen Space Telescopes">Risk
+                Assessment</h4>
+              <div class="explanation-popup">
+                <ul>
+                  <p>Medium risk identified for vendor consent under AI Governance. Remediation: implement a PO
+                    agent-based consent system with clear opt-ins, granular controls, and audit-ready logs.</p>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    
-    <!-- FUSEFY SOLUTION PANEL -->
-    <div class="fusefy-solution-panel fragment" data-fragment-index="5">
-      <div class="panel-header"><h3>The Fusefy Solution: From Risk to Reward</h3></div>
-      <div class="solution-items-grid">
-          <div class="solution-item fragment fade-up" data-fragment-index="6"><div class="solution-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h12a2 2 0 012 2v7a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"/><path stroke-linecap="round" stroke-linejoin="round" d="M14 15l-2 2m0 0l-2-2m2 2v4m-4-3h8M8 4v4M12 4v2m4-2v4"/></svg></div><p>Unified Orchestration</p></div>
-          <div class="solution-item fragment fade-up" data-fragment-index="7"><div class="solution-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 12l2-1m-2 1l-2-1m2 1v2.5"/></svg></div><p>Grounded & Auditable AI</p></div>
-          <div class="solution-item fragment fade-up" data-fragment-index="8"><div class="solution-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h.5A2.5 2.5 0 0020 5.5V3.935M3.055 11a9 9 0 019-9c4.125 0 7.665 2.578 8.945 6.165"/><circle cx="12" cy="12" r="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>'Glass Box' Transparency</p></div>
-          <div class="solution-item fragment fade-up" data-fragment-index="9"><div class="solution-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/><path stroke-linecap="round" stroke-linejoin="round" d="M14 12H4M20 12h-2"/></svg></div><p>Integrated Low-Code Tools</p></div>
-          <div class="solution-item fragment fade-up" data-fragment-index="10"><div class="solution-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 12v.01M8 12v.01M16 12v.01"/></svg></div><p>Enterprise Security</p></div>
+
+    <!-- Page 2 (Hidden by default, UNCHANGED) -->
+    <div id="content-set-2" class="content-set" style="display: none;">
+      <p class="services-title animate-on-show">Services</p>
+      <div class="services-container">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 35px;">
+          <div style="display: flex; justify-content: space-around; align-items: stretch; gap: 20px; width: 85%;">
+            <div class="service-box animate-on-show">
+              <p>GenAI + Agent Integration</p>
+              <ul>
+                <li>Seamlessly combine Generative AI models with intelligent agents.</li>
+                <li>Automate complex workflows and critical decision-making processes.</li>
+                <li>Personalize user experiences in real-time through adaptive, goal-driven interactions.</li>
+              </ul>
+            </div>
+            <div class="service-box animate-on-show">
+              <p>Cloud Enablement</p>
+              <ul>
+                <li>Leverage leading cloud platforms like Vertex AI, Azure, and Gemini.</li>
+                <li>Deploy scalable, secure, and high-performance AI solutions.</li>
+                <li>Accelerate innovation with managed services and streamlined experimentation.</li>
+              </ul>
+            </div>
+            <div class="service-box animate-on-show">
+              <p>Enterprise-Grade Deployment</p>
+              <ul>
+                <li>Ensure robust security and full regulatory compliance.</li>
+                <li>Streamline deployment and management across all environments.</li>
+                <li>Embed governance and trust throughout the entire AI lifecycle.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="back-button-container animate-on-show">
+            <button id="back-button" class="navigation-button" style="padding: 10px 20px;">
+              <img
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImJsdWUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTggMTVsLTYtNi02IDYiLz48L3N2Zz4="
+                alt="Up Arrow" style="width: 24px; height: 24px; margin-right: 8px;">
+              <span>Back</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <script src="slides-interactive.js"></script>
 </section>

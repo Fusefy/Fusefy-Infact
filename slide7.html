@@ -1,6 +1,620 @@
-<section class="intelligent-agents-slide" data-auto-animate data-transition="zoom">
+<section class="ai-stack-slide" data-auto-animate data-transition="zoom">
   <style>
-    .intelligent-agents-slide {
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+    .ai-stack-slide {
+      font-family: "Inter", sans-serif;
+      background: #ffffff;
+      color: var(--text-primary);
+      width: 100vw;
+      height: 100vh;
+      padding: 4vh 6vw;
+      box-sizing: border-box;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ai-stack-slide * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    .ai-stack-slide :root {
+      --primary-blue: #2563eb;
+      --primary-blue-light: #3b82f6;
+      --primary-orange: #f97316;
+      --primary-orange-light: #fb923c;
+      --primary-gradient: linear-gradient(135deg, #3b82f6, #2563eb);
+      --orange-gradient: linear-gradient(135deg, #f97316, #ea580c);
+      --light-bg: #ffffff;
+      --card-bg: #ffffff;
+      --card-border: rgba(37, 99, 235, 0.15);
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --shadow-glow-blue: 0 0 30px rgba(37, 99, 235, 0.15);
+      --shadow-glow-orange: 0 0 30px rgba(249, 115, 22, 0.15);
+      --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .ai-stack-container {
+      width: 100%;
+      max-width: 800px; 
+      padding: 10px;
+      position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      margin: 0 0 0 2vw;
+    }
+
+    .ai-stack-slide h2 {
+      text-align: center;
+      color: #2563eb;
+      font-weight: 700;
+      margin-bottom: 25px;
+      font-size: 28px;
+      letter-spacing: -0.5px;
+      position: relative;
+      display: block;
+      visibility: visible !important;
+      opacity: 1 !important;
+      z-index: 100;
+    }
+
+    .ai-stack-slide h2::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(to right, #3b82f6, #f97316);
+      border-radius: 3px;
+    }
+
+    .ai-stack {
+      flex-direction: column;
+      position: relative;
+      justify-content: space-between;
+      display: flex;
+      margin-top: 15px;
+    }
+
+    .ai-stack::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 30px;
+      width: 2px;
+      background: linear-gradient(
+        to bottom,
+        rgba(59, 130, 246, 0.8),
+        rgba(249, 115, 22, 0.8),
+        rgba(59, 130, 246, 0.8),
+        rgba(249, 115, 22, 0.8)
+      );
+      z-index: 0;
+      opacity: 0.2;
+    }
+
+    .stack-layer {
+      display: flex;
+      position: relative;
+      padding: 4px 10px;
+      border-radius: 16px;
+      background: #ffffff;
+      border: 1px solid rgba(37, 99, 235, 0.15);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      opacity: 0;
+      transform: translateY(40px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .stack-layer.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+      box-shadow: 0 0 30px rgba(37, 99, 235, 0.15),
+        0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .stack-layer:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1),
+        0 0 30px rgba(37, 99, 235, 0.15);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+
+    .layer-icon-wrapper {
+      flex: 0 0 40px;
+      height: 40px;
+      margin-right: 15px;
+      position: relative;
+    }
+
+    .layer-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      color: #fff;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .layer-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+      stroke: #fff;
+      stroke-width: 0.5;
+      transition: transform 0.3s ease;
+    }
+
+    .stack-layer:hover .layer-icon svg {
+      transform: scale(1.1);
+    }
+
+    .layer-icon::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: inherit;
+      filter: brightness(1.3);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .stack-layer:hover .layer-icon::before {
+      opacity: 1;
+    }
+
+    .layer-content {
+      flex-grow: 1;
+    }
+
+    .layer-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+    }
+
+    .layer-details {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.3;
+      margin-bottom: 3px;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+    }
+
+    .tech-tag {
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .tech-tag:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .connection-line {
+      position: relative;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 0;
+    }
+
+    .connection-line.active {
+      opacity: 1;
+    }
+
+    .arrow-svg {
+      width: 40px;
+      height: 20px;
+      fill: none;
+      stroke: #3b82f6;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 2px 4px rgba(59, 130, 246, 0.3));
+    }
+
+    .arrow-path {
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      transition: stroke-dashoffset 1.5s ease;
+    }
+
+    .connection-line.active .arrow-path {
+      stroke-dashoffset: 0;
+    }
+
+    .pulse-circle {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(59, 130, 246, 0.2);
+      top: 50%;
+      transform: translateY(-50%);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: translateY(-50%) scale(0.8);
+        opacity: 0;
+      }
+      50% {
+        transform: translateY(-50%) scale(1.2);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-50%) scale(0.8);
+        opacity: 0;
+      }
+    }
+
+    .data-particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #3b82f6;
+      top: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+    }
+
+    .connection-line.active .data-particle {
+      animation: moveParticle 2.5s infinite;
+    }
+
+    @keyframes moveParticle {
+      0% {
+        top: 4px;
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        top: 16px;
+        opacity: 0;
+      }
+    }
+
+    .layer-1 .layer-icon {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+    }
+    .layer-2 .layer-icon {
+      background: linear-gradient(135deg, #f97316, #ea580c);
+    }
+    .layer-3 .layer-icon {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+    }
+    .layer-4 .layer-icon {
+      background: linear-gradient(135deg, #f97316, #ea580c);
+    }
+
+    .layer-1 .tech-tag {
+      background: rgba(59, 130, 246, 0.1);
+      color: #2563eb;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+    .layer-2 .tech-tag {
+      background: rgba(249, 115, 22, 0.1);
+      color: #ea580c;
+      border: 1px solid rgba(249, 115, 22, 0.2);
+    }
+    .layer-3 .tech-tag {
+      background: rgba(59, 130, 246, 0.1);
+      color: #2563eb;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+    .layer-4 .tech-tag {
+      background: rgba(249, 115, 22, 0.1);
+      color: #ea580c;
+      border: 1px solid rgba(249, 115, 22, 0.2);
+    }
+
+    .layer-number {
+      position: absolute;
+      left: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+      font-size: 10px;
+      color: white;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+    }
+
+    .layer-2 .layer-number,
+    .layer-4 .layer-number {
+      background: linear-gradient(135deg, #f97316, #ea580c);
+      box-shadow: 0 0 15px rgba(249, 115, 22, 0.3);
+    }
+
+    .next-button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 5px 20px rgba(37, 99, 235, 0.4);
+      transition: all 0.3s ease;
+      z-index: 100;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .next-button:hover {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+    }
+
+    .next-button svg {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .next-button:hover svg {
+      transform: translateX(3px);
+    }
+
+    .layer-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+      border-radius: 20px;
+      padding: 3px 8px;
+      font-size: 10px;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.5s ease;
+      transition-delay: 0.3s;
+    }
+
+    .layer-2 .layer-badge,
+    .layer-4 .layer-badge {
+      background: linear-gradient(135deg, #f97316, #ea580c);
+    }
+
+    .stack-layer.active .layer-badge {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hexagon pattern for icons */
+    .hexagon {
+      position: absolute;
+      width: 46px;
+      height: 46px;
+      top: -3px;
+      left: -3px;
+      z-index: -1;
+      opacity: 0.4;
+      transform: scale(0.9);
+      transition: all 0.3s ease;
+    }
+
+    .stack-layer:hover .hexagon {
+      transform: scale(1.1);
+      opacity: 0.6;
+    }
+
+    /* Fix for Reveal.js */
+    .reveal .ai-stack-slide h2 {
+      color: #2563eb !important;
+      font-family: "Inter", sans-serif;
+      text-transform: none;
+      text-shadow: none;
+      margin-bottom: 25px;
+      font-size: 24px;
+      letter-spacing: -0.5px;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    /* Added a special style for the heading to make it stand out */
+    .stack-heading {
+      border-radius: 8px;
+      background: rgba(37, 99, 235, 0.05);
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .ai-stack-container {
+        padding: 10px 5px;
+      }
+
+      .ai-stack-slide h2 {
+        font-size: 20px;
+        margin-bottom: 25px;
+      }
+
+      .stack-layer {
+        padding: 10px;
+      }
+
+      .layer-icon-wrapper {
+        flex: 0 0 35px;
+        height: 35px;
+        margin-right: 12px;
+      }
+
+      .layer-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+      }
+
+      .layer-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .layer-title {
+        font-size: 18px !important;
+      }
+
+      .layer-details {
+        font-size: 16px;
+        line-height: 1.3;
+      }
+
+      .tech-tag {
+        font-size: 14px;
+        padding: 2px 6px;
+      }
+
+      .next-button {
+        width: 40px;
+        height: 40px;
+        bottom: 15px;
+        right: 15px;
+      }
+
+      .hexagon {
+        width: 41px;
+        height: 41px;
+      }
+
+      .ai-stack {
+        margin-top: 30px;
+      }
+    }
+
+    /* Updated logo reveal section with agent tiles */
+    .logo-reveal {
+      position: absolute;
+      top: 250px;
+      left: 100%;
+      transform: translate(60px, -50%);
+      width: 400px;
+      height: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+    }
+    
+    .fixed-logo {
+      width: 110px;
+      height: auto;
+      opacity: 0;
+      transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+      filter: drop-shadow(0 4px 16px rgba(37,99,235,0.10));
+      position: relative;
+      z-index: 10;
+      margin-bottom: 30px;
+    }
+    
+    .agent-icons-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      width: 100%;
+      padding: 15px;
+    }
+    
+    .agent-avatar:last-child {
+      grid-column: 1 / -1;
+      justify-self: center;
+    }
+    
+    .agent-avatar {
+      position: relative;
+      width: 160px;
+      height: 110px;
+      background: white;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      cursor: pointer;
+      padding: 12px;
+      border: 1px solid rgba(37,99,235,0.1);
+    }
+    
+    .agent-avatar:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(37,99,235,0.15);
+      border-color: rgba(37,99,235,0.2);
+    }
+    
+    .agent-avatar svg {
+      width: 28px;
+      height: 28px;
+      margin-bottom: 8px;
+      color: #2563eb;
+    }
+    
+    .agent-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #1e293b;
+      text-align: center;
+      width: 100%;
+      opacity: 1;
+      text-shadow: none;
+      line-height: 1.2;
+    }
+    
+    :root {
       --dark-blue: #0a2540;
       --light-blue: #3a86ff;
       --orange: #ff6b35;
@@ -10,394 +624,131 @@
       --card-shadow: rgba(0, 0, 0, 0.1);
       --gradient-bg: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
       --success-green: #10b981;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background: white;
-      width: 100%;
-      height: 100%;
-      padding: 4vh 6vw;
-      box-sizing: border-box;
-      position: relative;
-      font-family: 'Segoe UI', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* Position and styling for individual agent tiles */
+    .agent-avatar:nth-child(1) {
+      background: linear-gradient(135deg, rgba(58, 134, 255, 0.1), rgba(10, 37, 64, 0.1));
+    }
+    .agent-avatar:nth-child(1) svg {
+      color: var(--light-blue);
     }
     
-    /* MODIFIED: Storylane modal styles for full screen */
-    .storylane-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: #000; /* Background for transition */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+    .agent-avatar:nth-child(2) {
+      background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(230, 73, 0, 0.1));
+    }
+    .agent-avatar:nth-child(2) svg {
+      color: var(--orange);
     }
     
-    .storylane-modal.active {
+    .agent-avatar:nth-child(3) {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(4, 120, 87, 0.1));
+    }
+    .agent-avatar:nth-child(3) svg {
+      color: var(--success-green);
+    }
+    
+    .agent-avatar:nth-child(4) {
+      background: linear-gradient(135deg, rgba(10, 37, 64, 0.1), rgba(58, 134, 255, 0.1));
+    }
+    .agent-avatar:nth-child(4) svg {
+      color: var(--dark-blue);
+    }
+    
+    /* Show the agent icons when logo is visible */
+    .logo-reveal.visible .fixed-logo,
+    .logo-reveal.fragment.visible .fixed-logo,
+    .logo-reveal.fragment.current-fragment .fixed-logo {
       opacity: 1;
-      visibility: visible;
-      transition: opacity 0.3s ease;
     }
     
-    .storylane-container {
-      /* MODIFIED FOR FULL SCREEN */
-      width: 100%;
-      height: 100%;
-      max-width: none;
-      aspect-ratio: unset;
-      background-color: white;
-      border-radius: 0;
-      box-shadow: none;
-      position: relative;
-      transform: none;
-      transition: none;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      padding: 0;
-      justify-content: center;
+    .logo-reveal.visible .agent-avatar,
+    .logo-reveal.fragment.visible .agent-avatar,
+    .logo-reveal.fragment.current-fragment .agent-avatar {
+      opacity: 1;
+      transform: scale(1);
     }
     
-    .storylane-modal.active .storylane-container {
-       transform: none;
+    /* Add animation delays for each agent icon */
+    .logo-reveal.visible .agent-avatar:nth-child(1),
+    .logo-reveal.fragment.visible .agent-avatar:nth-child(1),
+    .logo-reveal.fragment.current-fragment .agent-avatar:nth-child(1) {
+      transition-delay: 0.2s;
     }
     
-    .close-storylane {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 40px;
-      height: 40px;
-      background-color: rgba(0, 0, 0, 0.5);
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      font-size: 24px;
-      font-weight: bold;
-      color: #fff;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-      z-index: 100;
-      transition: transform 0.2s ease, background-color 0.2s ease;
+    .logo-reveal.visible .agent-avatar:nth-child(2),
+    .logo-reveal.fragment.visible .agent-avatar:nth-child(2),
+    .logo-reveal.fragment.current-fragment .agent-avatar:nth-child(2) {
+      transition-delay: 0.4s;
     }
     
-    .close-storylane:hover {
-      background-color: rgba(0, 0, 0, 0.7);
-      transform: scale(1.1);
-      color: #ff6b35;
-    }
-
-    .intelligent-agents-slide * {
-      box-sizing: border-box;
-    }
-
-    .slide-header {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      text-align: center;
-      margin-bottom: 15px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .subtitle-wrapper {
-        font-size: 20px;
-        color: #0a2540 !important;
-      text-align: center;
-      margin-bottom: 25px;
-      position: relative;
-    }
-
-    .company-logo {
-      height: 40px;
-      max-width: 40px;
-      transition: transform 0.3s ease;
-    }
-
-    .company-logo:hover {
-      transform: scale(1.1);
-    }
-
-    .slide-content {
-      flex-direction: column;
-      justify-content: center;
-      width: 100%;
-      position: relative;
-    }
-
-    .agent-cards-container {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      width: 100%;
-      flex: 1;
-      justify-content: center;
-    }
-
-    .top-row, .bottom-row {
-      display: flex;
-      gap: 50px;
-      justify-content: center;
-    }
-
-    .top-row {
-      flex-wrap: wrap;
-      margin-bottom: 15px;
-    }
-
-    .bottom-row {
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .agent-card {
-      background-color: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-      padding: 16px;
-      position: relative;
-      overflow: visible;
-      border: 1px solid var(--card-border);
-      flex: 1;
-      min-width: 200px;
-      max-width: 400px;
-      height: 200px;
-      transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-      cursor: pointer;
-    }
-
-    .agent-card:hover {
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      transform: translateY(-5px) scale(1.02);
-      border-color: var(--light-blue);
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 12px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #f0f4f8;
-    }
-
-    .agent-icon {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 10px;
-      margin-right: 12px;
-      background: linear-gradient(135deg, #f0f5fa 0%, #e6eef7 100%);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-      position: relative;
-    }
-
-    .agent-icon svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    .agent-info {
-      flex: 1;
-    }
-
-    .agent-name {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 3px;
-      color: var(--dark-blue);
-      letter-spacing: -0.3px;
-    }
-
-    .agent-use-case {
-      font-size: 12px;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-
-    .impact-list {
-      list-style-type: none;
-      margin-top: 10px;
-      padding: 0;
-    }
-
-    .impact-item {
-      margin-bottom: 10px;
-      display: flex;
-      align-items: flex-start;
-      font-size: 13px;
-      color: var(--text-primary);
-      font-weight: 500;
-      position: relative;
-      line-height: 1.4;
-      text-align: left;
-      padding-left: 0;
-      list-style-type: none;
-      gap: 8px;
-    }
-
-    .impact-icon {
-      width: 18px;
-      height: 18px;
-      margin-right: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background-color: rgba(16, 185, 129, 0.1);
-      position: relative;
-      overflow: visible;
-    }
-
-    .impact-icon svg {
-      width: 10px;
-      height: 10px;
-      fill: var(--success-green);
-      position: relative;
-      z-index: 1;
-    }
-
-    .card-procurement { border-top: 3px solid var(--light-blue); }
-    .card-hr { border-top: 3px solid var(--orange); }
-    .card-recruitment { border-top: 3px solid var(--light-blue); }
-    .card-claims { border-top: 3px solid var(--orange); }
-    .card-customer { border-top: 3px solid var(--light-blue); }
-    .card-healthcare { border-top: 3px solid var(--light-blue); }
-
-    .icon-procurement { background: linear-gradient(135deg, rgba(58, 134, 255, 0.1) 0%, rgba(58, 134, 255, 0.05) 100%); }
-    .icon-procurement svg { fill: var(--light-blue); }
-    .icon-hr { background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 107, 53, 0.05) 100%); }
-    .icon-hr svg { fill: var(--orange); }
-    .icon-recruitment { background: linear-gradient(135deg, rgba(58, 134, 255, 0.1) 0%, rgba(58, 134, 255, 0.05) 100%); }
-    .icon-recruitment svg { fill: var(--light-blue); }
-    .icon-claims { background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 107, 53, 0.05) 100%); }
-    .icon-claims svg { fill: var(--orange); }
-    .icon-customer { background: linear-gradient(135deg, rgba(58, 134, 255, 0.1) 0%, rgba(58, 134, 255, 0.05) 100%); }
-    .icon-customer svg { fill: var(--light-blue); }
-    .icon-healthcare { background: linear-gradient(135deg, rgba(58, 134, 255, 0.1) 0%, rgba(58, 134, 255, 0.05) 100%); }
-    .icon-healthcare svg { fill: var(--light-blue); }
-
-    .fragment { opacity: 0; transition: all 0.5s ease; }
-    .fragment.visible { opacity: 1; }
-
-    .agent-card.glow::after {
-      content: '';
-      position: absolute;
-      top: -2px; left: -2px; right: -2px; bottom: -2px;
-      background: linear-gradient(45deg, var(--light-blue), transparent, var(--orange));
-      z-index: -1;
-      border-radius: 14px;
-      opacity: 0.2;
-    }
-
-    .bg-accent { position: absolute; border-radius: 50%; z-index: -1; filter: blur(50px); opacity: 0.1; }
-    .bg-accent-1 { width: 200px; height: 200px; top: -50px; right: -50px; background: var(--light-blue); }
-    .bg-accent-2 { width: 150px; height: 150px; bottom: -30px; left: -30px; background: var(--orange); }
-
-    .shimmer { position: relative; overflow: visible; }
-    .shimmer::after {
-      content: '';
-      position: absolute;
-      top: 0; right: 0; bottom: 0; left: 0;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 100%);
-      opacity: 0;
+    .logo-reveal.visible .agent-avatar:nth-child(3),
+    .logo-reveal.fragment.visible .agent-avatar:nth-child(3),
+    .logo-reveal.fragment.current-fragment .agent-avatar:nth-child(3) {
+      transition-delay: 0.6s;
     }
     
-    /* MODIFIED: Standardized styles for the full screen embed */
-    .sl-embed {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-    
-    .storylane-loading {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #FFF; /* Use a solid background */
-      z-index: 1;
-    }
-    
-    .loading-spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid rgba(58, 134, 255, 0.2);
-      border-top: 4px solid var(--light-blue);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin-bottom: 15px;
-    }
-    
-    .loading-text {
-      color: var(--dark-blue);
-      font-size: 16px;
-      text-align: center;
-    }
-    
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    
-    .agent-card.clickable {
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    
-    .agent-card.clickable:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    }
-    
-    .agent-card.clicked {
-      transform: scale(0.96);
-      transition: transform 0.1s ease;
-    }
-    
-    .agent-card::after {
-      content: "Click to view demo";
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      background-color: rgba(10, 37, 64, 0.1);
-      color: var(--dark-blue);
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 10px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    
-    .agent-card:hover::after {
-      opacity: 0.7;
+    .logo-reveal.visible .agent-avatar:nth-child(4),
+    .logo-reveal.fragment.visible .agent-avatar:nth-child(4),
+    .logo-reveal.fragment.current-fragment .agent-avatar:nth-child(4) {
+      transition-delay: 0.8s;
     }
 
-    @media (max-width: 768px) {
-      /* MODIFIED: Removed specific overrides for modal as it's now always full screen */
+    @media (max-width: 900px) {
+      .logo-reveal { 
+        width: 280px; 
+        height: 340px;
+        left: 100%; 
+        transform: translate(30px, -50%); 
+      }
+      .fixed-logo { width: 90px; }
+      .agent-avatar {
+        width: 120px;
+        height: 90px;
+      }
+      .agent-avatar:last-child {
+        width: 140px;
+        height: 90px;
+      }
+      .agent-avatar svg {
+        width: 24px;
+        height: 24px;
+      }
+      .agent-label {
+        font-size: 10px;
+        bottom: -20px;
+      }
+      .agent-icons-container {
+        gap: 12px;
+        padding: 10px;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .logo-reveal { 
+        width: 220px; 
+        height: 220px;
+        left: 90vw; 
+        transform: translate(0, -50%); 
+      }
+      .fixed-logo { width: 70px; }
+      .agent-avatar {
+        width: 20px;
+        height: 20px;
+      }
+      .agent-avatar svg {
+        width: 10px;
+        height: 10px;
+      }
+      .agent-label {
+        font-size: 9px;
+        bottom: -18px;
+      }
     }
   </style>
-
   <header class="slide-header" data-id="header">
-    <h1 class="zoom-in" data-auto-animate data-auto-animate-duration="1.5">
-      AGENTIC AI USE CASES
+    <h1 class="zoom-in" data-auto-animate data-auto-animate-duration="1.5" visibility="visible">
+      The Agentic AI Stack
     </h1>
     <img
       src="./images/Logo.png"
@@ -408,285 +759,404 @@
     />
   </header>
 
-  <div class="slide-content">
-    <div class="subtitle-wrapper">
-      <h2>
-        Intelligent Agents Built for Business Operations
-      </h2>
+  <div class="ai-stack-container">
+    <div class="stack-heading">
+      <h2>Built on a Modern, Open AI Stack</h2>
     </div>
 
-    <div class="agent-cards-container">
-      <!-- Top row with 3 cards -->
-      <div class="top-row">
-        <!-- Healthcare Agent -->
-        <div class="agent-card card-healthcare" data-storylane-url="https://app.storylane.io/share/gh3snrqq5ljv">
-          <div class="card-header">
-            <div class="agent-icon icon-healthcare">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M18 14h-4v4h-4v-4H6v-4h4V6h4v4h4m1-9H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/>
-              </svg>
-            </div>
-            <div class="agent-info">
-              <div class="agent-name">Healthcare Agent</div>
-              <div class="agent-use-case">Medical Document Processing</div>
-            </div>
+    <div class="ai-stack">
+      <!-- Layer 1: Infrastructure -->
+      <div class="stack-layer layer-4 fragment" data-fragment-index="1">
+        <div class="layer-number">1</div>
+        <div class="layer-icon-wrapper">
+          <svg
+            class="hexagon"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polygon
+              points="50 0, 93.3 25, 93.3 75, 50 100, 6.7 75, 6.7 25"
+              fill="#f97316"
+              stroke="#ea580c"
+              stroke-width="2"
+            />
+          </svg>
+          <div class="layer-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M17.5 19H9a7 7 0 1 1 6.71-9h2.79a4.5 4.5 0 1 1 0 9Z" />
+              <path d="M17 14h.01" />
+              <path d="M13 14h.01" />
+            </svg>
           </div>
-          <ul class="impact-list">
-            <li class="impact-item">
-              <div class="impact-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-              </div>
-              <span>65% faster documentation</span>
-            </li>
-            <li class="impact-item">
-              <div class="impact-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-              </div>
-              <span>90% accuracy in records</span>
-            </li>
-            <li class="impact-item">
-              <div class="impact-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-              </div>
-              <span>4x patient data processing</span>
-            </li>
-          </ul>
         </div>
-
-        <!-- Onboarding Agent -->
-        <div class="agent-card card-hr" data-storylane-url="https://app.storylane.io/share/d9xx3md7cyhg">
-          <div class="card-header">
-            <div class="agent-icon icon-hr">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M6,9H18V11H6M14,14H6V12H14M18,8H6V6H18"/>
-              </svg>
-            </div>
-            <div class="agent-info">
-              <div class="agent-name">Onboarding Agent</div>
-              <div class="agent-use-case">Employee Onboarding Assistant</div>
-            </div>
+        <div class="layer-content">
+          <div class="layer-title">Infrastructure</div>
+          <div class="layer-details">
+            Enterprise-grade cloud foundation with high-performance computing
+            resources.
           </div>
-          <ul class="impact-list">
-            <li class="impact-item">
-              <div class="impact-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-              </div>
-              <span>70% faster onboarding</span>
-            </li>
-            <li class="impact-item">
-              <div class="impact-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-              </div>
-              <span>45% reduced HR support</span>
-            </li>
-            <li class="impact-item">
-              <div class="impact-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-              </div>
-              <span>2x faster query resolution</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Interview Agent -->
-        <div class="agent-card card-recruitment" data-storylane-url="https://app.storylane.io/share/daptmkw6awmo">
-          <div class="card-header">
-            <div class="agent-icon icon-recruitment">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2M14,20V19C14,17.67 11.33,17 10,17C8.67,17 6,17.67 6,19V20H14M10,12A2,2 0 0,0 8,14A2,2 0 0,0 10,16A2,2 0 0,0 12,14A2,2 0 0,0 10,12Z"/>
-              </svg>
-            </div>
-            <div class="agent-info">
-              <div class="agent-name">Interview Agent</div>
-              <div class="agent-use-case">Recruitment Assistance</div>
-            </div>
+          <div class="tech-tags">
+            <span class="tech-tag">AWS</span>
+            <span class="tech-tag">Azure</span>
+            <span class="tech-tag">GCP</span>
           </div>
-          <ul class="impact-list">
-            <li class="impact-item">
-              <div class="impact-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-              </div>
-              <span>50% faster screening</span>
-            </li>
-            <li class="impact-item">
-              <div class="impact-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-              </div>
-              <span>85% auto-scheduling</span>
-            </li>
-            <li class="impact-item">
-              <div class="impact-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-              </div>
-              <span>3x recruiter productivity</span>
-            </li>
-          </ul>
         </div>
+        <div class="layer-badge">Foundation</div>
       </div>
 
-      <!-- Bottom row with 2 cards -->
-      <div class="bottom-row">
-        <!-- Claim Reimbursement Agent -->
-        <div class="agent-card card-claims" data-storylane-url="https://app.storylane.io/share/dhhssqjljjan">
-          <div class="card-header">
-            <div class="agent-icon icon-claims">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,10.5A1.5,1.5 0 0,0 10.5,12A1.5,1.5 0 0,0 12,13.5A1.5,1.5 0 0,0 13.5,12A1.5,1.5 0 0,0 12,10.5M7.5,12A4.5,4.5 0 0,1 12,7.5A4.5,4.5 0 0,1 16.5,12H15A3,3 0 0,0 12,9A3,3 0 0,0 9,12H7.5Z"/>
-              </svg>
-            </div>
-            <div class="agent-info">
-              <div class="agent-name">Claim Reimbursement Agent</div>
-              <div class="agent-use-case">Claims Automation</div>
-            </div>
-          </div>
-          <ul class="impact-list">
-            <li class="impact-item">
-              <div class="impact-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-              </div>
-              <span>40% faster processing</span>
-            </li>
-            <li class="impact-item">
-              <div class="impact-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-              </div>
-              <span>30% less manual review</span>
-            </li>
-            <li class="impact-item">
-              <div class="impact-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-              </div>
-              <span>Improved audit quality</span>
-            </li>
-          </ul>
-        </div>
+      <!-- Connection with SVG arrow -->
+      <div class="connection-line fragment" data-fragment-index="1">
+        <svg
+          class="arrow-svg"
+          viewBox="0 0 40 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path class="arrow-path" d="M20 2 L20 18 M12 12 L20 18 L28 12" />
+        </svg>
+        <div class="pulse-circle"></div>
+        <div class="data-particle"></div>
+        <div class="data-particle" style="animation-delay: 0.8s"></div>
+      </div>
 
-        <!-- PO Agent -->
-        <div class="agent-card card-procurement" data-storylane-url="https://app.storylane.io/share/1qaq6ksdkphn">
-          <div class="card-header">
-            <div class="agent-icon icon-procurement">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M10,19L11.5,17.5L9.5,15.5L11.5,13.5L10,12L7,15L10,18V19Z"/>
-              </svg>
-            </div>
-            <div class="agent-info">
-              <div class="agent-name">Purchase Order Agent</div>
-              <div class="agent-use-case">PO Processing Automation</div>
-            </div>
-          </div>
-          <ul class="impact-list">
-            <li class="impact-item">
-              <div class="impact-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-              </div>
-              <span>60% less manual effort</span>
-            </li>
-            <li class="impact-item">
-              <div class="impact-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-              </div>
-              <span>95% data accuracy</span>
-            </li>
-            <li class="impact-item">
-              <div class="impact-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-              </div>
-              <span>3x cycle time speed-up</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Storylane modals for each agent -->
-    <div id="storylane-modal-interview" class="storylane-modal">
-      <div class="storylane-container">
-        <div class="close-storylane">×</div>
-        <div class="sl-embed">
-          <div class="storylane-loading">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">Loading Claim Reimbursement Demo...</div>
+      <!-- Layer 2: Foundation Models -->
+      <div class="stack-layer layer-1 fragment" data-fragment-index="2">
+        <div class="layer-number">2</div>
+        <div class="layer-icon-wrapper">
+          <svg
+            class="hexagon"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polygon
+              points="50 0, 93.3 25, 93.3 75, 50 100, 6.7 75, 6.7 25"
+              fill="#3b82f6"
+              stroke="#2563eb"
+              stroke-width="2"
+            />
+          </svg>
+          <div class="layer-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"
+              />
+              <path
+                d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"
+              />
+            </svg>
           </div>
         </div>
-      </div>
-    </div>
-    
-    <div id="storylane-modal-claim" class="storylane-modal">
-      <div class="storylane-container">
-        <div class="close-storylane">×</div>
-        <div class="sl-embed">
-          <div class="storylane-loading">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">Loading Interview Agent Demo...</div>
+        <div class="layer-content">
+          <div class="layer-title">Foundation Models</div>
+          <div class="layer-details">
+            Advanced neural networks that form the cognitive core of the AI
+            stack.
+          </div>
+          <div class="tech-tags">
+            <span class="tech-tag">Gemini</span>
+            <span class="tech-tag">GPT-4o</span>
+            <span class="tech-tag">Claude</span>
+            <span class="tech-tag">Mistral</span>
           </div>
         </div>
+        <div class="layer-badge">Core Intelligence</div>
       </div>
-    </div>
-    
-    <div id="storylane-modal-po" class="storylane-modal">
-      <div class="storylane-container">
-        <div class="close-storylane">×</div>
-        <div class="sl-embed">
-          <div class="storylane-loading">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">Loading onboarding agent demo...</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div id="storylane-modal-onboarding" class="storylane-modal">
-      <div class="storylane-container">
-        <div class="close-storylane">×</div>
-        <div class="sl-embed">
-          <div class="storylane-loading">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">Loading Interview Agent Demo...</div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div id="storylane-modal-healthcare" class="storylane-modal">
-      <div class="storylane-container">
-        <div class="close-storylane">×</div>
-        <div class="sl-embed">
-          <div class="storylane-loading">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">Loading Healthcare Agent Demo...</div>
+      <!-- Connection with SVG arrow -->
+      <div class="connection-line fragment" data-fragment-index="2">
+        <svg
+          class="arrow-svg"
+          viewBox="0 0 40 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            class="arrow-path"
+            d="M20 2 L20 18 M12 12 L20 18 L28 12"
+            stroke="#3b82f6"
+          />
+        </svg>
+        <div class="pulse-circle"></div>
+        <div class="data-particle"></div>
+        <div class="data-particle" style="animation-delay: 0.8s"></div>
+      </div>
+
+      <!-- Layer 3: Frameworks -->
+      <div class="stack-layer layer-2 fragment" data-fragment-index="3">
+        <div class="layer-number">3</div>
+        <div class="layer-icon-wrapper">
+          <svg
+            class="hexagon"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polygon
+              points="50 0, 93.3 25, 93.3 75, 50 100, 6.7 75, 6.7 25"
+              fill="#f97316"
+              stroke="#ea580c"
+              stroke-width="2"
+            />
+          </svg>
+          <div class="layer-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="3" />
+              <path d="M3 7V5a2 2 0 0 1 2-2h2" />
+              <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+              <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+              <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+              <path d="M8 7v.01" />
+              <path d="M16 7v.01" />
+              <path d="M8 16v.01" />
+              <path d="M16 16v.01" />
+              <path d="M12 8v.01" />
+              <path d="M12 16v.01" />
+              <path d="M9 12h.01" />
+              <path d="M15 12h.01" />
+            </svg>
           </div>
+        </div>
+        <div class="layer-content">
+          <div class="layer-title">Frameworks</div>
+          <div class="layer-details">
+            Orchestration systems that enable reasoning, planning, and agent
+            collaboration.
+          </div>
+          <div class="tech-tags">
+            <span class="tech-tag">Crew AI</span>
+            <span class="tech-tag">LangChain</span>
+            <span class="tech-tag">AutoGen</span>
+          </div>
+        </div>
+        <div class="layer-badge">Orchestration</div>
+      </div>
+
+      <!-- Connection with SVG arrow -->
+      <div class="connection-line fragment" data-fragment-index="3">
+        <svg
+          class="arrow-svg"
+          viewBox="0 0 40 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path class="arrow-path" d="M20 2 L20 18 M12 12 L20 18 L28 12" />
+        </svg>
+        <div class="pulse-circle"></div>
+        <div class="data-particle"></div>
+        <div class="data-particle" style="animation-delay: 0.8s"></div>
+      </div>
+
+      <!-- Layer 4: Grounding -->
+      <div class="stack-layer layer-3 fragment" data-fragment-index="4">
+        <div class="layer-number">4</div>
+        <div class="layer-icon-wrapper">
+          <svg
+            class="hexagon"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polygon
+              points="50 0, 93.3 25, 93.3 75, 50 100, 6.7 75, 6.7 25"
+              fill="#3b82f6"
+              stroke="#2563eb"
+              stroke-width="2"
+            />
+          </svg>
+          <div class="layer-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+              <path d="M11 8v6" />
+              <path d="M8 11h6" />
+            </svg>
+          </div>
+        </div>
+        <div class="layer-content">
+          <div class="layer-title">Grounding</div>
+          <div class="layer-details">
+            Knowledge retrieval systems that connect AI models to accurate
+            information sources.
+          </div>
+          <div class="tech-tags">
+            <span class="tech-tag">RAG Pipelines</span>
+            <span class="tech-tag">Pinecone</span>
+            <span class="tech-tag">FAISS</span>
+          </div>
+        </div>
+        <div class="layer-badge">Knowledge Base</div>
+      </div>
+    </div>
+    <!-- Logo Reveal Fragment with agent tiles -->
+    <div class="logo-reveal fragment" data-fragment-index="5">
+      <img src="./images/Fusefycolor.png" alt="Company Logo" class="fixed-logo" />
+      <div class="agent-icons-container">
+        <div class="agent-avatar">
+          <!-- Healthcare Agent SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8h-1V6c0-2-1-3-3-3h-4C8 3 7 4 7 6v2H6c-2 0-3 1-3 3v9c0 2 1 3 3 3h12c2 0 3-1 3-3v-9c0-2-1-3-3-3Z" />
+            <path d="M12 8v9" />
+            <path d="M8 13h9" />
+          </svg>
+          <div class="agent-label">Healthcare Process Agent</div>
+        </div>
+        <div class="agent-avatar">
+          <!-- Onboarding Agent SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+            <path d="M8 2h8" />
+            <path d="M12 2v4" />
+          </svg>
+          <div class="agent-label">Onboarding Agent</div>
+        </div>
+        <div class="agent-avatar">
+          <!-- Interview Scheduler Agent SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+            <path d="M16 2v4" />
+            <path d="M8 2v4" />
+            <circle cx="12" cy="11" r="3" />
+            <path d="M12 14v4" />
+            <path d="M9 18h6" />
+          </svg>
+          <div class="agent-label">Interview & Schedule Coordination Agent</div>
+        </div>
+        <div class="agent-avatar">
+          <!-- Purchase Order Processing Agent SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <path d="M14 2v6h6" />
+            <path d="M9 13h6" />
+            <path d="M9 17h6" />
+            <circle cx="9" cy="13" r="1" />
+            <circle cx="9" cy="17" r="1" />
+          </svg>
+          <div class="agent-label">Purchase Order Processing Agent</div>
+        </div>
+        <div class="agent-avatar">
+          <!-- Claim Reimbursement Agent SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="5" width="20" height="14" rx="2" />
+            <path d="M12 9v6" />
+            <path d="M15 12h-6" />
+            <path d="M6 5v-2" />
+            <path d="M18 5v-2" />
+            <path d="M2 10h20" />
+          </svg>
+          <div class="agent-label">Claims & Reimbursement Agent</div>
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // For Reveal.js integration
+      const initStackAnimation = (event) => {
+        if (event && !event.currentSlide.classList.contains("ai-stack-slide")) {
+          return;
+        }
+
+        const layers = document.querySelectorAll(
+          ".ai-stack-slide .stack-layer"
+        );
+        const connections = document.querySelectorAll(
+          ".ai-stack-slide .connection-line"
+        );
+
+        // Add active class to each layer when its fragment becomes visible
+        if (typeof Reveal !== "undefined") {
+          Reveal.addEventListener("fragmentshown", function (event) {
+            const fragmentIndex = event.fragment.getAttribute(
+              "data-fragment-index"
+            );
+
+            if (event.fragment.classList.contains("stack-layer")) {
+              event.fragment.classList.add("active");
+            }
+
+            if (event.fragment.classList.contains("connection-line")) {
+              event.fragment.classList.add("active");
+            }
+          });
+
+          Reveal.addEventListener("fragmenthidden", function (event) {
+            const fragmentIndex = event.fragment.getAttribute(
+              "data-fragment-index"
+            );
+
+            if (event.fragment.classList.contains("stack-layer")) {
+              event.fragment.classList.remove("active");
+            }
+
+            if (event.fragment.classList.contains("connection-line")) {
+              event.fragment.classList.remove("active");
+            }
+          });
+        }
+
+        // Add interactive hover effects
+        layers.forEach((layer) => {
+          layer.addEventListener("mouseenter", () => {
+            if (
+              layer.classList.contains("active") ||
+              layer.classList.contains("visible")
+            ) {
+              layer.style.transform = "translateY(-5px) scale(1.02)";
+            }
+          });
+
+          layer.addEventListener("mouseleave", () => {
+            if (
+              layer.classList.contains("active") ||
+              layer.classList.contains("visible")
+            ) {
+              layer.style.transform = "translateY(0) scale(1)";
+            }
+          });
+        });
+      };
+
+      // Initialize for non-Reveal.js environments
+      initStackAnimation();
+
+      // For Reveal.js
+      if (typeof Reveal !== "undefined") {
+        Reveal.addEventListener("slidechanged", initStackAnimation);
+
+        // Run once on load to initialize current slide if it's this one
+        initStackAnimation({
+          currentSlide: document.querySelector(".present"),
+        });
+      }
+    });
+  </script>
 </section>

@@ -43,6 +43,76 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+function resetAnimation(el) {
+  el.style.animation = 'none';
+  void el.offsetWidth;
+  el.style.animation = '';
+}
+
+//----------------------------------------- Function for slide 4 , the animation will work whenever the slide is shown
+// Replay all hero, headings, and cards animations
+function replayAnimations() {
+  // Hero section
+  document.querySelectorAll('.platform-hero .platform-heading, .platform-hero .platform-hyphen, .platform-hero .platform-subtext')
+    .forEach(resetAnimation);
+
+  // Section headings
+  document.querySelectorAll('.cloud-platform-heading, .ai-platform-heading, .byo-platform-heading')
+    .forEach(resetAnimation);
+
+  // All cards
+  document.querySelectorAll('.platform-card')
+    .forEach(resetAnimation);
+}
+
+// Reveal.js event for slide change
+document.addEventListener('DOMContentLoaded', function () {
+  if (window.Reveal) {
+    Reveal.addEventListener('slidechanged', function (event) {
+      if (event.currentSlide && event.currentSlide.classList.contains('index-slide')) {
+        replayAnimations();
+      }
+    });
+  }
+});
+
+// -------------------Function for slide 6- BATTLE CARD ----------------------
+function resetAnimation(element) {
+  element.style.animation = 'none';
+  // Force reflow
+  void element.offsetWidth;
+  element.style.animation = '';
+}
+
+// Replay all main block and table row animations
+function replayAnimations() {
+  // Main blocks
+  ['.features-section', '.compare-section', '.comparison-table-container'].forEach(sel => {
+    const el = document.querySelector(sel);
+    if (el) resetAnimation(el);
+  });
+  // Table rows
+  document.querySelectorAll('.comparison-table tbody tr').forEach(row => resetAnimation(row));
+}
+
+// Reveal.js event for slide change
+document.addEventListener('DOMContentLoaded', function () {
+  if (window.Reveal) {
+    Reveal.addEventListener('slidechanged', function (event) {
+      if (event.currentSlide && event.currentSlide.classList.contains('index-slide')) {
+        replayAnimations();
+      }
+    });
+  }
+});
+
+//--------------------------- Function for tab navigation slide 3 -Vertical and Categories we serve -----------------------------------
+function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
 /**
  * Master function to set up all interactive elements
  */
