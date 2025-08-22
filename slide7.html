@@ -1,603 +1,248 @@
-<section class="ai-adoption-slide" data-transition="zoom">
-  <style>
-    /* BG style for whole slide */
-    .ai-adoption-slide {
-      background: url('./images/BG-2-Slide5.png') no-repeat center center / cover;
-      /* Optional: fallback color if image fails to load */
-      background-color: #f9fafb;
-    }
+<section class="index-slide" data-auto-animate>
+    <style>
+        /*
+          NOTE: For a standard webpage, these <link> tags should be in the <head>.
+          For encapsulated components like Reveal.js slides, placing them here is common.
+        */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
-    .content-set {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      overflow: hidden;
-    }
+        /* --- STYLES FOR THE DEPLOYMENT WORKFLOW VISUALIZER --- */
 
-    .clickable-image {
-      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-      position: relative;
-      z-index: 10;
-      cursor: pointer;
-    }
+        /* --- 1. General Styles & Variables --- */
+        :root {
+            --font-family: 'Poppins', sans-serif;
+            --bg-color: #F8F9FA;
+            --container-bg: #FFFFFF;
+            --text-primary: #212529;
+            --text-secondary: #6C757D;
+            --border-color: #DEE2E6;
+            --shadow: 0 1rem 2rem rgba(0, 0, 0, 0.07);
 
-    .clickable-image:hover {
-      transform: scale(1.02);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
+            /* Theme Colors */
+            --blue-light-bg: #E8EAF6;
+            --blue-icon-bg: #D1D9F8;
+            --blue-icon-color: #3F51B5;
+            --teal-light-bg: #E0F2F1;
+            --teal-icon-bg: #B2DFDB;
+            --teal-icon-color: #00897B;
+            --purple-light-bg: #EDE7F6;
+            --purple-icon-bg: #D1C4E9;
+            --purple-icon-color: #673AB7;
+            --orange-light-bg: #FFF3E0;
+            --orange-icon-bg: #FFE0B2;
+            --orange-icon-color: #FB8C00;
+            --green-light-bg: #E8F5E9;
+            --green-icon-bg: #C8E6C9;
+            --green-icon-color: #43A047;
+        }
 
-    .navigation-button {
-      position: relative;
-      z-index: 20;
-      transition: transform 0.2s ease;
-      background-color: white;
-      color: blue;
-      border: none;
-      border-radius: 4px;
-      font-size: 12px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-    }
+        /* Applying a base style to the component's container for font consistency */
+        .slide-container {
+            font-family: var(--font-family);
+            color: var(--text-primary);
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 1050px; /* CHANGED: Reduced max-width */
+            margin: 1.5rem auto 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            transform: scale(0.85); /* CHANGED: Reduced scale for overall smaller size */
+            transform-origin: top center;
+        }
 
-    .navigation-button:hover {
-      transform: scale(1.05);
-    }
+        /* --- 2. Main Workflow Container --- */
+        .workflow-container {
+            display: flex;
+            background-color: var(--container-bg);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            min-height: 460px; /* CHANGED: Reduced height */
+        }
 
-    /* --- Zoom Overlay Styles (UNCHANGED) --- */
-    .zoom-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0s linear 0.3s;
-    }
+        /* --- 3. Left Navigation Panel --- */
+        .workflow-nav {
+            flex-basis: 38%;
+            padding: 2rem;
+            border-right: 1px solid #F1F3F5;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .zoom-overlay.active {
-      opacity: 1;
-      visibility: visible;
-      transition: opacity 0.3s ease;
-    }
+        .workflow-nav h2 { font-size: 1.5rem; font-weight: 700; margin: 0 0 0.5rem 0; }
+        .workflow-nav .sub-title { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem; }
+        .workflow-nav ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+        .nav-item { display: flex; align-items: center; gap: 1rem; padding: 0.8rem 1.1rem; border-radius: 10px; cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease; font-weight: 500; color: #495057; font-size: 0.9rem; }
+        .nav-item i { width: 20px; text-align: center; font-size: 0.95rem; }
+        .nav-item:not(.active):hover { background-color: #F8F9FA; }
+        .nav-item.active.theme-blue { background-color: var(--blue-light-bg); color: var(--blue-icon-color); }
+        .nav-item.active.theme-teal { background-color: var(--teal-light-bg); color: var(--teal-icon-color); }
+        .nav-item.active.theme-purple { background-color: var(--purple-light-bg); color: var(--purple-icon-color); }
+        .nav-item.active.theme-orange { background-color: var(--orange-light-bg); color: var(--orange-icon-color); }
+        .nav-item.active.theme-green { background-color: var(--green-light-bg); color: var(--green-icon-color); }
+        .workflow-nav .footer-text { margin-top: auto; font-size: 0.75rem; color: #adb5bd; text-align: center; padding-top: 1rem; }
 
-    .zoom-image {
-      max-width: 80%;
-      max-height: 80%;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      border-radius: 8px;
-      transform: scale(0.8);
-      transition: transform 0.3s cubic-bezier(0.26, 0.86, 0.44, 0.985);
-    }
+        /* --- 4. Right Content Panel --- */
+        .workflow-content { flex-basis: 62%; padding: 2.5rem 3rem; transition: opacity 0.3s ease; }
+        .content-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+        .content-icon { width: 55px; height: 55px; border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 1.4rem; flex-shrink: 0; transition: background-color 0.3s ease, color 0.3s ease; }
+        .theme-blue .content-icon { background-color: var(--blue-icon-bg); color: var(--blue-icon-color); }
+        .theme-teal .content-icon { background-color: var(--teal-icon-bg); color: var(--teal-icon-color); }
+        .theme-purple .content-icon { background-color: var(--purple-icon-bg); color: var(--purple-icon-color); }
+        .theme-orange .content-icon { background-color: var(--orange-icon-bg); color: var(--orange-icon-color); }
+        .theme-green .content-icon { background-color: var(--green-icon-bg); color: var(--green-icon-color); }
+        .content-title h3 { margin: 0; font-size: 1.3rem; font-weight: 600; }
+        .content-title p { margin: 0; color: var(--text-secondary); font-size: 0.9rem; }
+        .content-details ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; }
+        .content-details li { display: flex; align-items: flex-start; gap: 1rem; color: #495057; line-height: 1.6; font-size: 0.9rem; }
+        .content-details .list-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 0.7rem; margin-top: 4px; flex-shrink: 0; transition: background-color 0.3s ease; }
+        .theme-blue .list-icon { background-color: var(--blue-icon-color); }
+        .theme-teal .list-icon { background-color: var(--teal-icon-color); }
+        .theme-purple .list-icon { background-color: var(--purple-icon-color); }
+        .theme-orange .list-icon { background-color: var(--orange-icon-color); }
+        .theme-green .list-icon { background-color: var(--green-icon-color); }
 
-    .zoom-overlay.active .zoom-image {
-      transform: scale(1);
-    }
+        /* --- 5. Bottom Automated Flow --- */
+        .automated-flow-wrapper { background-color: #f7f8fa; border-radius: 16px; padding: 2rem 1rem; }
+        .automated-flow { text-align: center; }
+        .automated-flow h3 { font-weight: 600; color: var(--text-secondary); margin-bottom: 2.5rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .flow-steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.2rem; /* CHANGED: Reduced gap */
+            flex-wrap: nowrap; /* CHANGED: Explicitly prevent wrapping */
+        }
+        
+        .flow-step {
+            display: flex;
+            align-items: center;
+            background-color: var(--container-bg);
+            border-radius: 40px;
+            padding: 0.5rem 1.25rem 0.5rem 0.6rem; /* CHANGED: Reduced padding */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+        }
 
-    .close-zoom {
-      position: fixed;
-      top: 30px;
-      right: 40px;
-      font-size: 30px;
-      color: #002060;
-      cursor: pointer;
-      background: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-      z-index: 2100;
-    }
+        .flow-icon-wrapper {
+            width: 45px;      /* CHANGED: Reduced size */
+            height: 45px;     /* CHANGED: Reduced size */
+            border-radius: 50%;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 0.8rem; /* CHANGED: Reduced margin */
+        }
 
-    /* --- Reveal.js Fragment Animation Styles (UNCHANGED) --- */
-    .reveal .slides section .fragment.fade-in-up {
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease, visibility 0s linear 0.6s;
-    }
+        .flow-icon {
+            font-size: 1.2rem; /* CHANGED: Reduced icon size */
+            color: var(--text-primary);
+        }
+        
+        .flow-text {
+            font-size: 0.9rem; /* CHANGED: Reduced font size */
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
 
-    .reveal .slides section .fragment.fade-in-up.visible {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-      transition-delay: 0s;
-    }
+        .flow-arrow { color: #ced4da; font-size: 1.5rem; }
+        
+        @media (max-width: 992px) {
+            .slide-container { transform: scale(1); }
+            .workflow-container { flex-direction: column; }
+            .workflow-nav { border-right: none; border-bottom: 1px solid #F1F3F5; }
+            .workflow-content { padding: 2rem; }
+            .flow-steps { flex-wrap: wrap; } /* Allow wrapping only on small screens */
+            .flow-arrow { display: none; }
+        }
+    </style>
 
-    /* --- PAGE 1: UPDATED STYLES for "A Glimpse Into the Future" --- */
-    .future-title {
-      color: #0021f3;
-      font-weight: bold;
-      font-size: small;
-      text-align: center;
-      margin-bottom: 20px; /* Increased margin */
-      text-transform: uppercase;
-    }
-
-    .future-title .gold-text {
-      color: #f5b01b;
-      /* Gold/Yellow */
-    }
-
-    /* UPDATED: This is now a container for rows */
-    .future-grid-container {
-      display: flex;
-      flex-direction: column;
-      gap: 25px; /* Spacing between rows */
-      width: 90%; /* <-- REDUCED WIDTH FROM 100% */
-      margin: 0 auto; /* <-- ADDED TO CENTER THE CONTAINER */
-    }
-    
-    /* NEW: Row container for title + cards */
-    .future-row {
-        display: flex;
-        align-items: center;
-        gap: 20px; /* Space between title and the cards block */
-    }
-
-    /* UPDATED: Styles for the title on the left */
-    .future-row-title {
-        flex: 0 0 240px; /* UPDATED: Increased width to keep title on one line */
-        font-size: medium;
-        font-weight: 900;
-        color: #333;
-        text-align: left;
-        text-transform: uppercase;
-    }
-
-    /* NEW: Container for the 3 cards */
-    .cards-container {
-        flex-grow: 1; /* Take up the remaining space */
-        display: flex;
-        gap: 20px; /* Space between individual cards */
-    }
-
-    /* UPDATED: Card styles */
-    .future-card {
-      position: relative;
-      background: #f9fafb;
-      border-radius: 17px;
-      padding: 10px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-
-      /* --- KEY CHANGES FOR ALIGNMENT & SIZE --- */
-      flex: 1; /* This makes the cards share space and grow wider */
-      height: 130px; /* Increased height for better proportion */
-    }
-
-
-    .future-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      /* cover full card */
-      border-radius: 17px;
-      /* match parent */
-      padding: 2px;
-      /* thickness of border */
-      background: linear-gradient(90deg, #c2a159 0%, #5a7ada 100%);
-      -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-      mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-      -webkit-mask-composite: destination-out;
-      mask-composite: exclude;
-      pointer-events: none;
-      /* doesn’t block clicks */
-    }
-
-
-    .future-card-img-container {
-      width: 100%;
-      height: 70px; /* Increased height for the image area */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 8px;
-      gap: 10px;
-    }
-
-    .future-card-img {
-      max-width: 45%;
-      max-height: 100%;
-      object-fit: contain;
-    }
-
-    .future-card-title {
-      font-size: small;
-      font-weight: bold;
-      color: #111827;
-      margin: 0;
-      line-height: 1.2;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: color 0.2s ease;
-    }
-
-    .future-card-title:hover {
-      color: #0021f3;
-    }
-
-    .future-card-desc {
-      display: none;
-    }
-
-    /* Hide description text */
-    .next-button-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      padding-top: 10px;
-    }
-
-    /* Explanation Popup Styles */
-    .explanation-popup {
-      position: absolute;
-      left: -230px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 220px;
-      background: #000;
-      border: 1px solid #333;
-      border-radius: 8px;
-      padding: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      z-index: 100;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.2s ease, visibility 0s linear 0.2s;
-    }
-
-    .explanation-popup.active {
-      opacity: 1;
-      visibility: visible;
-      transition: opacity 0.2s ease;
-    }
-
-    .explanation-popup ul {
-      margin: 0;
-      padding-left: 16px;
-      font-size: 12px;
-      line-height: 1.4;
-      color: #fff;
-    }
-
-    .explanation-popup li {
-      margin-bottom: 6px;
-    }
-
-    .explanation-popup::after {
-      content: '';
-      position: absolute;
-      right: -10px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 0;
-      height: 0;
-      border-top: 10px solid transparent;
-      border-bottom: 10px solid transparent;
-      border-left: 10px solid #000;
-    }
-
-    /* --- PAGE 2: Custom JS-triggered Animation Styles (UNCHANGED) --- */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .animate-on-show {
-      opacity: 1;
-      transform: translateY(20px);
-    }
-
-    .animate-on-show.start-animation {
-      animation: fadeInUp 0.6s ease-out forwards;
-    }
-
-    .services-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-    }
-
-    .services-title {
-      font-size: small;
-      font-weight: 900;
-      color: #0021F3;
-    }
-
-    .service-box {
-      flex: 1;
-      border: 1px solid #002060;
-      border-radius: 6px;
-      padding: 15px;
-      text-align: left;
-      background-color: #f8faff;
-      min-height: 140px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .service-box p {
-      font-weight: bold;
-      color: #002060;
-      margin-top: 0;
-      margin-bottom: 8px;
-      font-size: small;
-    }
-
-    .service-box ul {
-      font-size: small;
-      line-height: 1.4;
-      margin: 0;
-      padding-left: 16px;
-      color: #333;
-    }
-  </style>
-
-  <!-- Zoom Overlay (UNCHANGED) -->
-  <div class="zoom-overlay" id="zoomOverlay">
-    <div class="close-zoom">×</div>
-    <img class="zoom-image" id="zoomedImage" src="" alt="Zoomed Image" />
-  </div>
-
-  <div class="slide-padding">
-    <!-- Slide Header (UNCHANGED) -->
-    <header class="slide-header">
-      <h1>What is AI Adoption as a Service?</h1>
-      <img src="./images/Logo.png" alt="Company Logo" class="company-logo">
+    <header class="slide-header" data-id="header">
+        <h1 class="zoom-in" data-auto-animate data-auto-animate-duration="1.5">
+            Deployment Pipeline
+        </h1>
+        <img src="images/Logo.png" alt="Company Logo" class="company-logo" data-auto-animate data-auto-animate-duration="1" />
     </header>
 
-    <!-- Page 1 (UPDATED HTML STRUCTURE) -->
-    <div id="content-set-1" class="content-set">
-      <h2 class="future-title fragment fade-in-up" data-fragment-index="0">A Glimpse Into The <span
-          class="gold-text">Future</span></h2>
+    <div class="slide-container">
+        <!-- Main Interactive Box -->
+        <div class="workflow-container">
+            <!-- Left Navigation Panel -->
+            <div class="workflow-nav">
+                <h2>Modern Deployment Workflow</h2>
+                <p class="sub-title">Select a step to see the details.</p>
+                <ul id="nav-list">
+                    <li class="nav-item" data-step="1">
+                        <i class="fa-solid fa-box-archive"></i> 1. Containerize the Code
+                    </li>
+                    <li class="nav-item" data-step="2">
+                        <i class="fa-solid fa-person-running"></i> 2. Run & Test 
+                    </li>
+                    <li class="nav-item" data-step="3">
+                        <i class="fa-solid fa-code"></i> 3. Edit & Verify
+                    </li>
+                    <li class="nav-item" data-step="4">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> 4. Platform-based Deployment
+                    </li>
+                    <li class="nav-item" data-step="5">
+                        <i class="fa-solid fa-circle-check"></i> 5. Automated Deployment Flow
+                    </li>
+                </ul>
+            </div>
 
-      <div class="future-grid-container">
-        <!-- Row 1: AI INVENTORY -->
-        <div class="future-row fragment fade-in-up" data-fragment-index="1">
-          <h3 style="font-size: 26px;" class="future-row-title">AI Inventory</h3>
-          <div class="cards-container">
-            <div class="future-card">
-              <div class="future-card-img-container">
-                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/Heatmap.png"
-                  alt="AI Adoption Insights" class="future-card-img clickable-image" data-src="./images/Heatmap.png" />
-                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/AI Inventory.png"
-                  alt="AI Adoption Insights" class="future-card-img clickable-image"
-                  data-src="./images/AI Inventory.png" />
-              </div>
-              <h4 class="future-card-title" style="font-size: small;" data-explanation="Neural Networks">AI Inventory -
-                Heatmap</h4>
-              <div class="explanation-popup">
-                <ul>
-                  <p>Evaluates AI use cases by factors like compliance, redundancy, data quality, and strategic fit.
-                    Color-coded scores with hover insights help quickly prioritize high-impact, low-risk use cases.</p>
-                </ul>
-              </div>
+            <!-- Right Content Panel -->
+            <div id="workflow-details" class="workflow-content">
+                <!-- Content is dynamically inserted here by JavaScript -->
             </div>
-            <div class="future-card">
-              <div class="future-card-img-container">
-                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/TCO-1.png"
-                  alt="Robotic Process Automation" class="future-card-img clickable-image"
-                  data-src="./images/TCO-1.png" />
-                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/TCO-NEW-2.png"
-                  alt="Robotic Process Automation" class="future-card-img clickable-image"
-                  data-src="./images/TCO-NEW-2.png" />
-              </div>
-              <h4 class="future-card-title" style="font-size: medium;" data-explanation="Robotic Process Automation">TCO
-              </h4>
-              <div class="explanation-popup">
-                <ul>
-                  <p>TCO breaks down total cost across five key factors, visualized in chart segments.
-                    Includes usability costs like training and support to highlight major expense areas for better
-                    planning.</p>
-                </ul>
-              </div>
-            </div>
-            <div class="future-card">
-              <div class="future-card-img-container">
-                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/ROI-1.png"
-                  alt="Generative Companions" class="future-card-img clickable-image" data-src="./images/ROI-1.png" />
-                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/ROI-G.png"
-                  alt="Generative Companions" class="future-card-img clickable-image" data-src="./images/ROI-G.png" />
-              </div>
-              <h4 class="future-card-title" style="font-size: medium;" data-explanation="Generative Companions">ROI</h4>
-              <div class="explanation-popup">
-                <ul>
-                  <p>Cumulative Benefits (blue) grow steadily over 5 years, while Costs (red) rise more slowly.
-                    Net Gain (green) shows profit over time, with ROI improving year by year.</p>
-                </ul>
-              </div>
-            </div>
-          </div>
         </div>
 
-        <!-- Row 2: AI FOUNDRY -->
-        <div class="future-row fragment fade-in-up" data-fragment-index="2">
-          <h3 style="font-size: 26px;" class="future-row-title">AI foundry</h3>
-          <div class="cards-container">
-            <div class="future-card">
-              <div class="future-card-img-container">
-                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/ARC-Foundary.png"
-                  alt="CRISPR Gene Editing" class="future-card-img clickable-image"
-                  data-src="./images/ARC-Foundary.png" />
-              </div>
-              <h4 class="future-card-title" style="font-size: small ;" data-explanation="CRISPR Gene Editing">AI Foundry
-                Platform Architecture</h4>
-              <div class="explanation-popup">
-                <ul>
-                  <p>The flow starts with users providing cloud and framework details. Git repositories are then fetched
-                    for analysis. Based on repo data and Jira stories, code is generated. This code goes through automated
-                    testing, and if it passes, it’s deployed to the target environment.</p>
-                </ul>
-              </div>
+        <!-- Bottom Flowchart -->
+        <div class="automated-flow-wrapper">
+            <div class="automated-flow">
+                <h3>COMPLETE AUTOMATED FLOW</h3>
+                <div class="flow-steps">
+                    <div class="flow-step">
+                        <div class="flow-icon-wrapper">
+                            <i class="fa-solid fa-code flow-icon"></i>
+                        </div>
+                        <span class="flow-text">Code</span>
+                    </div>
+                    <i class="fa-solid fa-arrow-right flow-arrow"></i>
+                    <div class="flow-step">
+                        <div class="flow-icon-wrapper">
+                           <i class="fa-solid fa-box-archive flow-icon"></i>
+                        </div>
+                        <span class="flow-text">Containerize</span>
+                    </div>
+                    <i class="fa-solid fa-arrow-right flow-arrow"></i>
+                    <div class="flow-step">
+                        <div class="flow-icon-wrapper">
+                            <i class="fa-solid fa-vial-circle-check flow-icon"></i>
+                        </div>
+                        <span class="flow-text">Test & Edit</span>
+                    </div>
+                    <i class="fa-solid fa-arrow-right flow-arrow"></i>
+                    <div class="flow-step">
+                        <div class="flow-icon-wrapper">
+                            <i class="fa-solid fa-circle-check flow-icon"></i>
+                        </div>
+                        <span class="flow-text">CI/CD</span>
+                    </div>
+                    <i class="fa-solid fa-arrow-right flow-arrow"></i>
+                    <div class="flow-step">
+                        <div class="flow-icon-wrapper">
+                             <i class="fa-solid fa-rocket flow-icon"></i>
+                        </div>
+                        <span class="flow-text">Deploy</span>
+                    </div>
+                </div>
             </div>
-            <div class="future-card">
-              <div class="future-card-img-container">
-                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/AI Foundary-1.png"
-                  alt="CRISPR Gene Editing" class="future-card-img clickable-image"
-                  data-src="./images/AI Foundary-1.png" />
-                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/AI Foundary-2.png"
-                  alt="CRISPR Gene Editing" class="future-card-img clickable-image"
-                  data-src="./images/AI Foundary-2.png" />
-              </div>
-              <h4 class="future-card-title" style="font-size: small;" data-explanation="3D Bioprinting">Use case selection
-                and Service Choice</h4>
-              <div class="explanation-popup">
-                <ul>
-                  <p>AI Foundry lets you pick a use case, build agents instantly, choose a cloud provider, and integrate
-                    with frameworks like LangChain.</p>
-                </ul>
-              </div>
-            </div>
-            <div class="future-card">
-              <div class="future-card-img-container">
-                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/AI Foundary-3.png"
-                  alt="3D Bioprinting" class="future-card-img clickable-image" data-src="./images/AI Foundary-3.png" />
-                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/AI Foundary-3a.png"
-                  alt="3D Bioprinting" class="future-card-img clickable-image" data-src="./images/AI Foundary-3a.png" />
-              </div>
-              <h4 class="future-card-title" style="font-size: small;" data-explanation="Personalized Medicine">Source code
-                generation & testing</h4>
-              <div class="explanation-popup">
-                <ul>
-                  <p>Fusefy generates project code with key files like app.py and `Dockerfile.
-                    Built-in tests verify functions like topic handling and exit commands.</p>
-                </ul>
-              </div>
-            </div>
-          </div>
         </div>
-
-        <!-- Row 3: AUDIT SUITE -->
-        <div class="future-row fragment fade-in-up" data-fragment-index="3">
-          <h3 style="font-size: 26px;" class="future-row-title">Audit suite</h3>
-          <div class="cards-container">
-            <div class="future-card">
-              <div class="future-card-img-container">
-                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/validation1.png"
-                  alt="Fusion Power" class="future-card-img clickable-image" data-src="./images/validation1.png" />
-                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/validation2.png"
-                  alt="Fusion Power" class="future-card-img clickable-image" data-src="./images/validation2.png" />
-              </div>
-              <h4 class="future-card-title" style="font-size: small;" data-explanation="Fusion Power">Model validation
-              </h4>
-              <div class="explanation-popup">
-                <ul>
-                  <p>The Audit Suite validates model runs with metrics like accuracy, drift, and data quality.It
-                    highlights issues, tracks performance over time, and flags models needing attention.</p>
-                </ul>
-              </div>
-            </div>
-            <div class="future-card">
-              <div class="future-card-img-container">
-                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/Model Validatio-1.png"
-                  alt="Asteroid Mining" class="future-card-img clickable-image"
-                  data-src="./images/Model Validatio-1.png" />
-                <img style="width: 50%;border: 1.3px solid grey !important; " src="./images/Model Validation-2.png"
-                  alt="Asteroid Mining" class="future-card-img clickable-image"
-                  data-src="./images/Model Validation-2.png" />
-              </div>
-              <h4 class="future-card-title" style="font-size: small;" data-explanation="Asteroid Mining">Model Monitoring
-              </h4>
-              <div class="explanation-popup">
-                <ul>
-                  <p>The Monitoring module tracks deployed models in real-time using metrics like accuracy, precision, and
-                    F1-score.
-                    It detects performance drops, data drift, and library vulnerabilities to ensure ongoing model
-                    reliability.</p>
-                </ul>
-              </div>
-            </div>
-            <div class="future-card">
-              <div class="future-card-img-container">
-                <img style="width: 50%; border: 1.3px solid grey !important;" src="./images/risk.png"
-                  alt="Next-Gen Space Telescopes" class="future-card-img clickable-image" data-src="./images/risk.png" />
-              </div>
-              <h4 class="future-card-title" style="font-size: small;" data-explanation="Next-Gen Space Telescopes">Risk
-                Assessment</h4>
-              <div class="explanation-popup">
-                <ul>
-                  <p>Medium risk identified for vendor consent under AI Governance. Remediation: implement a PO
-                    agent-based consent system with clear opt-ins, granular controls, and audit-ready logs.</p>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <!-- Page 2 (Hidden by default, UNCHANGED) -->
-    <div id="content-set-2" class="content-set" style="display: none;">
-      <p class="services-title animate-on-show">Services</p>
-      <div class="services-container">
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 35px;">
-          <div style="display: flex; justify-content: space-around; align-items: stretch; gap: 20px; width: 85%;">
-            <div class="service-box animate-on-show">
-              <p>GenAI + Agent Integration</p>
-              <ul>
-                <li>Seamlessly combine Generative AI models with intelligent agents.</li>
-                <li>Automate complex workflows and critical decision-making processes.</li>
-                <li>Personalize user experiences in real-time through adaptive, goal-driven interactions.</li>
-              </ul>
-            </div>
-            <div class="service-box animate-on-show">
-              <p>Cloud Enablement</p>
-              <ul>
-                <li>Leverage leading cloud platforms like Vertex AI, Azure, and Gemini.</li>
-                <li>Deploy scalable, secure, and high-performance AI solutions.</li>
-                <li>Accelerate innovation with managed services and streamlined experimentation.</li>
-              </ul>
-            </div>
-            <div class="service-box animate-on-show">
-              <p>Enterprise-Grade Deployment</p>
-              <ul>
-                <li>Ensure robust security and full regulatory compliance.</li>
-                <li>Streamline deployment and management across all environments.</li>
-                <li>Embed governance and trust throughout the entire AI lifecycle.</li>
-              </ul>
-            </div>
-          </div>
-          <div class="back-button-container animate-on-show">
-            <button id="back-button" class="navigation-button" style="padding: 10px 20px;">
-              <img
-                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImJsdWUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTggMTVsLTYtNi02IDYiLz48L3N2Zz4="
-                alt="Up Arrow" style="width: 24px; height: 24px; margin-right: 8px;">
-              <span>Back</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script src="slides-interactive.js"></script>
+     <script src="js/slides-interactive.js"></script>
 </section>

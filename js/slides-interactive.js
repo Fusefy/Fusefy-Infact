@@ -65,6 +65,146 @@ function replayAnimations() {
     .forEach(resetAnimation);
 }
 
+
+//------------------------------------------
+
+// File: Fusefy-Demo/js/slides-interactive.js
+
+// File: Fusefy-Demo/js/slides-interactive.js
+
+// Wait for the Reveal.js framework to be fully initialized before running our script.
+Reveal.addEventListener('ready', function() {
+
+    // Select the component's main container within the current slide
+    const container = document.querySelector('.slide-container');
+
+    // If the component doesn't exist on the page, stop the script
+    if (!container) {
+        return;
+    }
+
+    // Prevents the script from running multiple times if the slide is re-initialized
+    if (container.dataset.initialized) {
+        return;
+    }
+    container.dataset.initialized = 'true';
+
+    // --- 1. DATA for each step ---
+    const stepsData = {
+        1: {
+            title: "1. Containerize the Code",
+            description: "Package your application and its dependencies into a standardized, portable container.",
+            points: [
+                "Write a Dockerfile defining the environment.",
+                "Define dependencies, runtime, and entry point.",
+                "Build a lightweight, efficient Docker image."
+            ],
+            icon: "fa-solid fa-box-archive",
+            theme: "theme-blue",
+            pointIcon: "fa-solid fa-check"
+        },
+        2: {
+            title: "2. Run & Test",
+            description: "Ensure the containerized application works perfectly in a local development environment.",
+            points: [
+                "Use VS Code Live Server / Live Share for real-time testing.",
+                "Make and test changes directly in the editor.",
+                "Use mounted volumes to reflect code updates instantly."
+            ],
+            icon: "fa-solid fa-person-running",
+            theme: "theme-teal",
+            pointIcon: "fa-solid fa-check"
+        },
+        3: {
+            title: "3. Edit & Verify",
+            description: "Iteratively improve the code based on local testing and feedback.",
+            points: [
+                "Update code inside VS Code to fix bugs or add features.",
+                "Saved changes sync with the live running instance.",
+                "Retest the application until it works as expected."
+            ],
+            icon: "fa-solid fa-code",
+            theme: "theme-purple",
+            pointIcon: "fa-solid fa-check"
+        },
+        4: {
+            title: "4. Platform-based Deployment",
+            description: "Push the container image to a cloud registry and deploy it to a hosting service.",
+            points: [
+                "Push image to a registry (e.g., Docker Hub, AWS ECR, GCP GCR).",
+                "Deploy using a service like AWS ECS, GCP Cloud Run, or Azure App Service.",
+                "Configure networking, scaling, and environment variables."
+            ],
+            icon: "fa-solid fa-cloud-arrow-up",
+            theme: "theme-orange",
+            pointIcon: "fa-solid fa-check"
+        },
+        5: {
+            title: "5. Automated Deployment Flow",
+            description: "Establish a CI/CD pipeline to automate the entire build, test, and deploy process.",
+            points: [
+                "Commit changes to a Git repository to trigger the pipeline.",
+                "CI/CD (e.g., GitHub Actions) automatically builds and pushes the image.",
+                "The platform fetches the latest container and deploys it seamlessly."
+            ],
+            icon: "fa-solid fa-circle-check",
+            theme: "theme-green",
+            pointIcon: "fa-solid fa-check"
+        }
+    };
+
+    // --- 2. DOM Elements ---
+    const navList = document.getElementById('nav-list');
+    const navItems = document.querySelectorAll('.nav-item');
+    const workflowDetailsContainer = document.getElementById('workflow-details');
+
+    if (!navList || navItems.length === 0 || !workflowDetailsContainer) {
+        console.error("Workflow component elements not found. Script will not run.");
+        return;
+    }
+
+    // --- 3. Function to update content ---
+    function updateContent(step) {
+        const data = stepsData[step];
+        if (!data) return;
+        const pointsHtml = data.points.map(point => `<li><div class="list-icon"><i class="${data.pointIcon}"></i></div><span>${point}</span></li>`).join('');
+        const contentHtml = `<div class="content-header"><div class="content-icon"><i class="${data.icon}"></i></div><div class="content-title"><h3>${data.title}</h3><p>${data.description}</p></div></div><div class="content-details"><ul>${pointsHtml}</ul></div>`;
+        workflowDetailsContainer.innerHTML = contentHtml;
+        workflowDetailsContainer.className = 'workflow-content';
+        workflowDetailsContainer.classList.add(data.theme);
+    }
+
+    // --- 4. Function to handle nav clicks ---
+    function handleNavClick(e) {
+        const clickedItem = e.target.closest('.nav-item');
+        if (!clickedItem) return;
+        const step = clickedItem.dataset.step;
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            Object.values(stepsData).forEach(data => item.classList.remove(data.theme));
+        });
+        const data = stepsData[step];
+        if (data) {
+            clickedItem.classList.add('active', data.theme);
+        }
+        updateContent(step);
+    }
+
+    // --- 5. Initial setup ---
+    function initialize() {
+        const firstNavItem = navItems[0];
+        const initialStep = firstNavItem.dataset.step;
+        const initialData = stepsData[initialStep];
+        if (initialData) {
+            firstNavItem.classList.add('active', initialData.theme);
+            updateContent(initialStep);
+        }
+        navList.addEventListener('click', handleNavClick);
+    }
+
+    initialize();
+});
+//--------------------------------------------
 // Reveal.js event for slide change
 document.addEventListener('DOMContentLoaded', function () {
   if (window.Reveal) {
