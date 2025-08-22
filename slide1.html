@@ -140,6 +140,30 @@
       color: #0021f3;
       font-size: 16px;
     }
+
+    /* --- NEW STYLES ADDED FOR AGENTIC AI SECTION --- */
+    .agentic-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px; /* Creates space between the icon and text */
+      margin-top: 25px;
+    }
+
+    .agentic-icon {
+      height: 130px; /* Adjust size as needed */
+      width: 130px;
+      flex-shrink: 0; /* Prevents the icon from shrinking */
+    }
+    
+    /* Override .main-heading styles ONLY within our new container */
+    .agentic-container .main-heading {
+      margin-top: 0; /* Remove the default top margin */
+      text-align: left; /* Align text to the left relative to the icon */
+      width: auto; /* Allow the content to define the width */
+    }
+    /* --- END OF NEW STYLES --- */
+
   </style>
 
   <header class="slide-header" data-id="header">
@@ -159,7 +183,7 @@
     <!-- Logo container for better centering -->
     <div class="fusefy-logo-container fragment" data-fragment-index="0">
       <img
-      style="padding-top: 70px; width: 300px; height: 85px;"
+        style="padding-top: 70px; width: 300px; height: 85px;"
         src="images/fusefy.svg"
         alt="Fusefy Logo"
         class="fusefy-logo custom-appear"
@@ -170,8 +194,14 @@
     <p class="main-heading fragment" data-fragment-index="1">
       AI Adoption As A Service
     </p>
-    <p data-fragment-index="2"  class="main-heading fragment" style="font-weight: 900; color: #002060; line-height: 0.3 !important;">
-      Agentic AI: Turning Intelligence into Action</p>
+
+    <!-- NEW: Container for the icon and text. The fragment attributes are moved here so they appear together. -->
+    <div class="agentic-container fragment" data-fragment-index="2">
+      <img src="images/Slide1.png" alt="Agentic AI Icon" class="agentic-icon" />
+      <p class="main-heading" style="font-weight: 700; color: #002060; line-height: 1.6 !important;">
+        Agentic AI: Turning Intelligence into <br> Action
+      </p>
+    </div>
   </div>
 
   <!-- No inline script needed - handled by global slides-interactive.js -->

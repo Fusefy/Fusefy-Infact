@@ -1,231 +1,178 @@
 <section class="index-slide" data-auto-animate>
-  <style>
-    /* --- ORIGINAL STYLES (UNCHANGED) --- */
-    /* Wrapper to arrange heading, hyphen, and content in one line */
-    .platform-hero {
-      width: 100%;
+    <style>
+    /* Tighten gap below the header only on this slide */
+    .index-slide .slide-header { margin-bottom: 0.5rem; }
+
+    /* Row holds the left heading + right content box */
+    .expertise-row {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;           /* center the whole row under header */
       display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      margin-top: 0.5rem;
-      padding: 0 24px;
-      gap: 0.6rem;
+      align-items: flex-start;  /* top-align heading with box */
+      gap: 2rem; /* Increased gap for better spacing */
     }
 
-    .platform-heading {
-      font-size: 2rem !important;
-      font-weight: 700;
-      margin: 0;
-      background: linear-gradient(90deg, #4169e1, #8a2be2);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      white-space: nowrap;
+    /* Add space between the two rows */
+    .expertise-row:not(:last-child) {
+      margin-bottom: 1.5rem;
     }
 
-    .platform-hyphen {
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: #333;
+    /* Left-side heading (reused for both sections) */
+    .expertise-heading {
+      font-size: 1.7rem !important;
+      font-weight: bold;
+      color: #155596;
+      margin-top: 0.5rem; /* Align text better with the top of the box */
+      line-height: 1.2;
+      text-align: left;
+      /* --- KEY CHANGE FOR ALIGNMENT --- */
+      flex: 0 0 240px; /* Give a fixed width so both rows align perfectly */
     }
 
-    .platform-subtext {
+    /* NEW: Style for the gold text in headings */
+    .expertise-heading .gold-text {
+      color: #D4AF37; /* Gold color */
+    }
+
+
+    /* Right-side tabs box */
+    .tab-container {
+      flex: 1;                 /* fill remaining width */
+      height: 380px;           /* INCREASED height for scroll */
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow-y: auto;        /* enable vertical scroll */
+    }
+
+    .tab-header {
+      display: flex;
+      border-bottom: 2px solid #e0e0e0;
+      background: #f5f9fc;
+      position: sticky; /* keep header fixed when scrolling */
+      top: 0;
+      z-index: 2;
+    }
+
+    .tab-button {
       flex: 1;
-      line-height: 1.5;
-      font-size: 1.05rem;
-      color: #333;
-    }
-
-    /* Section headings */
-    .cloud-platform-heading,
-    .ai-platform-heading,
-    .byo-platform-heading {
       text-align: center;
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-top: -1.5rem !important;
-      margin-bottom: 1.2rem;
-      color: #000;
+      padding: 0.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      background: transparent;
+      transition: all 0.3s ease;
     }
 
-    /* Card container styling */
-    .platform-cards {
+    .tab-button.active {
+      color: #155596;
+      border-bottom: 3px solid #00aaff;
+      background: #fff;
+    }
+
+    .tab-content {
+      padding: 1.5rem; /* Increased padding */
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Grid for cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* Force 4 columns */
+      gap: 1.5rem; /* Increased gap */
+    }
+
+    .card {
+      padding: 0.8rem;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      background: #fafafa;
+      transition: all 0.3s ease;
+      text-align: left;
+    }
+
+    .card:hover {
+      background: #f0f8ff;
+      transform: translateY(-3px);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 0.3rem;
+      font-size: 0.9rem; /* Adjusted font size */
+      font-weight: bold;
+      color: #222;
+      text-transform: uppercase;
+    }
+
+    .card p {
+      color: #555;
+      font-size: 0.85rem;
+      line-height: 1.3;
+      margin-bottom: 0;
+    }
+
+    /* --- STYLES FOR MARKETPLACE SECTION --- */
+    .marketplace-container {
+      flex: 1;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 1.5rem 2rem;
+    }
+
+    .marketplace-columns {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1.5rem;
-      margin-top: 0.5rem;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
     }
 
-    /* Compact card design */
-    .platform-card {
-      background-color: #fff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      border-radius: 16px;
-      padding: 0.8rem 1.2rem;
-      width: 190px;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    /* Hover effect */
-    .platform-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-    }
-
-    /* Image styling */
-    .platform-card img {
-      width: 45px;
-      height: auto;
-      object-fit: contain;
-      margin-right: 1rem;
-    }
-
-    /* Text styling */
-    .platform-card h3 {
-      font-size: 1.1rem;
-      font-weight: 900;
-      color: #333;
-      margin: 0;
-      white-space: nowrap;
-    }
-
-    /* Special style for BYO cards without image */
-    .byo-card {
+    .marketplace-column {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      gap: 1rem;
+    }
+
+    .marketplace-item {
+      display: flex;
       align-items: center;
-      text-align: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: #374151;
     }
 
-    .byo-card h3 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: #222;
-    }
-
-    .byo-card p {
-      font-size: 0.95rem;
-      color: #666;
-      margin: 0;
+    .marketplace-item svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0; /* Prevents icon from shrinking */
     }
 
 
-    /* --- NEW ANIMATION STYLES --- */
-    
-    /* Keyframe for cards dropping in from above */
-    @keyframes dropIn {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
+    /* Responsive: stack on small widths */
+    @media (max-width: 900px) {
+      .expertise-row {
+        flex-direction: column;
+        align-items: stretch;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      .expertise-heading {
+        white-space: normal;
+        margin-bottom: 0.5rem;
       }
     }
-
-    /* Keyframe for content sliding in from the left */
-    @keyframes slideInFromLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    
-    /* Keyframe for content sliding in from the right */
-    @keyframes slideInFromRight {
-      from {
-        opacity: 0;
-        transform: translateX(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    
-    /* Keyframe for a simple fade-in */
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-
-    /* Prepare elements for animation by hiding them initially */
-    .platform-hero .platform-heading,
-    .platform-hero .platform-hyphen,
-    .platform-hero .platform-subtext,
-    .cloud-platform-heading,
-    .ai-platform-heading,
-    .byo-platform-heading,
-    .platform-card {
-      opacity: 0;
-    }
-
-    /* Animate the main hero text */
-    .platform-hero .platform-heading {
-      animation: slideInFromLeft 0.8s ease-out forwards;
-      animation-delay: 1.6s; /* Starts after header animation */
-    }
-    .platform-hero .platform-hyphen,
-    .platform-hero .platform-subtext {
-      animation: slideInFromRight 0.8s ease-out forwards;
-      animation-delay: 1.6s;
-    }
-    
-    /* Animate section headings */
-    .cloud-platform-heading {
-      animation: fadeIn 0.7s ease-out forwards;
-      animation-delay: 2.1s;
-    }
-    .ai-platform-heading {
-      animation: fadeIn 0.7s ease-out forwards;
-      animation-delay: 3.0s; /* Delay until after the first row of cards */
-    }
-    .byo-platform-heading {
-      animation: fadeIn 0.7s ease-out forwards;
-      animation-delay: 4.1s; /* Delay until after the second row of cards */
-    }
-
-    /* Apply the drop-in animation to all cards with a smooth easing */
-    .platform-card {
-      animation: dropIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    }
-
-    /* --- Staggered delays for each row of cards --- */
-
-    /* Row 1: Cloud Platforms */
-    .cloud-platform-heading + .platform-cards .platform-card:nth-child(1) { animation-delay: 2.3s; }
-    .cloud-platform-heading + .platform-cards .platform-card:nth-child(2) { animation-delay: 2.45s; }
-    .cloud-platform-heading + .platform-cards .platform-card:nth-child(3) { animation-delay: 2.6s; }
-    
-    /* Row 2: AI Platforms */
-    .ai-platform-heading + .platform-cards .platform-card:nth-child(1) { animation-delay: 3.2s; }
-    .ai-platform-heading + .platform-cards .platform-card:nth-child(2) { animation-delay: 3.35s; }
-    .ai-platform-heading + .platform-cards .platform-card:nth-child(3) { animation-delay: 3.5s; }
-    .ai-platform-heading + .platform-cards .platform-card:nth-child(4) { animation-delay: 3.65s; }
-
-    /* Row 3: Bring Your Own Platform */
-    .byo-platform-heading + .platform-cards .platform-card:nth-child(1) { animation-delay: 4.3s; }
-    .byo-platform-heading + .platform-cards .platform-card:nth-child(2) { animation-delay: 4.45s; }
-    .byo-platform-heading + .platform-cards .platform-card:nth-child(3) { animation-delay: 4.6s; }
-
   </style>
 
   <header class="slide-header" data-id="header">
     <h1 class="zoom-in" data-auto-animate data-auto-animate-duration="1.5">
-      Powering Our Platform
+      Verticals & Categories We Serve
     </h1>
     <img
       src="images/Logo.png"
@@ -236,71 +183,83 @@
     />
   </header>
 
-  <!-- Heading on left, hyphen, content on right -->
-  <div class="platform-hero">
-    <h2 style="margin-top: 0% !important;" class="platform-heading">
-      Multiple AI Platforms
-    </h2>
-    <span style="margin-top: -2% !important;" class="platform-hyphen">-</span>
-    <p class="platform-subtext">
-  Our solution is <span style="font-weight: 700;">platform and language agnostic</span>, 
-  supporting a vast ecosystem of AI tools and services. Plus, you <br> can 
-  <span style="font-weight: 700;">bring your own platform</span> — we'll integrate it seamlessly.
-</p>
-
-  </div>
-
-  <!-- Cloud Platforms Section -->
-  <h2 class="cloud-platform-heading">Cloud Platforms</h2>
-  <div class="platform-cards">
-    <div class="platform-card">
-      <img src="images/AWS.png" alt="Amazon Web Services" />
-      <h3>Amazon Web <br> Services</h3>
-    </div>
-    <div class="platform-card">
-      <img src="images/google-cloud.png" alt="Google Cloud" />
-      <h3>Google Cloud</h3>
-    </div>
-    <div class="platform-card">
-      <img src="images/b2.png" alt="Azure" />
-      <h3>Azure</h3>
-    </div>
-  </div>
-
-  <!-- AI Platforms & Tools Section -->
-  <h2 class="ai-platform-heading">AI Platforms & Tools</h2>
-  <div class="platform-cards">
-    <div class="platform-card">
-      <img src="images/Agentforce.png" alt="Agentforce" />
-      <h3>Agentforce</h3>
-    </div>
-    <div class="platform-card">
-      <img src="images/b1.png" alt="Databricks" />
-      <h3>Databricks</h3>
-    </div>
-    <div class="platform-card">
-      <img src="images/GPT.png" alt="OpenAI" />
-      <h3>OpenAI</h3>
-    </div>
-    <div class="platform-card">
-      <img src="images/SNOW.png" alt="Snow Flake" />
-      <h3>Snow Flake</h3>
+  <!-- Section 1: Heading on the LEFT, Box on the RIGHT -->
+  <div class="expertise-row">
+    <h2 class="expertise-heading"  style="align-self: center;">OUR EXPERT<span class="gold-text">ISE</span></h2>
+    <div class="tab-container">
+      <div class="tab-header">
+        <button class="tab-button active" onclick="showTab('verticals')">Verticals</button>
+        <button class="tab-button" onclick="showTab('categories')">Categories</button>
+      </div>
+      <div id="verticals" class="tab-content active">
+        <div class="card-grid">
+          <div class="card"><h3>Healthcare</h3><p>Streamlining patient care and administrative workflows.</p></div>
+          <div class="card"><h3>Finance</h3><p>Automating financial operations and enhancing security.</p></div>
+          <div class="card"><h3>Real Estate</h3><p>Simplifying property management and client interactions.</p></div>
+          <div class="card"><h3>Logistics</h3><p>Optimizing supply chains and tracking from end to end.</p></div>
+          <div class="card"><h3>Education</h3><p>Personalizing learning experiences and managing institutions.</p></div>
+          <div class="card"><h3>HR</h3><p>Improving employee lifecycle management and talent acquisition.</p></div>
+          <div class="card"><h3>Retail & E-commerce</h3><p>Enhancing customer shopping experiences and inventory.</p></div>
+          <div class="card"><h3>Manufacturing</h3><p>Boosting production efficiency and quality control.</p></div>
+        </div>
+      </div>
+      <div id="categories" class="tab-content">
+        <div class="card-grid">
+          <div class="card"><h3>BI Agents</h3><p>Delivering actionable insights from complex data sets.</p></div>
+          <div class="card"><h3>Voice Agents</h3><p>Providing natural, conversational voice-based assistance.</p></div>
+          <div class="card"><h3>Customer Support Agents</h3><p>Resolving customer queries with speed and accuracy.</p></div>
+          <div class="card"><h3>Case Management Agents</h3><p>Organizing and tracking complex cases to resolution.</p></div>
+          <div class="card"><h3>Claims Processing Agents</h3><p>Automating the validation and processing of claims.</p></div>
+          <div class="card"><h3>CRM Agents</h3><p>Managing customer relationships and sales pipelines.</p></div>
+          <div class="card"><h3>Knowledge Search Agents</h3><p>Finding and retrieving relevant information instantly.</p></div>
+          <div class="card"><h3>HCM Agents</h3><p>Streamlining human capital management processes.</p></div>
+          <div class="card"><h3>ERP Agents</h3><p>Integrating and managing core business operations.</p></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Bring Your Own Platform Section -->
-  <h2 class="byo-platform-heading">Bring Your Own Platform</h2>
-  <div class="platform-cards">
-    <div class="platform-card byo-card">
-      <h3>Existing</h3>
-      <p>Your Current Stack</p>
-    </div>
-    <div class="platform-card byo-card">
-      <h3>Old</h3>
-      <p>Legacy Systems</p>
-    </div>
-    <div class="platform-card byo-card">
-      <h3>+ New Platform</h3>
+  <!-- Section 2: Marketplace Section -->
+  <div class="expertise-row">
+    <h2 class="expertise-heading">OUR AI MARKET<span class="gold-text">PLACE</span></h2>
+    <div class="marketplace-container">
+      <div class="marketplace-columns">
+        <!-- Left Column -->
+        <div class="marketplace-column">
+          <div class="marketplace-item">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="#3B82F6"/><path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Interview agent</span>
+          </div>
+          <div class="marketplace-item">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="#3B82F6"/><path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Claim reimbursement agent</span>
+          </div>
+          <div class="marketplace-item">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="#3B82F6"/><path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Teams Reminder Flow using Lists & Power Automate</span>
+          </div>
+          <div class="marketplace-item">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="#3B82F6"/><path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Automation platform n8n</span>
+          </div>
+        </div>
+        <!-- Right Column -->
+        <div class="marketplace-column">
+          <div class="marketplace-item">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="#3B82F6"/><path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Order processing agent</span>
+          </div>
+          <div class="marketplace-item">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="#3B82F6"/><path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Data quality and Anomaly agent</span>
+          </div>
+          <div class="marketplace-item">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="#3B82F6"/><path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Onboarding agent</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</section> 
+
+</section>

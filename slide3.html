@@ -1,178 +1,192 @@
 <section class="index-slide" data-auto-animate>
-    <style>
-    /* Tighten gap below the header only on this slide */
-    .index-slide .slide-header { margin-bottom: 0.5rem; }
+  <style>
+    /* General Section Font */
+    .ai-adoption-section {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
 
-    /* Row holds the left heading + right content box */
-    .expertise-row {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;           /* center the whole row under header */
+    /* Main Wrapper */
+    .ai-adoption-wrapper {
+      background: linear-gradient(to right, #f0f6ff 30%, #ffffff 70%);
+      padding: 60px 40px;
+      margin-top: 40px;
       display: flex;
-      align-items: flex-start;  /* top-align heading with box */
-      gap: 2rem; /* Increased gap for better spacing */
-    }
-
-    /* Add space between the two rows */
-    .expertise-row:not(:last-child) {
-      margin-bottom: 1.5rem;
-    }
-
-    /* Left-side heading (reused for both sections) */
-    .expertise-heading {
-      font-size: 1.7rem !important;
-      font-weight: bold;
-      color: #155596;
-      margin-top: 0.5rem; /* Align text better with the top of the box */
-      line-height: 1.2;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
       text-align: left;
-      /* --- KEY CHANGE FOR ALIGNMENT --- */
-      flex: 0 0 240px; /* Give a fixed width so both rows align perfectly */
+      overflow: hidden;
     }
 
-    /* NEW: Style for the gold text in headings */
-    .expertise-heading .gold-text {
-      color: #D4AF37; /* Gold color */
-    }
-
-
-    /* Right-side tabs box */
-    .tab-container {
-      flex: 1;                 /* fill remaining width */
-      height: 380px;           /* INCREASED height for scroll */
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      overflow-y: auto;        /* enable vertical scroll */
-    }
-
-    .tab-header {
-      display: flex;
-      border-bottom: 2px solid #e0e0e0;
-      background: #f5f9fc;
-      position: sticky; /* keep header fixed when scrolling */
-      top: 0;
-      z-index: 2;
-    }
-
-    .tab-button {
-      flex: 1;
-      text-align: center;
-      padding: 0.8rem;
-      font-weight: bold;
-      cursor: pointer;
-      border: none;
-      outline: none;
-      font-size: 1rem;
-      background: transparent;
-      transition: all 0.3s ease;
-    }
-
-    .tab-button.active {
-      color: #155596;
-      border-bottom: 3px solid #00aaff;
-      background: #fff;
-    }
-
-    .tab-content {
-      padding: 1.5rem; /* Increased padding */
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    /* Grid for cards */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr); /* Force 4 columns */
-      gap: 1.5rem; /* Increased gap */
-    }
-
-    .card {
-      padding: 0.8rem;
-      border-radius: 8px;
-      border: 1px solid #e5e7eb;
-      background: #fafafa;
-      transition: all 0.3s ease;
-      text-align: left;
-    }
-
-    .card:hover {
-      background: #f0f8ff;
-      transform: translateY(-3px);
-    }
-
-    .card h3 {
-      margin-top: 0;
-      margin-bottom: 0.3rem;
-      font-size: 0.9rem; /* Adjusted font size */
-      font-weight: bold;
-      color: #222;
-      text-transform: uppercase;
-    }
-
-    .card p {
-      color: #555;
-      font-size: 0.85rem;
-      line-height: 1.3;
-      margin-bottom: 0;
-    }
-
-    /* --- STYLES FOR MARKETPLACE SECTION --- */
-    .marketplace-container {
-      flex: 1;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      padding: 1.5rem 2rem;
-    }
-
-    .marketplace-columns {
+    .ai-adoption-container {
       display: flex;
       justify-content: space-between;
-      gap: 2rem;
+      align-items: center;
+      max-width: 1100px;
+      width: 100%;
+      gap: 60px;
     }
 
-    .marketplace-column {
+    /* LEFT - Intro Section */
+    .intro-text {
       flex: 1;
+      max-width: 400px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeSlideUp 1.2s ease-out forwards;
+      animation-delay: 0.3s;
+    }
+
+    .blue-line {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(to right, #0052ff, #a2c1ff);
+      margin-bottom: 20px;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: growLine 1s ease-out forwards;
+      animation-delay: 0.2s;
+    }
+
+    .intro-text h2 {
+      font-size: 36px;
+      font-weight: 700;
+      color: #1c2e4a;
+      line-height: 1.3;
+      margin: 0 0 20px 0;
+    }
+
+    .intro-text p {
+      font-size: 16px;
+      color: #5a677d;
+      line-height: 1.6;
+    }
+
+    .no-hype {
+      color: #0052ff;
+      font-weight: 600;
+    }
+
+    /* RIGHT - Steps Flow */
+    .steps-flow {
+      flex: 1.2;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
     }
 
-    .marketplace-item {
+    .step-item {
       display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      opacity: 0;
+      transform: translateX(40px);
+      animation: fadeSlideLeft 1s ease-out forwards;
+    }
+
+    /* Step Animations (delay each step) */
+    .step-item:nth-child(1) { animation-delay: 0.6s; }
+    .step-item:nth-child(3) { animation-delay: 1.2s; }
+    .step-item:nth-child(5) { animation-delay: 1.8s; }
+
+    .step-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 0.75rem;
-      font-size: 0.9rem;
-      color: #374151;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transform: scale(0.5);
+      opacity: 0;
+      animation: popIn 0.8s ease-out forwards;
     }
 
-    .marketplace-item svg {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0; /* Prevents icon from shrinking */
+    .step-item:nth-child(1) .step-icon { animation-delay: 0.7s; }
+    .step-item:nth-child(3) .step-icon { animation-delay: 1.3s; }
+    .step-item:nth-child(5) .step-icon { animation-delay: 1.9s; }
+
+    .icon-ideation { background-color: #0052ff; }
+    .icon-foundry { background-color: #192b69; }
+    .icon-audit { background-color: #f7a600; }
+
+    .step-content h3 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 8px 0;
     }
 
+    .title-ideation { color: #0052ff; }
+    .title-foundry { color: #192b69; }
+    .title-audit { color: #f7a600; }
 
-    /* Responsive: stack on small widths */
-    @media (max-width: 900px) {
-      .expertise-row {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .expertise-heading {
-        white-space: normal;
-        margin-bottom: 0.5rem;
-      }
+    .step-content p {
+      font-size: 16px;
+      color: #5a677d;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Arrows with bounce effect */
+    .arrow {
+      height: 40px;
+      width: 64px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 8px 0;
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards, bounce 1.5s infinite ease-in-out;
+    }
+
+    .arrow:nth-of-type(1) { animation-delay: 1s, 2s; }
+    .arrow:nth-of-type(2) { animation-delay: 1.6s, 2.6s; }
+
+    /* Animations */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeSlideLeft {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes growLine {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .ai-adoption-wrapper { padding: 40px 20px; }
+      .ai-adoption-container { flex-direction: column; text-align: center; }
+      .intro-text { margin-bottom: 50px; max-width: 100%; }
+      .blue-line { margin-left: auto; margin-right: auto; }
+      .steps-flow { align-items: center; }
+      .step-item { flex-direction: column; text-align: center; align-items: center; gap: 15px; }
     }
   </style>
 
   <header class="slide-header" data-id="header">
     <h1 class="zoom-in" data-auto-animate data-auto-animate-duration="1.5">
-      Verticals & Categories We Serve
+      3 Steps to AI Success
     </h1>
     <img
       src="images/Logo.png"
@@ -183,83 +197,110 @@
     />
   </header>
 
-  <!-- Section 1: Heading on the LEFT, Box on the RIGHT -->
-  <div class="expertise-row">
-    <h2 class="expertise-heading">OUR EXPERT<span class="gold-text">ISE</span></h2>
-    <div class="tab-container">
-      <div class="tab-header">
-        <button class="tab-button active" onclick="showTab('verticals')">Verticals</button>
-        <button class="tab-button" onclick="showTab('categories')">Categories</button>
+  <!-- Animated AI Adoption Section -->
+  <div class="ai-adoption-wrapper">
+    <div class="ai-adoption-container">
+      <!-- Intro -->
+      <div class="intro-text">
+        <div class="blue-line"></div>
+        <h2>3 Steps for Rapid<br>Enterprise AI Adoption<br>with ROI</h2>
+        <p>A pragmatic, <span class="no-hype">no-hype</span> approach to help enterprises adopt AI efficiently and at scale.</p>
       </div>
-      <div id="verticals" class="tab-content active">
-        <div class="card-grid">
-          <div class="card"><h3>Healthcare</h3><p>Streamlining patient care and administrative workflows.</p></div>
-          <div class="card"><h3>Finance</h3><p>Automating financial operations and enhancing security.</p></div>
-          <div class="card"><h3>Real Estate</h3><p>Simplifying property management and client interactions.</p></div>
-          <div class="card"><h3>Logistics</h3><p>Optimizing supply chains and tracking from end to end.</p></div>
-          <div class="card"><h3>Education</h3><p>Personalizing learning experiences and managing institutions.</p></div>
-          <div class="card"><h3>HR</h3><p>Improving employee lifecycle management and talent acquisition.</p></div>
-          <div class="card"><h3>Retail & E-commerce</h3><p>Enhancing customer shopping experiences and inventory.</p></div>
-          <div class="card"><h3>Manufacturing</h3><p>Boosting production efficiency and quality control.</p></div>
+
+      <!-- Steps -->
+      <div class="steps-flow">
+        <!-- Step 1 -->
+        <div class="step-item">
+          <div class="step-icon icon-ideation">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 
+                  2 0 0 1 0 2.83 2 2 0 0 
+                  1-2.83 0l-.06-.06a1.65 1.65 
+                  0 0 0-1.82-.33 1.65 1.65 0 
+                  0 0-1 1.51V21a2 2 0 0 
+                  1-2 2 2 2 0 0 1-2-2v-.09A1.65 
+                  1.65 0 0 0 9 19.4a1.65 1.65 
+                  0 0 0-1.82.33l-.06.06a2 2 0 
+                  0 1-2.83 0 2 2 0 0 1 
+                  0-2.83l.06-.06a1.65 1.65 0 
+                  0 0 .33-1.82 1.65 1.65 0 
+                  0 0-1.51-1H3a2 2 0 0 
+                  1-2-2 2 2 0 0 1 2-2h.09A1.65 
+                  1.65 0 0 0 4.6 9a1.65 1.65 
+                  0 0 0-.33-1.82l-.06-.06a2 
+                  2 0 0 1 0-2.83 2 2 0 0 
+                  1 2.83 0l.06.06a1.65 1.65 
+                  0 0 0 1.82.33H9a1.65 1.65 
+                  0 0 0 1-1.51V3a2 2 0 0 
+                  1 2-2 2 2 0 0 1 2 
+                  2v.09a1.65 1.65 0 0 
+                  0 1 1.51 1.65 1.65 0 0 
+                  0 1.82-.33l.06-.06a2 
+                  2 0 0 1 2.83 0 2 2 0 0 
+                  1 0 2.83l-.06.06a1.65 
+                  1.65 0 0 0-.33 1.82V9a1.65 
+                  1.65 0 0 0 1.51 1H21a2 
+                  2 0 0 1 2 2 2 2 0 0 
+                  1-2 2h-.09a1.65 1.65 0 
+                  0 0-1.51 1z">
+              </path>
+            </svg>
+          </div>
+          <div class="step-content">
+            <h3 class="title-ideation">Fusefy AI Ideation Studio</h3>
+            <p>Seamlessly engage with business and identify high ROI use cases and build roadmap.</p>
+          </div>
         </div>
-      </div>
-      <div id="categories" class="tab-content">
-        <div class="card-grid">
-          <div class="card"><h3>BI Agents</h3><p>Delivering actionable insights from complex data sets.</p></div>
-          <div class="card"><h3>Voice Agents</h3><p>Providing natural, conversational voice-based assistance.</p></div>
-          <div class="card"><h3>Customer Support Agents</h3><p>Resolving customer queries with speed and accuracy.</p></div>
-          <div class="card"><h3>Case Management Agents</h3><p>Organizing and tracking complex cases to resolution.</p></div>
-          <div class="card"><h3>Claims Processing Agents</h3><p>Automating the validation and processing of claims.</p></div>
-          <div class="card"><h3>CRM Agents</h3><p>Managing customer relationships and sales pipelines.</p></div>
-          <div class="card"><h3>Knowledge Search Agents</h3><p>Finding and retrieving relevant information instantly.</p></div>
-          <div class="card"><h3>HCM Agents</h3><p>Streamlining human capital management processes.</p></div>
-          <div class="card"><h3>ERP Agents</h3><p>Integrating and managing core business operations.</p></div>
+
+        <!-- Arrow -->
+        <div class="arrow">
+          <svg width="18" height="30" viewBox="0 0 18 30" fill="#e0e0e0">
+            <path d="M8 0H10V20H15L9 29L3 20H8V0Z" />
+          </svg>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-item">
+          <div class="step-icon icon-foundry">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <path
+                d="M12 15.5a3.5 3.5 0 0 0 3.5-3.5c0-1.93-1.57-3.5-3.5-3.5a3.5 3.5 0 
+                0 0-2.47 1.03">
+              </path>
+            </svg>
+          </div>
+          <div class="step-content">
+            <h3 class="title-foundry">Fusefy AI Foundry</h3>
+            <p>Build your ideas in any AI platform of your choice rapidly with state of art low-code models.</p>
+          </div>
+        </div>
+
+        <!-- Arrow -->
+        <div class="arrow">
+          <svg width="18" height="30" viewBox="0 0 18 30" fill="#e0e0e0">
+            <path d="M8 0H10V20H15L9 29L3 20H8V0Z" />
+          </svg>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-item">
+          <div class="step-icon icon-audit">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <div class="step-content">
+            <h3 class="title-audit">Fusefy AI Audit Suite</h3>
+            <p>Continuously measure model performance, security and safety features to comply with regulatory and security standards.</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Section 2: Marketplace Section -->
-  <div class="expertise-row">
-    <h2 class="expertise-heading">OUR AI MARKET<span class="gold-text">PLACE</span></h2>
-    <div class="marketplace-container">
-      <div class="marketplace-columns">
-        <!-- Left Column -->
-        <div class="marketplace-column">
-          <div class="marketplace-item">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="#3B82F6"/><path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Interview agent</span>
-          </div>
-          <div class="marketplace-item">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="#3B82F6"/><path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Claim reimbursement agent</span>
-          </div>
-          <div class="marketplace-item">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="#3B82F6"/><path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Teams Reminder Flow using Lists & Power Automate</span>
-          </div>
-          <div class="marketplace-item">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="#3B82F6"/><path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Automation platform n8n</span>
-          </div>
-        </div>
-        <!-- Right Column -->
-        <div class="marketplace-column">
-          <div class="marketplace-item">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="#3B82F6"/><path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Order processing agent</span>
-          </div>
-          <div class="marketplace-item">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="#3B82F6"/><path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Data quality and Anomaly agent</span>
-          </div>
-          <div class="marketplace-item">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="#3B82F6"/><path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Onboarding agent</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </section>
