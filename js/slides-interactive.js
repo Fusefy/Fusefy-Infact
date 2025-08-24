@@ -48,6 +48,169 @@ function resetAnimation(el) {
   void el.offsetWidth;
   el.style.animation = '';
 }
+//----------JS function for  7th slide -----------------------
+// Wait for Reveal.js framework to initialize
+Reveal.addEventListener('ready', function() {
+
+    // --- INITIALIZER FOR THE "MODERN DEPLOYMENT WORKFLOW" COMPONENT ---
+    (function initializeWorkflow() {
+        // Find the core elements for this specific component
+        const workflowContainer = document.querySelector('.fusefy-slide-container');
+        const navList = document.getElementById('nav-list');
+
+        // If this component isn't on the page, stop this function to prevent errors.
+        if (!workflowContainer || !navList) {
+            return;
+        }
+        
+        // Prevents the script from adding event listeners multiple times
+        if (workflowContainer.dataset.initialized) {
+            return;
+        }
+        workflowContainer.dataset.initialized = 'true';
+
+        // Get all elements the script will interact with
+        const navItems = workflowContainer.querySelectorAll('.fusefy-nav-item');
+        const workflowDetailsContainer = document.getElementById('workflow-details');
+
+        // Structured data for each step
+        const stepsData = {
+            1: {
+                title: "1. Containerize the Code",
+                description: "Package your application and its dependencies into a standardized, portable container.",
+                points: [
+                    "Write a Dockerfile defining the environment.",
+                    "Define dependencies, runtime, and entry point.",
+                    "Build a lightweight, efficient Docker image."
+                ],
+                icon: "fa-solid fa-box-archive",
+                theme: "theme-blue",
+                pointIcon: "fa-solid fa-check"
+            },
+            2: {
+                title: "2. Run & Test Locally",
+                description: "Ensure the containerized application works perfectly in a local development environment.",
+                points: [
+                    "Use VS Code Live Server / Live Share for real-time testing.",
+                    "Make and test changes directly in the editor.",
+                    "Use mounted volumes to reflect code updates instantly."
+                ],
+                icon: "fa-solid fa-person-running",
+                theme: "theme-teal",
+                pointIcon: "fa-solid fa-check"
+            },
+            3: {
+                title: "3. Edit & Verify",
+                description: "Iteratively improve the code based on local testing and feedback.",
+                points: [
+                    "Update code inside VS Code to fix bugs or add features.",
+                    "Saved changes sync with the live running instance.",
+                    "Retest the application until it works as expected."
+                ],
+                icon: "fa-solid fa-code",
+                theme: "theme-purple",
+                pointIcon: "fa-solid fa-check"
+            },
+            4: {
+                title: "4. Platform-based Deployment",
+                description: "Push the container image to a cloud registry and deploy it to a hosting service.",
+                points: [
+                    "Push image to a registry (e.g., Docker Hub, AWS ECR, GCP GCR).",
+                    "Deploy using a service like AWS ECS, GCP Cloud Run, or Azure App Service.",
+                    "Configure networking, scaling, and environment variables."
+                ],
+                icon: "fa-solid fa-cloud-arrow-up",
+                theme: "theme-orange",
+                pointIcon: "fa-solid fa-check"
+            },
+            5: {
+                title: "5. Automated Deployment Flow",
+                description: "Establish a CI/CD pipeline to automate the entire build, test, and deploy process.",
+                points: [
+                    "Commit changes to a Git repository to trigger the pipeline.",
+                    "CI/CD (e.g., GitHub Actions) automatically builds and pushes the image.",
+                    "The platform fetches the latest container and deploys it seamlessly."
+                ],
+                icon: "fa-solid fa-circle-check",
+                theme: "theme-green",
+                pointIcon: "fa-solid fa-check"
+            }
+        };
+        
+        // Function to update the right-side content panel dynamically
+        function updateContent(step) {
+            const data = stepsData[step];
+            if (!data) return;
+
+            const pointsHtml = data.points
+                .map(point => `
+                    <li>
+                        <div class="fusefy-list-icon">
+                            <i class="${data.pointIcon}"></i>
+                        </div>
+                        <span>${point}</span>
+                    </li>`)
+                .join('');
+
+            const contentHtml = `
+                <div class="fusefy-content-header">
+                    <div class="fusefy-content-icon"><i class="${data.icon}"></i></div>
+                    <div class="fusefy-content-title">
+                        <h3>${data.title}</h3>
+                        <p>${data.description}</p>
+                    </div>
+                </div>
+                <div class="fusefy-content-details">
+                    <ul>${pointsHtml}</ul>
+                </div>`;
+
+            workflowDetailsContainer.innerHTML = contentHtml;
+            workflowDetailsContainer.className = 'fusefy-content-panel';
+            workflowDetailsContainer.classList.add(data.theme);
+        }
+
+        // Handle clicks on navigation items
+        function handleNavClick(event) {
+            const clickedItem = event.target.closest('.fusefy-nav-item');
+            if (!clickedItem) return;
+
+            const step = clickedItem.dataset.step;
+
+            // Reset all nav items
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                Object.values(stepsData).forEach(data => item.classList.remove(data.theme));
+            });
+            
+            // Activate clicked item
+            const data = stepsData[step];
+            if (data) {
+                clickedItem.classList.add('active', data.theme);
+            }
+            
+            // Update content panel
+            updateContent(step);
+        }
+        
+        // Initial setup: set first item as active
+        const firstNavItem = navItems[0];
+        if (firstNavItem) {
+            const initialStep = firstNavItem.dataset.step;
+            const initialData = stepsData[initialStep];
+            if (initialData) {
+                firstNavItem.classList.add('active', initialData.theme);
+                updateContent(initialStep);
+            }
+            navList.addEventListener('click', handleNavClick);
+        }
+    })();
+
+});
+
+//-----------------------completed----------------
+
+
+
 
 //----------------------------------------- Function for slide 4 , the animation will work whenever the slide is shown
 // Replay all hero, headings, and cards animations
