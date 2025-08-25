@@ -89,6 +89,33 @@
       grid-template-columns: repeat(4, 1fr); /* Force 4 columns */
       gap: 1.5rem; /* Increased gap */
     }
+    
+    /* --- NEW: Styles for the highlighted Healthcare card --- */
+    .healthcare-highlight {
+      background-color: #f7fbff; /* Very light blue background */
+      border: 1px solid #cce5ff;   /* Soft blue border */
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;     /* Space between this and the grid below */
+      display: flex;
+      align-items: center;
+      gap: 1.25rem; /* Space between title and description */
+    }
+    .healthcare-highlight h3 {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: #333;
+      text-transform: uppercase;
+      flex-shrink: 0; /* Prevent "HEALTHCARE" from wrapping */
+    }
+    .healthcare-highlight p {
+      margin: 0;
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+    /* --- End of new styles --- */
 
     .card {
       padding: 0.8rem;
@@ -192,8 +219,14 @@
         <button class="tab-button" onclick="showTab('categories')">Categories</button>
       </div>
       <div id="verticals" class="tab-content active">
+        <!-- UPDATED: Highlighted Healthcare card above the grid -->
+        <div class="healthcare-highlight">
+            <h3>Healthcare</h3>
+            <p>Streamlining patient care and administrative workflows.</p>
+        </div>
+        
+        <!-- Grid with the remaining vertical cards -->
         <div class="card-grid">
-          <div class="card"><h3>Healthcare</h3><p>Streamlining patient care and administrative workflows.</p></div>
           <div class="card"><h3>Finance</h3><p>Automating financial operations and enhancing security.</p></div>
           <div class="card"><h3>Real Estate</h3><p>Simplifying property management and client interactions.</p></div>
           <div class="card"><h3>Logistics</h3><p>Optimizing supply chains and tracking from end to end.</p></div>
