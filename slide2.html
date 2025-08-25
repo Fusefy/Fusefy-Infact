@@ -110,64 +110,119 @@
       color: #fff;
     }
 
-    /* Feature cards */
+    /* --- NEW SMALL FEATURES SECTION --- */
+    .stats-fusefy {
+      position: absolute;
+      top: 420px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      width: 80%;
+      max-width: 1000px;
+      margin-top: 20px;
+    }
+
+    .stat-card {
+      background: #f8fbfd;
+      border-radius: 10px;
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      min-width: 200px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #1b1b1b;
+    }
+
+    .stat-card .icon {
+      color: #2196f3;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* --- UPDATED FEATURE SECTION (TWO BIG BOXES) --- */
     .features-fusefy {
       position: absolute;
-      top: 440px;
+      top: 470px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
       justify-content: center;
       align-items: stretch;
-      gap: 4.5%;
+      gap: 5%;
       width: 70%;
       max-width: 920px;
     }
 
     .feature-fusefy {
-      flex: 0 1 280px;
+      flex: 0 1 400px;
       background: #fff;
       border-radius: 12px;
-      box-shadow: 18px 0px 12px rgba(0, 0, 0, 0.08);
-      padding: 16px 16px 18px;
-      text-align: center;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 20px;
       height: auto;
+      text-align: left;
+      border: 1px solid #eee;
     }
 
-    .feature-icon-fusefy {
-      width: 54px;
-      height: 54px;
-      background: #fff;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 6px auto 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    .feature-fusefy.old-way {
+      background: #fff5f5;
+      border: 1px solid #fbcaca;
     }
 
-    .feature-icon-fusefy img {
-      width: 28px;
-      height: 28px;
+    .feature-fusefy.new-way {
+      background: #f5fff8;
+      border: 1px solid #b7f1c8;
     }
 
     .feature-fusefy h3 {
-      margin: 6px 0 6px;
-      font-size: 17px;
+      margin: 0 0 12px;
+      font-size: 18px;
       font-weight: 700;
-      color: #052260;
     }
 
-    .feature-fusefy p {
+    .feature-fusefy.old-way h3 {
+      color: #d32f2f;
+    }
+
+    .feature-fusefy.new-way h3 {
+      color: #1b5e20;
+    }
+
+    .feature-fusefy ul {
+      list-style: none;
+      padding: 0;
       margin: 0;
-      font-size: 14px;
-      color: #444;
-      line-height: 1.5;
+    }
+
+    .feature-fusefy ul li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 15px;
+      color: #333;
+    }
+
+    .feature-fusefy.old-way ul li::before {
+      content: "✘";
+      color: #d32f2f;
+      font-weight: bold;
+    }
+
+    .feature-fusefy.new-way ul li::before {
+      content: "✔";
+      color: #1b5e20;
+      font-weight: bold;
     }
 
     /* --- NEW ANIMATION STYLES --- */
-    
-    /* Keyframe for a subtle scale-up and fade-in effect */
     @keyframes fadeInScale {
       from {
         opacity: 0;
@@ -179,7 +234,6 @@
       }
     }
     
-    /* Keyframe for the timeline to grow from the center */
     @keyframes growFromCenter {
       from {
         transform: translateX(-50%) scaleX(0);
@@ -189,20 +243,19 @@
       }
     }
 
-    /* Prepare all elements for animation by making them invisible */
     .tagline-fusefy,
     .subtext-fusefy,
     .timeline-fusefy,
     .timeline-fusefy .circle-fusefy,
     .step-fusefy,
+    .stat-card,
     .feature-fusefy {
       opacity: 0;
     }
 
-    /* Apply animations with delays for a sequential effect */
     .tagline-fusefy {
       animation: fadeInScale 0.8s ease-out forwards;
-      animation-delay: 1.6s; /* Starts after the header animation */
+      animation-delay: 1.6s;
     }
 
     .subtext-fusefy {
@@ -214,34 +267,37 @@
       animation: growFromCenter 0.7s ease-out forwards;
       animation-delay: 2.3s;
     }
-    
-    /* Stagger the appearance of the timeline circles */
+
     .timeline-fusefy .circle-fusefy {
-        animation: fadeInScale 0.5s ease-out forwards;
+      animation: fadeInScale 0.5s ease-out forwards;
     }
     .timeline-fusefy .circle-fusefy:nth-child(1) { animation-delay: 2.7s; }
     .timeline-fusefy .circle-fusefy:nth-child(2) { animation-delay: 2.8s; }
     .timeline-fusefy .circle-fusefy:nth-child(3) { animation-delay: 2.9s; }
 
-    /* Stagger the appearance of the step buttons */
     .step-fusefy {
-        animation: fadeInScale 0.6s ease-out forwards;
+      animation: fadeInScale 0.6s ease-out forwards;
     }
     .steps-fusefy .step-fusefy:nth-child(1) { animation-delay: 3.2s; }
     .steps-fusefy .step-fusefy:nth-child(2) { animation-delay: 3.4s; }
     .steps-fusefy .step-fusefy:nth-child(3) { animation-delay: 3.6s; }
-    
-    /* Stagger the appearance of the feature cards */
-    .feature-fusefy {
-        animation: fadeInScale 0.6s ease-out forwards;
-    }
-    .features-fusefy .feature-fusefy:nth-child(1) { animation-delay: 3.9s; }
-    .features-fusefy .feature-fusefy:nth-child(2) { animation-delay: 4.1s; }
-    .features-fusefy .feature-fusefy:nth-child(3) { animation-delay: 4.3s; }
 
+    .stat-card {
+      animation: fadeInScale 0.6s ease-out forwards;
+    }
+    .stats-fusefy .stat-card:nth-child(1) { animation-delay: 3.8s; }
+    .stats-fusefy .stat-card:nth-child(2) { animation-delay: 4.0s; }
+    .stats-fusefy .stat-card:nth-child(3) { animation-delay: 4.2s; }
+    .stats-fusefy .stat-card:nth-child(4) { animation-delay: 4.4s; }
+
+    .feature-fusefy {
+      animation: fadeInScale 0.6s ease-out forwards;
+    }
+    .features-fusefy .feature-fusefy:nth-child(1) { animation-delay: 4.7s; }
+    .features-fusefy .feature-fusefy:nth-child(2) { animation-delay: 4.9s; }
   </style>
 
-   <header class="slide-header" data-id="header">
+  <header class="slide-header" data-id="header">
     <h1 class="zoom-in" data-auto-animate data-auto-animate-duration="1.5">What is Fusefy ?</h1>
     <img src="images/Logo.png" alt="Company Logo" class="company-logo" data-auto-animate
       data-auto-animate-duration="1" />
@@ -268,29 +324,32 @@
 
   <!-- Step buttons -->
   <div class="steps-fusefy">
-    <div class="step-fusefy orange">Ideation - Under 16 Hours </div>
-    <div class="step-fusefy white">Less Than 2 Days</div>
-    <div class="step-fusefy blue">Instant Results</div>
+    <div class="step-fusefy orange">16 +Hours </div>
+    <div class="step-fusefy white">2 Weeks</div>
+    <div class="step-fusefy blue">3x faster</div>
   </div>
 
-  <!-- Feature cards -->
+
+  <!-- Updated Feature Cards -->
   <div class="features-fusefy">
-    <div class="feature-fusefy">
-      <div class="feature-icon-fusefy"><img src="images/ImageSlow.png" alt="Icon 1" /></div>
-      <h3>Slow Time-to-Market?</h3>
-      <p>The problem isn't the idea, it's execution. Skip the complexity—go from concept to production in weeks.</p>
+    <div class="feature-fusefy old-way">
+      <h3>Manual Integrations</h3>
+      <ul>
+        <li>RPA Subscriptions</li>
+        <li>OCR Tools</li>
+        <li>Vendor Lock-in risk</li>
+        <li>Custom connectors, scripts, and APIs</li>
+      </ul>
     </div>
 
-    <div class="feature-fusefy">
-      <div class="feature-icon-fusefy"><img src="images/ImageInfra.png" alt="Icon 2" /></div>
-      <h3>Infrastructure & Integration Headaches?</h3>
-      <p>Avoid lock-in and extra SaaS—our solutions run inside your existing systems like Jira.</p>
-    </div>
-
-    <div class="feature-fusefy">
-      <div class="feature-icon-fusefy"><img src="images/ImageBuilt.png" alt="Icon 3" /></div>
-      <h3>Built for Your Business</h3>
-      <p>Deploy AI with confidence—transparent, monitored, and seamlessly integrated for trust and compliance.</p>
+    <div class="feature-fusefy new-way">
+      <h3>Agentic AI Automation</h3>
+      <ul>
+        <li>Agentic AI Workflows</li>
+        <li>Custom LLMs</li>
+        <li>Full Control</li>
+        <li>Dynamic adaptability</li>
+      </ul>
     </div>
   </div>
-</section> 
+</section>

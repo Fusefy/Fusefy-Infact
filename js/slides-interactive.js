@@ -4,38 +4,38 @@
  * across all slides to ensure consistent behavior.
  */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   console.log('Slides interactive handler initialized');
-  
+
   // Initialize all slide interactivity
   setupAllSlideInteractions();
-  
+
   // Listen for Reveal.js events if available
   if (typeof Reveal !== 'undefined') {
     // Re-initialize when slides change
-    Reveal.addEventListener('slidechanged', function(event) {
+    Reveal.addEventListener('slidechanged', function (event) {
       console.log('Slide changed, reinitializing interactions');
       setupAllSlideInteractions();
-      
+
       // Reset to first fragment on index slide
       if (event.currentSlide && event.currentSlide.classList.contains("index-slide")) {
         Reveal.navigateFragment(-1); // Reset to beginning
       }
     });
-    
+
     // Handle fragment events
-    Reveal.addEventListener('fragmentshown', function(event) {
+    Reveal.addEventListener('fragmentshown', function (event) {
       handleFragmentVisibility(event.fragment, true);
     });
-    
-    Reveal.addEventListener('fragmenthidden', function(event) {
+
+    Reveal.addEventListener('fragmenthidden', function (event) {
       handleFragmentVisibility(event.fragment, false);
     });
   } else {
     // If Reveal.js isn't available yet, wait for it
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
       if (typeof Reveal !== 'undefined') {
-        Reveal.addEventListener('ready', function() {
+        Reveal.addEventListener('ready', function () {
           setupAllSlideInteractions();
         });
       }
@@ -50,109 +50,109 @@ function resetAnimation(el) {
 }
 //----------JS function for  7th slide -----------------------
 // Wait for Reveal.js framework to initialize
-Reveal.addEventListener('ready', function() {
+Reveal.addEventListener('ready', function () {
 
-    // --- INITIALIZER FOR THE "MODERN DEPLOYMENT WORKFLOW" COMPONENT ---
-    (function initializeWorkflow() {
-        // Find the core elements for this specific component
-        const workflowContainer = document.querySelector('.fusefy-slide-container');
-        const navList = document.getElementById('nav-list');
+  // --- INITIALIZER FOR THE "MODERN DEPLOYMENT WORKFLOW" COMPONENT ---
+  (function initializeWorkflow() {
+    // Find the core elements for this specific component
+    const workflowContainer = document.querySelector('.fusefy-slide-container');
+    const navList = document.getElementById('nav-list');
 
-        // If this component isn't on the page, stop this function to prevent errors.
-        if (!workflowContainer || !navList) {
-            return;
-        }
-        
-        // Prevents the script from adding event listeners multiple times
-        if (workflowContainer.dataset.initialized) {
-            return;
-        }
-        workflowContainer.dataset.initialized = 'true';
+    // If this component isn't on the page, stop this function to prevent errors.
+    if (!workflowContainer || !navList) {
+      return;
+    }
 
-        // Get all elements the script will interact with
-        const navItems = workflowContainer.querySelectorAll('.fusefy-nav-item');
-        const workflowDetailsContainer = document.getElementById('workflow-details');
+    // Prevents the script from adding event listeners multiple times
+    if (workflowContainer.dataset.initialized) {
+      return;
+    }
+    workflowContainer.dataset.initialized = 'true';
 
-        // Structured data for each step
-        const stepsData = {
-            1: {
-                title: "1. Containerize the Code",
-                description: "Package your application and its dependencies into a standardized, portable container.",
-                points: [
-                    "Write a Dockerfile defining the environment.",
-                    "Define dependencies, runtime, and entry point.",
-                    "Build a lightweight, efficient Docker image."
-                ],
-                icon: "fa-solid fa-box-archive",
-                theme: "theme-blue",
-                pointIcon: "fa-solid fa-check"
-            },
-            2: {
-                title: "2. Run & Test Locally",
-                description: "Ensure the containerized application works perfectly in a local development environment.",
-                points: [
-                    "Use VS Code Live Server / Live Share for real-time testing.",
-                    "Make and test changes directly in the editor.",
-                    "Use mounted volumes to reflect code updates instantly."
-                ],
-                icon: "fa-solid fa-person-running",
-                theme: "theme-teal",
-                pointIcon: "fa-solid fa-check"
-            },
-            3: {
-                title: "3. Edit & Verify",
-                description: "Iteratively improve the code based on local testing and feedback.",
-                points: [
-                    "Update code inside VS Code to fix bugs or add features.",
-                    "Saved changes sync with the live running instance.",
-                    "Retest the application until it works as expected."
-                ],
-                icon: "fa-solid fa-code",
-                theme: "theme-purple",
-                pointIcon: "fa-solid fa-check"
-            },
-            4: {
-                title: "4. Platform-based Deployment",
-                description: "Push the container image to a cloud registry and deploy it to a hosting service.",
-                points: [
-                    "Push image to a registry (e.g., Docker Hub, AWS ECR, GCP GCR).",
-                    "Deploy using a service like AWS ECS, GCP Cloud Run, or Azure App Service.",
-                    "Configure networking, scaling, and environment variables."
-                ],
-                icon: "fa-solid fa-cloud-arrow-up",
-                theme: "theme-orange",
-                pointIcon: "fa-solid fa-check"
-            },
-            5: {
-                title: "5. Automated Deployment Flow",
-                description: "Establish a CI/CD pipeline to automate the entire build, test, and deploy process.",
-                points: [
-                    "Commit changes to a Git repository to trigger the pipeline.",
-                    "CI/CD (e.g., GitHub Actions) automatically builds and pushes the image.",
-                    "The platform fetches the latest container and deploys it seamlessly."
-                ],
-                icon: "fa-solid fa-circle-check",
-                theme: "theme-green",
-                pointIcon: "fa-solid fa-check"
-            }
-        };
-        
-        // Function to update the right-side content panel dynamically
-        function updateContent(step) {
-            const data = stepsData[step];
-            if (!data) return;
+    // Get all elements the script will interact with
+    const navItems = workflowContainer.querySelectorAll('.fusefy-nav-item');
+    const workflowDetailsContainer = document.getElementById('workflow-details');
 
-            const pointsHtml = data.points
-                .map(point => `
+    // Structured data for each step
+    const stepsData = {
+      1: {
+        title: "1.Requirement Gathering",
+        description: "Align stakeholders, capture business goals, and validate feasibility against system capabilities.",
+        points: [
+          "Engage with business stakeholders to capture objectives, KPIs, and constraints.",
+          "Ensure technical teams understand business impact.",
+          "Compare requirements against current systems, identify dependencies, risks, and validate feasibility for technical implementation."
+        ],
+        icon: "fa-solid fa-box-archive",
+        theme: "theme-blue",
+        pointIcon: "fa-solid fa-check"
+      },
+      2: {
+        title: "2. Jira Stories Creation",
+        description: "Break down business needs into epics, stories, and tasks with clear priorities and traceability.",
+        points: [
+          "Epics → Stories → Tasks Breakdown – Convert business needs into Epics, decompose into User Stories with acceptance criteria.",
+          "Define granular tasks for sprint planning.",
+          "Prioritization & Traceability – Use frameworks like MoSCoW/WSJF to prioritize stories, link them to requirements for end-to-end traceability, and ensure compliance."
+        ],
+        icon: "fa-solid fa-person-running",
+        theme: "theme-teal",
+        pointIcon: "fa-solid fa-check"
+      },
+      3: {
+        title: "3. Code Generation & Development",
+        description: "Develop clean, modular, and secure code with CI/CD automation for consistency.",
+        points: [
+          "Standards & Best Practices – Write clean, modular code following SOLID principles.",
+          "Apply code reviews, static analysis, and secure coding guidelines.",
+          "Automation & CI/CD Integration – Use automated code scaffolding, testing frameworks, and CI/CD pipelines to ensure consistency and reduce manual overhead."
+        ],
+        icon: "fa-solid fa-code",
+        theme: "theme-purple",
+        pointIcon: "fa-solid fa-check"
+      },
+      4: {
+        title: "4. Deployment",
+        description: "Release applications through scalable, automated pipelines with rollback and progressive deployment strategies.",
+        points: [
+          "Environment Strategy – Deploy code progressively across Dev → QA → UAT → Prod with automated pipelines feature toggles, and rollback mechanisms.",
+          "Deploy using a service like AWS ECS, GCP Cloud Run, or Azure App Service.",
+          "Scalable & Resilient Deployment – Utilize containerization (Docker, Kubernetes), infrastructure as code (Terraform/CloudFormation), and blue-green/canary releases."
+        ],
+        icon: "fa-solid fa-cloud-arrow-up",
+        theme: "theme-orange",
+        pointIcon: "fa-solid fa-check"
+      },
+      5: {
+        title: "5.Monitoring & Observability",
+        description: "Ensure end-to-end observability with logs, metrics, alerts, and proactive incident response.",
+        points: [
+          "End-to-End Observability – Implement centralized logging (ELK, CloudWatch, Datadog), metrics (Prometheus, Grafana), and tracing (OpenTelemetry, Jaeger).",
+          "Proactive Incident Response – Set up automated alerts, anomaly detection.",
+          "Dashboards for real-time insights; enable SLO/SLI-based monitoring for reliability."
+        ],
+        icon: "fa-solid fa-circle-check",
+        theme: "theme-green",
+        pointIcon: "fa-solid fa-check"
+      }
+    };
+
+    // Function to update the right-side content panel dynamically
+    function updateContent(step) {
+      const data = stepsData[step];
+      if (!data) return;
+
+      const pointsHtml = data.points
+        .map(point => `
                     <li>
                         <div class="fusefy-list-icon">
                             <i class="${data.pointIcon}"></i>
                         </div>
                         <span>${point}</span>
                     </li>`)
-                .join('');
+        .join('');
 
-            const contentHtml = `
+      const contentHtml = `
                 <div class="fusefy-content-header">
                     <div class="fusefy-content-icon"><i class="${data.icon}"></i></div>
                     <div class="fusefy-content-title">
@@ -164,61 +164,61 @@ Reveal.addEventListener('ready', function() {
                     <ul>${pointsHtml}</ul>
                 </div>`;
 
-            workflowDetailsContainer.innerHTML = contentHtml;
-            workflowDetailsContainer.className = 'fusefy-content-panel';
-            workflowDetailsContainer.classList.add(data.theme);
-        }
+      workflowDetailsContainer.innerHTML = contentHtml;
+      workflowDetailsContainer.className = 'fusefy-content-panel';
+      workflowDetailsContainer.classList.add(data.theme);
+    }
 
-        // Handle clicks on navigation items
-        function handleNavClick(event) {
-            const clickedItem = event.target.closest('.fusefy-nav-item');
-            if (!clickedItem) return;
+    // Handle clicks on navigation items
+    function handleNavClick(event) {
+      const clickedItem = event.target.closest('.fusefy-nav-item');
+      if (!clickedItem) return;
 
-            const step = clickedItem.dataset.step;
+      const step = clickedItem.dataset.step;
 
-            // Reset all nav items
-            navItems.forEach(item => {
-                item.classList.remove('active');
-                Object.values(stepsData).forEach(data => item.classList.remove(data.theme));
-            });
-            
-            // Activate clicked item
-            const data = stepsData[step];
-            if (data) {
-                clickedItem.classList.add('active', data.theme);
-            }
-            
-            // Update content panel
-            updateContent(step);
-        }
-        
-        // Initial setup: set first item as active
-        const firstNavItem = navItems[0];
-        if (firstNavItem) {
-            const initialStep = firstNavItem.dataset.step;
-            const initialData = stepsData[initialStep];
-            if (initialData) {
-                firstNavItem.classList.add('active', initialData.theme);
-                updateContent(initialStep);
-            }
-            navList.addEventListener('click', handleNavClick);
-        }
-    })();
+      // Reset all nav items
+      navItems.forEach(item => {
+        item.classList.remove('active');
+        Object.values(stepsData).forEach(data => item.classList.remove(data.theme));
+      });
+
+      // Activate clicked item
+      const data = stepsData[step];
+      if (data) {
+        clickedItem.classList.add('active', data.theme);
+      }
+
+      // Update content panel
+      updateContent(step);
+    }
+
+    // Initial setup: set first item as active
+    const firstNavItem = navItems[0];
+    if (firstNavItem) {
+      const initialStep = firstNavItem.dataset.step;
+      const initialData = stepsData[initialStep];
+      if (initialData) {
+        firstNavItem.classList.add('active', initialData.theme);
+        updateContent(initialStep);
+      }
+      navList.addEventListener('click', handleNavClick);
+    }
+  })();
 
 });
 
 //-----------------------completed----------------
 function scrollToElement(targetId, event) {
-      // Prevent the default link behavior
-      event.preventDefault(); 
-      
-      const targetElement = document.getElementById(targetId);
-      
-      if (targetElement) {
-        // Smoothly scroll the target element into the viewport
-        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
+  // Prevent the default link behavior
+  event.preventDefault();
+
+  const targetElement = document.getElementById(targetId);
+
+  if (targetElement) {
+    // Smoothly scroll the target element into the viewport
+    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
 
 //-------------------code JS function for the slide 8 -onclick image-----------------
 // slides-interactive.js
@@ -295,30 +295,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //--------------------------- Function for tab navigation slide 3 -Vertical and Categories we serve -----------------------------------
 function showTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-      document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-      document.getElementById(tabId).classList.add('active');
-      event.target.classList.add('active');
-    }
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  event.target.classList.add('active');
+}
 /**
  * Master function to set up all interactive elements
  */
 function setupAllSlideInteractions() {
   // Setup clickable images for zoom
   setupZoomableImages();
-  
+
   // Setup navigation buttons within slides
   setupNavigationButtons();
-  
+
   // Setup AI adoption slide specific functionality
   setupAIAdoptionSlide();
-  
+
   // Setup progress rings and multipliers in business impact slide
   setupBusinessImpactAnimations();
-  
+
   // Add pulse effect to logos
   setupLogoPulseEffects();
-  
+
   // Setup any other interactive elements
   setupMiscInteractions();
 }
@@ -331,19 +331,19 @@ function setupZoomableImages() {
   document.querySelectorAll('.clickable-image').forEach(img => {
     img.removeAttribute('onclick');
   });
-  
+
   // Add event delegation for clickable images
-  document.addEventListener('click', function(event) {
+  document.addEventListener('click', function (event) {
     // Check if the clicked element has the clickable-image class
     if (event.target.classList.contains('clickable-image')) {
       event.preventDefault();
       event.stopPropagation();
-      
+
       const imgSrc = event.target.getAttribute('data-src') || event.target.src;
       showZoom(imgSrc);
       return false;
     }
-    
+
     // Handle zoom overlay close button
     if (event.target.closest('.close-zoom')) {
       event.preventDefault();
@@ -354,7 +354,7 @@ function setupZoomableImages() {
   }, true);
 
   // Keyboard event for closing zoom overlay
-  document.addEventListener('keydown', function(event) {
+  document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
       const zoomOverlay = document.querySelector('.zoom-overlay.active');
       if (zoomOverlay) {
@@ -370,7 +370,7 @@ function setupZoomableImages() {
  */
 function showZoom(imgSrc) {
   let overlay = document.getElementById('zoomOverlay');
-  
+
   // If the overlay doesn't exist, create it
   if (!overlay) {
     overlay = document.createElement('div');
@@ -382,11 +382,11 @@ function showZoom(imgSrc) {
     `;
     document.body.appendChild(overlay);
   }
-  
+
   const zoomedImg = document.getElementById('zoomedImage');
   zoomedImg.src = imgSrc;
   overlay.classList.add('active');
-  
+
   if (typeof Reveal !== 'undefined') {
     Reveal.configure({ keyboard: false });
   }
@@ -400,7 +400,7 @@ function closeZoom() {
   if (overlay) {
     overlay.classList.remove('active');
   }
-  
+
   if (typeof Reveal !== 'undefined') {
     Reveal.configure({ keyboard: true });
   }
@@ -425,8 +425,8 @@ function setupAIAdoptionSlide() {
     // Clone node to remove all event listeners
     const newNextButton = nextButton.cloneNode(true);
     nextButton.parentNode.replaceChild(newNextButton, nextButton);
-    
-    newNextButton.addEventListener('click', function(e) {
+
+    newNextButton.addEventListener('click', function (e) {
       e.preventDefault();
       e.stopPropagation();
       if (page1 && page2) {
@@ -443,8 +443,8 @@ function setupAIAdoptionSlide() {
     // Clone node to remove all event listeners
     const newBackButton = backButton.cloneNode(true);
     backButton.parentNode.replaceChild(newBackButton, backButton);
-    
-    newBackButton.addEventListener('click', function(e) {
+
+    newBackButton.addEventListener('click', function (e) {
       e.preventDefault();
       e.stopPropagation();
       if (page1 && page2) {
@@ -489,17 +489,17 @@ function resetAnimationsOnHide(container) {
  */
 function setupExplanationPopups(slide) {
   const cardTitles = slide.querySelectorAll('.future-card-title');
-  
+
   cardTitles.forEach(title => {
     const card = title.closest('.future-card');
     const popup = card.querySelector('.explanation-popup');
-    
+
     if (!popup) return;
-    
+
     // Remove any existing event listeners
     const newTitle = title.cloneNode(true);
     title.parentNode.replaceChild(newTitle, title);
-    
+
     // Hover behavior
     newTitle.addEventListener('mouseenter', () => {
       // Hide any other active popups
@@ -508,43 +508,43 @@ function setupExplanationPopups(slide) {
       });
       popup.classList.add('active');
     });
-    
+
     newTitle.addEventListener('mouseleave', () => {
       if (!popup.matches(':hover')) {
         popup.classList.remove('active');
       }
     });
-    
+
     // Keep popup open when hovering over it
     popup.addEventListener('mouseenter', () => {
       popup.classList.add('active');
     });
-    
+
     popup.addEventListener('mouseleave', () => {
       popup.classList.remove('active');
     });
-    
+
     // Click behavior for mobile/touch devices
     newTitle.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      
+
       // Toggle this popup and hide others
       const isCurrentlyActive = popup.classList.contains('active');
       slide.querySelectorAll('.explanation-popup.active').forEach(p => {
         p.classList.remove('active');
       });
-      
+
       if (!isCurrentlyActive) {
         popup.classList.add('active');
       }
-      
+
       return false;
     });
   });
-  
+
   // Close popups when clicking outside
-  document.addEventListener('click', function(e) {
+  document.addEventListener('click', function (e) {
     if (!e.target.closest('.future-card')) {
       slide.querySelectorAll('.explanation-popup.active').forEach(popup => {
         popup.classList.remove('active');
@@ -563,37 +563,37 @@ function setupNavigationButtons() {
     if (btn.closest('.ai-adoption-slide')) return;
     btn.removeAttribute('onclick');
   });
-  
+
   // Use event delegation for navigation buttons (excluding AI adoption slide)
-  document.addEventListener('click', function(event) {
+  document.addEventListener('click', function (event) {
     // Skip if we're in the AI adoption slide (handled separately)
     if (event.target.closest('.ai-adoption-slide')) return;
-    
+
     // Next button in other slides
     if (event.target.closest('#next-button')) {
       event.preventDefault();
       event.stopPropagation();
-      
+
       // Handle other slide navigation here if needed
       return false;
     }
-    
+
     // Back button in other slides
     if (event.target.closest('#back-button')) {
       event.preventDefault();
       event.stopPropagation();
-      
+
       // Handle other slide navigation here if needed
       return false;
     }
   }, true);
-  
+
   // Add keyboard navigation support (excluding AI adoption slide)
-  document.addEventListener('keydown', function(event) {
+  document.addEventListener('keydown', function (event) {
     // Skip if we're in the AI adoption slide
     const currentSlide = typeof Reveal !== 'undefined' ? Reveal.getCurrentSlide() : null;
     if (currentSlide && currentSlide.classList.contains('ai-adoption-slide')) return;
-    
+
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       // Handle keyboard navigation for other slides if needed
     }
@@ -606,31 +606,31 @@ function setupNavigationButtons() {
 function setupBusinessImpactAnimations() {
   const businessImpactSlide = document.querySelector('.business-impact-slide');
   if (!businessImpactSlide) return;
-  
+
   // Ensure the slide header is always visible
   const slideHeader = businessImpactSlide.querySelector('.slide-header');
   if (slideHeader) {
     slideHeader.style.visibility = 'visible';
     slideHeader.style.opacity = '1';
   }
-  
+
   // Calculate offset for progress rings
   const circles = businessImpactSlide.querySelectorAll('.progress-ring-circle');
   circles.forEach(circle => {
     const radius = circle.getAttribute('r');
     const circumference = 2 * Math.PI * radius;
-    
+
     // Set the stroke-dasharray to the circumference
     const valueCircle = circle.nextElementSibling;
     if (valueCircle && valueCircle.classList.contains('progress-ring-circle-value')) {
       valueCircle.style.strokeDasharray = `${circumference}`;
       valueCircle.setAttribute('data-circumference', circumference);
-      
+
       // Initially set to full circumference (0% progress)
       valueCircle.style.strokeDashoffset = circumference;
     }
   });
-  
+
   // Initialize animations if this is not within Reveal.js
   if (typeof Reveal === 'undefined') {
     // Find all animation elements
@@ -640,7 +640,7 @@ function setupBusinessImpactAnimations() {
     const activeMarkers = businessImpactSlide.querySelectorAll('.multiplier-marker.active');
     const currentMarkers = businessImpactSlide.querySelectorAll('.multiplier-marker.current');
     const multiplierValues = businessImpactSlide.querySelectorAll('.multiplier-value');
-    
+
     // Animate all elements
     ringCircles.forEach(circle => circle.classList.add('animate'));
     animateCounts.forEach(count => count.classList.add('animate'));
@@ -656,7 +656,7 @@ function setupBusinessImpactAnimations() {
  */
 function handleFragmentVisibility(fragment, isVisible) {
   if (!fragment) return;
-  
+
   // Check if it's a business impact slide fragment
   if (fragment.closest('.business-impact-slide')) {
     // Find all animation elements within this fragment
@@ -666,47 +666,47 @@ function handleFragmentVisibility(fragment, isVisible) {
     const activeMarkers = fragment.querySelectorAll('.multiplier-marker.active');
     const currentMarker = fragment.querySelector('.multiplier-marker.current');
     const multiplierValue = fragment.querySelector('.multiplier-value');
-    
+
     if (isVisible) {
       // Animate the progress ring
       if (ringCircle) {
         // Get the target percentage from the associated counter
         const percentEl = fragment.querySelector('.animate-count');
         let targetPercent = 0;
-        
+
         if (percentEl) {
           targetPercent = parseInt(percentEl.style.getPropertyValue('--target-value') || "0");
         }
-        
+
         // Calculate the appropriate strokeDashoffset
         const circumference = parseFloat(ringCircle.getAttribute('data-circumference') || 2 * Math.PI * 20);
         const targetOffset = calculateOffset(targetPercent, circumference);
-        
+
         // Apply the calculated offset
         ringCircle.style.setProperty('--target-offset', targetOffset);
         ringCircle.classList.add('animate');
       }
-      
+
       // Animate the counter
       if (animateCount) {
         animateCount.classList.add('animate');
       }
-      
+
       // Animate the multiplier progress bar
       if (multiplierProgress) {
         multiplierProgress.classList.add('animate');
       }
-      
+
       // Animate the active markers
       if (activeMarkers.length) {
         activeMarkers.forEach(marker => marker.classList.add('animate'));
       }
-      
+
       // Animate the current marker
       if (currentMarker) {
         currentMarker.classList.add('animate');
       }
-      
+
       // Animate the multiplier value
       if (multiplierValue) {
         multiplierValue.classList.add('animate');
@@ -718,28 +718,28 @@ function handleFragmentVisibility(fragment, isVisible) {
         ringCircle.style.strokeDashoffset = circumference; // Reset to 0%
         ringCircle.classList.remove('animate');
       }
-      
+
       // Reset the counter animation
       if (animateCount) {
         animateCount.classList.remove('animate');
       }
-      
+
       // Reset the multiplier progress animation
       if (multiplierProgress) {
         multiplierProgress.style.width = '0%';
         multiplierProgress.classList.remove('animate');
       }
-      
+
       // Reset the active markers animation
       if (activeMarkers.length) {
         activeMarkers.forEach(marker => marker.classList.remove('animate'));
       }
-      
+
       // Reset the current marker animation
       if (currentMarker) {
         currentMarker.classList.remove('animate');
       }
-      
+
       // Reset the multiplier value animation
       if (multiplierValue) {
         multiplierValue.classList.remove('animate');
@@ -762,22 +762,22 @@ function setupStorylaneDemos() {
   // Check if we're on the intelligent agents slide
   const agentsSlide = document.querySelector('.intelligent-agents-slide');
   if (!agentsSlide) return;
-  
+
   // Remove any existing event listeners from agent cards
   document.querySelectorAll('.agent-card[data-storylane-url]').forEach(card => {
     card.removeAttribute('onclick');
-    
+
     // Add visual feedback for clickability
     card.classList.add('clickable');
-    
+
     // Add click handler to open in new tab
     card.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      
+
       // Open link in new tab
       window.open(card.dataset.storylaneUrl, '_blank');
-      
+
       // Visual feedback on click
       card.style.transform = 'scale(0.98)';
       setTimeout(() => {
@@ -787,7 +787,7 @@ function setupStorylaneDemos() {
   });
 
   // Add keyboard navigation for accessibility
-  document.addEventListener('keydown', function(event) {
+  document.addEventListener('keydown', function (event) {
     if (event.key === 'Enter' || event.key === ' ') {
       const focusedCard = document.activeElement;
       if (focusedCard && focusedCard.classList.contains('agent-card') && focusedCard.dataset.storylaneUrl) {
@@ -808,17 +808,17 @@ function setupLogoPulseEffects() {
   document.querySelectorAll('.company-logo, .fusefy-logo').forEach(logo => {
     logo.removeAttribute('onclick');
   });
-  
+
   // Use event delegation for logo clicks
-  document.addEventListener('click', function(event) {
+  document.addEventListener('click', function (event) {
     const logo = event.target.closest('.company-logo, .fusefy-logo');
     if (logo) {
       event.preventDefault();
       event.stopPropagation();
-      
+
       logo.classList.add('pulse');
       setTimeout(() => logo.classList.remove('pulse'), 500);
-      
+
       return false;
     }
   });
@@ -832,18 +832,18 @@ function setupMiscInteractions() {
   const aiSlide = document.querySelector('.ai-adoption-slide');
   if (aiSlide) {
     // Only run if not already initialized or if slide is active
-    if (!aiSlide.dataset.initialized || 
-        (typeof Reveal !== 'undefined' && Reveal.getCurrentSlide() === aiSlide)) {
-      
+    if (!aiSlide.dataset.initialized ||
+      (typeof Reveal !== 'undefined' && Reveal.getCurrentSlide() === aiSlide)) {
+
       // Show content set 1 by default
       const contentSet1 = document.getElementById('content-set-1');
       const contentSet2 = document.getElementById('content-set-2');
-      
+
       if (contentSet1 && contentSet2) {
         contentSet1.style.display = 'block';
         contentSet2.style.display = 'none';
       }
-      
+
       // Reset and restart animations
       const animatedElements = aiSlide.querySelectorAll('.animate-on-load');
       animatedElements.forEach(el => {
@@ -851,7 +851,7 @@ function setupMiscInteractions() {
         void el.offsetWidth; // Force reflow
         el.style.animation = '';
       });
-      
+
       // Ensure next button is visible
       const buttonDiv = document.getElementById('next-button-wrapper');
       if (buttonDiv) {
@@ -865,12 +865,12 @@ function setupMiscInteractions() {
           }
         }, 2500);
       }
-      
+
       // Mark as initialized
       aiSlide.dataset.initialized = 'true';
     }
   }
-  
+
   // Setup Storylane modals for agent slides
   setupStorylaneDemos();
 }
