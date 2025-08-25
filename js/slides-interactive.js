@@ -208,10 +208,34 @@ Reveal.addEventListener('ready', function() {
 });
 
 //-----------------------completed----------------
+function scrollToElement(targetId, event) {
+      // Prevent the default link behavior
+      event.preventDefault(); 
+      
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        // Smoothly scroll the target element into the viewport
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
 
+//-------------------code JS function for the slide 8 -onclick image-----------------
+// slides-interactive.js
 
-
-
+document.addEventListener("DOMContentLoaded", function () {
+  Reveal.on('slidechanged', function (event) {
+    const slide = event.currentSlide;
+    if (slide.classList.contains('biagent')) {
+      // Reset animation
+      slide.classList.remove('active');
+      void slide.offsetWidth; // reflow to restart animations
+      // Trigger animation
+      setTimeout(() => slide.classList.add('active'), 50);
+    }
+  });
+});
+//-----------------------completed-------------------------
 //----------------------------------------- Function for slide 4 , the animation will work whenever the slide is shown
 // Replay all hero, headings, and cards animations
 function replayAnimations() {
