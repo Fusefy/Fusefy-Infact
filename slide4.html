@@ -517,9 +517,27 @@
     <!-- NEW PAGE (4-A) WITHIN THE SAME SLIDE -->
     <!-- ====================================================================== -->
     <div id="page-4a" style="padding-top: 0%; min-height: 100vh;">
-        <header class="slide-header">
+        <header class="slide-header" style="position: relative;">
             <h1 class="zoom-in"> Deep Dive into Insurance Payers (Commercial & Private) </h1>
             <img src="images/Logo.png" alt="Company Logo" class="company-logo" />
+            <!-- Added up arrow for navigation back to main slide -->
+            <div style="position: absolute; top: 10px; right: 100px; color: #155596; cursor: pointer; z-index: 100;"
+                onclick="
+                    document.getElementById('page-4a').style.display = 'none';
+                    document.querySelector('header.slide-header[data-id=\'header\']').style.display = 'block';
+                    document.querySelectorAll('.expertise-row').forEach(row => row.style.display = 'flex');
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                    setTimeout(function() { 
+                        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                        document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+                        document.getElementById('verticals').classList.add('active');
+                        document.querySelector('.tab-button:first-child').classList.add('active');
+                    }, 100);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+            </div>
         </header>
         <!-- New Heading Section (centered, matching image style) -->
         <div
