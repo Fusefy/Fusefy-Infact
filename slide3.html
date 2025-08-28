@@ -184,18 +184,29 @@
     }
   </style>
 
-  <header class="slide-header" data-id="header">
-    <h1 class="zoom-in" data-auto-animate data-auto-animate-duration="1.5">
-      3 Steps to AI Success
-    </h1>
+  <header class="slide-header" data-id="header" style="display: flex; align-items: center; justify-content: space-between;">
+  <h1 class="zoom-in" data-auto-animate data-auto-animate-duration="1.5" style="margin: 0;">
+    3 Steps to AI Success
+  </h1>
+  <div style="display: flex; align-items: center;">
+    <!-- Slide 7 Navigation Button - now BEFORE the logo -->
+    <a href="javascript:void(0);"
+       onclick="if(typeof Reveal !== 'undefined') { Reveal.slide(6); } else { window.location.href='index.html#/6'; }"
+       style="display: inline-block; margin-right: 12px; vertical-align: middle;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="#1a73e8" style="cursor: pointer;">
+        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+      </svg>
+    </a>
     <img
       src="images/Logo.png"
       alt="Company Logo"
       class="company-logo"
       data-auto-animate
       data-auto-animate-duration="1"
+      style="vertical-align: middle;"
     />
-  </header>
+  </div>
+</header>
 
   <!-- Animated AI Adoption Section -->
   <div class="ai-adoption-wrapper">
