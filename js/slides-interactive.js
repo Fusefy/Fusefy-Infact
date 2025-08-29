@@ -4,6 +4,48 @@
  * across all slides to ensure consistent behavior.
  */
 
+function setupBIDashboardImagePopup() {
+  document.querySelectorAll('.bi-dashboard-smallcard').forEach(function(card) {
+    card.onclick = function() {
+      var imgSrc = card.getAttribute('data-img-src');
+      console.log('Popup image src:', imgSrc); // Debug: check path in console
+      var popup = document.getElementById('biImagePopup');
+      var popupImg = document.getElementById('biImagePopupImg');
+      if (popup && popupImg && imgSrc) {
+        popupImg.src = imgSrc;
+        popup.style.display = 'flex';
+      }
+    };
+  });
+
+  var closeBtn = document.getElementById('biImagePopupClose');
+  if (closeBtn) {
+    closeBtn.onclick = function() {
+      var popup = document.getElementById('biImagePopup');
+      if (popup) popup.style.display = 'none';
+    };
+  }
+
+  var popup = document.getElementById('biImagePopup');
+  if (popup) {
+    popup.onclick = function(e) {
+      if (e.target === popup) {
+        popup.style.display = 'none';
+      }
+    };
+  }
+}
+
+// Run on initial load
+document.addEventListener('DOMContentLoaded', setupBIDashboardImagePopup);
+
+// Run again whenever Reveal.js changes slides (to re-bind events)
+if (typeof Reveal !== 'undefined') {
+  Reveal.addEventListener('slidechanged', function () {
+    setupBIDashboardImagePopup();
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   console.log('Slides interactive handler initialized');
 
