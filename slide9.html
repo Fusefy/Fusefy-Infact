@@ -20,7 +20,8 @@
       align-items: center; /* Horizontal center */
       padding: 0 20px;
       margin: auto; /* Center in available space */
-      max-width: 800px; /* Limit width for better readability */
+      max-width: 1200px; /* Wider for cards */
+      width: 100%;
     }
 
     .main-heading {
@@ -31,7 +32,7 @@
       margin-top: 40px;
       width: 100%;
     }
-    
+
     .subtitle {
       font-size: 24px;
       font-weight: 600;
@@ -47,15 +48,14 @@
     .fusefy-logo {
       max-width: 350px;
       height: auto;
-      margin: 0 auto 20px; /* Center horizontally with margin and add bottom margin */
+      margin: 0 auto 20px;
       cursor: pointer;
       transition: all 0.5s ease;
     }
     .fusefy-logo-container {
       width: 100%;
-      text-align: center; /* Ensure horizontal centering */
+      text-align: center;
     }
-
     .fusefy-logo:hover {
       transform: scale(1.05);
     }
@@ -64,12 +64,10 @@
     .fragment.custom-appear {
       opacity: 0;
     }
-
     .fragment.custom-appear.visible {
       opacity: 1;
       animation: appearAnimation 1s ease-out forwards;
     }
-
     @keyframes appearAnimation {
       0% {
         opacity: 0;
@@ -83,49 +81,36 @@
         transform: scale(1) rotate(0deg);
       }
     }
-
     .fusefy-logo.pulse {
       animation: pulseAnimation 0.5s ease-in-out;
     }
-
     @keyframes pulseAnimation {
-      0% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.1);
-      }
-      100% {
-        transform: scale(1);
-      }
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
-
     h1.zoom-in {
       transform: scale(0.5);
       opacity: 0;
       transition: all 1.5s cubic-bezier(0.26, 0.86, 0.44, 0.985);
     }
-
     section.present h1.zoom-in {
       transform: scale(1);
       opacity: 1;
     }
 
-    /* Ensure the header is properly positioned */
+    /* Header */
     .slide-header {
       width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-
-    /* Ensure the company logo is properly sized */
     .company-logo {
       height: 40px;
       max-width: 40px;
       transition: transform 0.3s ease;
     }
-
     .company-logo:hover {
       transform: scale(1.1);
     }
@@ -141,187 +126,108 @@
       font-size: 16px;
     }
 
-    /* --- NEW STYLES ADDED FOR AGENTIC AI SECTION --- */
-    .agentic-container {
+    /* --- NEW CARD SECTION STYLES --- */
+    .cards-container {
       display: flex;
       justify-content: center;
-      align-items: center;
-      gap: 25px; /* Creates space between the icon and text */
-      margin-top: 25px;
+      align-items: stretch;
+      gap: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
     }
 
-    .agentic-icon {
-      height: 130px; /* Adjust size as needed */
-      width: 130px;
-      flex-shrink: 0; /* Prevents the icon from shrinking */
-    }
-    
-    /* Override .main-heading styles ONLY within our new container */
-    .agentic-container .main-heading {
-      margin-top: 0; /* Remove the default top margin */
-      text-align: left; /* Align text to the left relative to the icon */
-      width: auto; /* Allow the content to define the width */
-    }
-    /* --- END OF NEW STYLES --- */
-
-    /* Additional styles for the AI Strategy Dashboard content */
-    /* Basic Reset & Font Smoothing */
-    .ai-dashboard-body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      background-color: #f9fafb; /* bg-gray-50 */
-      color: #1f2937; /* text-gray-800 */
-    }
-
-    /* Content Wrapper */
-    .ai-dashboard-content-wrapper {
-      height: 100%; /* Take full height of the section */
-      width: 100%; /* Take full width of the section */
-      overflow: hidden;
+    .info-card {
+      flex: 1;
+      min-width: 350px;
+      max-width: 500px;
+      background: #f9fbff;
+      border-radius: 12px;
+      padding: 10px 22px;
+      text-align: left;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding: 2rem; /* p-8 */
     }
 
-    /* Header */
-    .ai-dashboard-header {
-      text-align: center;
-      margin-bottom: 0rem; /* mb-8 */
-      flex-shrink: 0;
-    }
-    .ai-dashboard-header h1 {
-      font-size: 2.25rem; /* text-4xl */
-      line-height: 2.5rem;
-      font-weight: 800; /* font-extrabold */
-      letter-spacing: -0.025em; /* tracking-tight */
-      color: #111827; /* text-gray-900 */
-    }
-    .ai-dashboard-header p {
-      color: #6b7280; /* text-gray-500 */
-      margin-top: 0.5rem; /* mt-2 */
-      font-size: 1rem; /* text-base */
-      line-height: 1.5rem;
-    }
-
-    /* Grid for Cards */
-    .ai-card-grid {
-      display: grid;
-      grid-template-columns: repeat(1, minmax(0, 1fr)); /* grid-cols-1 */
-      gap: 2rem; /* gap-8 */
-      width: 100%;
-      max-width: 1024px; /* max-w-screen-lg */
-      margin-left: auto;
-      margin-right: auto;
-      flex-grow: 1; /* Allow grid to take available space */
-      overflow-y: auto; /* Add scroll for cards if they exceed height */
-    }
-    
-    /* Info Card */
-    .ai-info-card {
-      border-radius: 0.75rem; /* rounded-xl */
-      border-width: 1px;
-      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); /* shadow-lg */
-      display: flex;
-      flex-direction: column;
-      padding: 1.5rem; /* p-6 */
-      transition-property: all;
-      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-      transition-duration: 300ms;
-      height: auto; /* Adjusted to auto for content flexibility */
-      background-color: #ffffff; /* bg-white */
-      border-color: #e5e7eb; /* border-gray-200 */
-    }
-    .ai-info-card.highlight {
-      border-width: 2px;
-      border-color: #3b82f6; /* border-blue-500 */
-    }
-    
-    .ai-card-header {
-      margin-bottom: 1rem; /* mb-4 */
-      flex-shrink: 0;
+    .card-header {
       display: flex;
       align-items: center;
-    }
-    .ai-card-header .ai-icon-container {
-      flex-shrink: 0;
-      color: #1f2937; /* text-gray-800 */
-    }
-    .ai-info-card.highlight .ai-card-header .ai-icon-container {
-      color: #2563eb; /* text-blue-600 */
+      gap: 15px;
+      margin-bottom: 0px;
     }
 
-    .ai-card-header h2 {
-      font-size: 1.25rem; /* text-xl */
-      line-height: 1.75rem;
-      font-weight: 700; /* font-bold */
-      color: #1f2937; /* text-gray-800 */
+    .card-header img {
+      width: 40px;
+      height: 40px;
     }
-    .ai-info-card.highlight .ai-card-header h2 {
-      color: #2563eb; /* text-blue-600 */
-    }
-    
-    .ai-card-content {
-      color: #4b5563; /* text-gray-600 */
-      font-size: 1rem; /* text-base */
-      line-height: 1.625; /* leading-relaxed */
-      flex-grow: 1;
-    }
-    .ai-card-content p, .ai-card-content ul {
+
+    .card-header h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #002060;
       margin: 0;
-      padding: 0;
-    }
-    .ai-card-content p.mb-4 {
-      margin-bottom: 1rem;
-    }
-    .ai-card-content p, .ai-card-content li {
-      font-size: 0.875rem; /* text-sm */
-      line-height: 1.25rem;
-    }
-    .ai-card-content ul {
-      list-style-type: disc;
-      list-style-position: inside;
-    }
-    .ai-card-content ul.space-y-2 > li:not(:first-child) { margin-top: 0.5rem; }
-    .ai-card-content ul.space-y-3 > li:not(:first-child) { margin-top: 0.75rem; }
-
-
-    /* Icon styles */
-    .ai-icon {
-      width: 1.5rem; /* w-6 */
-      height: 1.5rem; /* h-6 */
-      margin-right: 0.75rem; /* mr-3 */
-    }
-    
-    /* Footer */
-    .ai-dashboard-footer {
-      text-align: center;
-      margin-top: 2rem; /* mt-8 */
-      font-size: 0.75rem; /* text-xs */
-      line-height: 1rem;
-      color: #9ca3af; /* text-gray-400 */
-      flex-shrink: 0;
     }
 
-    /* Responsive */
-    @media (min-width: 768px) { /* md: */
-      .ai-card-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr)); /* md:grid-cols-2 */
-      }
+    .info-card ul {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 16px;
+      color: #333;
+       flex-grow: 1;
     }
-    @media (min-width: 1024px) { /* lg: */
-      .ai-dashboard-header h1 {
-        font-size: 3rem; /* lg:text-5xl */
-        line-height: 1;
-      }
+    .info-card ul li {
+      margin-bottom: 8px;
     }
-  </style>
+
+    /* card5 */ 
+    /* Horizontal card (Card 5) */
+.horizontal-card {
+  flex: 1 1 100%;
+  background: #f9fbff;
+  max-width: 1055px;
+  border-radius: 12px;
+  padding: 5px 30px;
+  margin-top: 0px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.horizontal-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #002060;
+  margin-bottom: 0px;
+}
+
+.horizontal-points {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.point {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 200px;
+  font-size: 16px;
+  color: #333;
+}
+
+.point img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+    </style> 
 
   <header class="slide-header" data-id="header">
     <h1 class="zoom-in" data-auto-animate data-auto-animate-duration="1.5">
-      Enterprise AI Integration Framework
+      Demo: Enterprise AI integration with GCP
     </h1>
     <img
       src="images/Logo.png"
@@ -332,78 +238,85 @@
     />
   </header>
 
-    <div class="ai-card-grid">
-      <div class="ai-info-card">
-        <div class="ai-card-header">
-          <div class="ai-icon-container">
-             <img src="images/Level3.webp" alt="Level 3 Icon" class="ai-icon" style="width: 1.5rem; height: 1.5rem; margin-right: 0.75rem;" />
-          </div>
-          <h2>Level: Multi-Process AI systems optimize workflows extensively.</h2>
+  <div class="slide-body">
+    <!-- NEW CARDS SECTION -->
+    <div class="cards-container">
+      <!-- Card 1 -->
+      <div class="info-card">
+        <div class="card-header">
+          <img src="images/Multi-ProcessAI.png" alt="Icon">
+          <h2>Multi-Process AI Systems</h2>
         </div>
-        <div class="ai-card-content">
-          <ul class="space-y-2">
-            <li>AI highly integrated into workflow</li>
-            <li>Complex human and AI-agent assisted processes</li>
-            <li>Internal and external data sources</li>
-            <li>Broadest impact to enterprise wide OpEx opportunities</li>
-          </ul>
-        </div>
+        <ul>
+          <li>AI deeply integrated into your custom enterprise workflows</li>
+          <li>Human + AI-agent collaboration for complex processes</li>
+          <li>Internal & external data sources drive insights</li>
+          <li>Enterprise-wide OpEx optimization opportunities</li>
+        </ul>
       </div>
 
-      <div class="ai-info-card highlight">
-        <div class="ai-card-header">
-          <div class="ai-icon-container">
-            <img src="images/Strategy.png" alt="Level 3 Icon" class="ai-icon" style="width: 1.5rem; height: 1.5rem; margin-right: 0.75rem;" />
-          </div>
+      <!-- Card 2 -->
+      <div class="info-card">
+        <div class="card-header">
+          <img src="images/Strategy-2.png" alt="Icon">
           <h2>Our Strategy</h2>
         </div>
-        <div class="ai-card-content">
-          <ul class="space-y-3">
-            <li>Since most of our data sits in the warehouse, Google AgentSpace is recommended as the primary tech, an addl. advantage is integration with Google BI components for developing reports;</li>
-            <li>Microsoft Copilot Studio will be secondary, aligning with our overall cloud strategy;</li>
-            <li>If there are other solutions for specific needs or technology, those will be evaluated for "Fit-for-purpose".</li>
-          </ul>
+        <ul>
+          <li>Google AgentSpace → Primary platform, with BigQuery + BI integration</li>
+          <li>Fit-for-Purpose solutions → Flexibility, no vendor lock-in</li>
+        </ul>
+      </div>
+      <!-- Card 3 -->
+       <div class="info-card">
+        <div class="card-header">
+          <img src="images/google-cloud.png" alt="Icon">
+          <h2>Implementation on GCP</h2>
+        </div>
+        <ul>
+          <li>Build custom intelligent agents tailored to business logic</li>
+          <li>Leverage existing GCP infrastructure & talent</li>
+          <li>Embed data governance, compliance & security</li>
+          <li>Deliver a robust, scalable, secure AI ecosystem</li>
+        </ul>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="info-card">
+        <div class="card-header">
+          <img src="images/BigQuery.png" alt="Icon">
+          <h2>BigQuery as the Foundation</h2>
+        </div>
+        <ul>
+          <li>Central enterprise data warehouse</li>
+          <li>Secure storage of patient & consent data</li>
+          <li>Seamless AI/ML pipeline integration for predictive insights</li>
+          <li>Real-time analytics & reporting at scale</li>
+        </ul>
+      </div>  
+      <!-- Card 5 -->
+            <!-- Card 5 -->
+      <div class="horizontal-card">
+        <h2 style="padding-bottom: 0px !important;" class="horizontal-title">Value Proposition</h2>
+        <div class="horizontal-points">
+          <div class="point">
+            <img src="images/check-mark.png" alt="check">
+            <span>Faster time-to-market with ready GCP integration</span>
+          </div>
+          <div class="point">
+            <img src="images/check-mark.png" alt="check">
+            <span>Enterprise-wide cost savings &amp; OpEx reduction</span>
+          </div>
+          <div class="point">
+            <img src="images/check-mark.png" alt="check">
+            <span>Scalable, secure, compliant AI ecosystem</span>
+          </div>
+          <div class="point">
+            <img src="images/check-mark.png" alt="check">
+            <span>Future-proof with multi-platform flexibility</span>
+          </div>
         </div>
       </div>
 
-      <div class="ai-info-card">
-        <div class="ai-card-header">
-          <div class="ai-icon-container">
-              <img src="images/GCP_2.png" alt="Level 3 Icon" class="ai-icon" style="width: 3.5rem; height: 2.5rem; margin-right: 0.75rem;" />
-          </div>
-          <h2>Implementation & GCP</h2>
-        </div>
-        <div class="ai-card-content">
-          <p class="mb-4">The focus is on developing custom, intelligent agents within Google Cloud Platform (GCP) to create a robust, scalable, and secure AI ecosystem.</p>
-          <ul class="space-y-2">
-            <li>Leverage existing GCP infrastructure and talent.</li>
-            <li>Build bespoke agents tailored to specific business logic.</li>
-            <li>Ensure data governance and security within the GCP environment.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="ai-info-card">
-        <div class="ai-card-header">
-          <div class="ai-icon-container">
-              <svg xmlns="http://www.w3.org/2000/svg" class="ai-icon" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
-                  <path d="M4 6v6a8 3 0 0 0 16 0v-6"></path>
-                  <path d="M4 12v6a8 3 0 0 0 16 0v-6"></path>
-              </svg>
-          </div>
-          <h2>BigQuery Data Warehouse</h2>
-        </div>
-        <div class="ai-card-content">
-          <p class="mb-4">BigQuery acts as the central data warehouse, storing patient records and consent data in a secure, scalable way.</p>
-          <ul class="space-y-2">
-            <li>Enables real-time querying, analytics, and reporting on large volumes of healthcare data.</li>
-            <li>Seamless integration with AI/ML pipelines for predictive healthcare insights.</li>
-            <li>Ensures secure and scalable data management.</li>
-          </ul>
-        </div>
-      </div>
     </div>
   </div>
 </section>
