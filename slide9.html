@@ -12,7 +12,7 @@
       text-align: center; /* Center all text content */
     }
 
-    .slide-body {
+    .slide-content {
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -24,7 +24,7 @@
       width: 100%;
     }
 
-    .main-heading {
+    .title-main {
       font-size: 30px;
       font-weight: bold;
       color: #0021f3;
@@ -33,7 +33,7 @@
       width: 100%;
     }
 
-    .subtitle {
+    .title-sub {
       font-size: 24px;
       font-weight: 600;
       color: #002060;
@@ -45,26 +45,26 @@
       width: 100%;
     }
 
-    .fusefy-logo {
+    .logo-fusefy {
       max-width: 350px;
       height: auto;
       margin: 0 auto 20px;
       cursor: pointer;
       transition: all 0.5s ease;
     }
-    .fusefy-logo-container {
+    .logo-fusefy-wrapper {
       width: 100%;
       text-align: center;
     }
-    .fusefy-logo:hover {
+    .logo-fusefy:hover {
       transform: scale(1.05);
     }
 
     /* Fragment animations */
-    .fragment.custom-appear {
+    .fragment.effect-appear {
       opacity: 0;
     }
-    .fragment.custom-appear.visible {
+    .fragment.effect-appear.visible {
       opacity: 1;
       animation: appearAnimation 1s ease-out forwards;
     }
@@ -81,7 +81,7 @@
         transform: scale(1) rotate(0deg);
       }
     }
-    .fusefy-logo.pulse {
+    .logo-fusefy.animate-pulse {
       animation: pulseAnimation 0.5s ease-in-out;
     }
     @keyframes pulseAnimation {
@@ -89,34 +89,18 @@
       50% { transform: scale(1.1); }
       100% { transform: scale(1); }
     }
-    h1.zoom-in {
+    h1.animate-zoom {
       transform: scale(0.5);
       opacity: 0;
       transition: all 1.5s cubic-bezier(0.26, 0.86, 0.44, 0.985);
     }
-    section.present h1.zoom-in {
+    section.present h1.animate-zoom {
       transform: scale(1);
       opacity: 1;
     }
 
-    /* Header */
-    .slide-header {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .company-logo {
-      height: 40px;
-      max-width: 40px;
-      transition: transform 0.3s ease;
-    }
-    .company-logo:hover {
-      transform: scale(1.1);
-    }
-
     /* Navigation hint */
-    .nav-hint {
+    .navigation-hint {
       position: absolute;
       bottom: 70px;
       left: 0;
@@ -127,7 +111,7 @@
     }
 
     /* --- NEW CARD SECTION STYLES --- */
-    .cards-container {
+    .card-section {
       display: flex;
       justify-content: center;
       align-items: stretch;
@@ -136,7 +120,7 @@
       flex-wrap: wrap;
     }
 
-    .info-card {
+    .card-info {
       flex: 1;
       min-width: 350px;
       max-width: 500px;
@@ -149,84 +133,83 @@
       flex-direction: column;
     }
 
-    .card-header {
+    .card-info-header {
       display: flex;
       align-items: center;
       gap: 15px;
       margin-bottom: 0px;
     }
 
-    .card-header img {
+    .card-info-header img {
       width: 40px;
       height: 40px;
     }
 
-    .card-header h2 {
+    .card-info-header h2 {
       font-size: 20px;
       font-weight: 700;
       color: #002060;
       margin: 0;
     }
 
-    .info-card ul {
+    .card-info ul {
       margin: 0;
       padding-left: 20px;
       font-size: 16px;
       color: #333;
-       flex-grow: 1;
+      flex-grow: 1;
     }
-    .info-card ul li {
+    .card-info ul li {
       margin-bottom: 8px;
     }
 
-    /* card5 */ 
     /* Horizontal card (Card 5) */
-.horizontal-card {
-  flex: 1 1 100%;
-  background: #f9fbff;
-  max-width: 1055px;
-  border-radius: 12px;
-  padding: 5px 30px;
-  margin-top: 0px;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
-  text-align: center;
-}
+    .card-horizontal {
+      flex: 1 1 100%;
+      background: #f9fbff;
+      max-width: 1055px;
+      border-radius: 12px;
+      padding: 5px 30px;
+      margin-top: 0px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
+      text-align: center;
+    }
 
-.horizontal-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: #002060;
-  margin-bottom: 0px;
-}
+    .card-horizontal-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #002060;
+      margin-bottom: 0px;
+    }
 
-.horizontal-points {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 25px;
-  flex-wrap: wrap;
-}
+    .card-horizontal-points {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
 
-.point {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex: 1;
-  min-width: 200px;
-  font-size: 16px;
-  color: #333;
-}
+    .point-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 200px;
+      font-size: 16px;
+      color: #333;
+    }
 
-.point img {
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
-}
+    .point-item img {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+    }
 
-    </style> 
+  </style> 
 
   <header class="slide-header" data-id="header">
-    <h1 class="zoom-in" data-auto-animate data-auto-animate-duration="1.5">
+    <h1 class="animate-zoom" data-auto-animate data-auto-animate-duration="1.5">
       Demo: Enterprise AI integration with GCP
     </h1>
     <img
@@ -238,12 +221,12 @@
     />
   </header>
 
-  <div class="slide-body">
+  <div class="slide-content">
     <!-- NEW CARDS SECTION -->
-    <div class="cards-container">
+    <div class="card-section">
       <!-- Card 1 -->
-      <div class="info-card">
-        <div class="card-header">
+      <div class="card-info">
+        <div class="card-info-header">
           <img src="images/Multi-ProcessAI.png" alt="Icon">
           <h2>Multi-Process AI Systems</h2>
         </div>
@@ -256,8 +239,8 @@
       </div>
 
       <!-- Card 2 -->
-      <div class="info-card">
-        <div class="card-header">
+      <div class="card-info">
+        <div class="card-info-header">
           <img src="images/Strategy-2.png" alt="Icon">
           <h2>Our Strategy</h2>
         </div>
@@ -267,8 +250,8 @@
         </ul>
       </div>
       <!-- Card 3 -->
-       <div class="info-card">
-        <div class="card-header">
+      <div class="card-info">
+        <div class="card-info-header">
           <img src="images/google-cloud.png" alt="Icon">
           <h2>Implementation on GCP</h2>
         </div>
@@ -281,8 +264,8 @@
       </div>
 
       <!-- Card 4 -->
-      <div class="info-card">
-        <div class="card-header">
+      <div class="card-info">
+        <div class="card-info-header">
           <img src="images/BigQuery.png" alt="Icon">
           <h2>BigQuery as the Foundation</h2>
         </div>
@@ -293,24 +276,24 @@
           <li>Real-time analytics & reporting at scale</li>
         </ul>
       </div>  
+
       <!-- Card 5 -->
-            <!-- Card 5 -->
-      <div class="horizontal-card">
-        <h2 style="padding-bottom: 0px !important;" class="horizontal-title">Value Proposition</h2>
-        <div class="horizontal-points">
-          <div class="point">
+      <div class="card-horizontal">
+        <h2 style="padding-bottom: 0px !important;" class="card-horizontal-title">Value Proposition</h2>
+        <div class="card-horizontal-points">
+          <div class="point-item">
             <img src="images/check-mark.png" alt="check">
             <span>Faster time-to-market with ready GCP integration</span>
           </div>
-          <div class="point">
+          <div class="point-item">
             <img src="images/check-mark.png" alt="check">
             <span>Enterprise-wide cost savings &amp; OpEx reduction</span>
           </div>
-          <div class="point">
+          <div class="point-item">
             <img src="images/check-mark.png" alt="check">
             <span>Scalable, secure, compliant AI ecosystem</span>
           </div>
-          <div class="point">
+          <div class="point-item">
             <img src="images/check-mark.png" alt="check">
             <span>Future-proof with multi-platform flexibility</span>
           </div>
