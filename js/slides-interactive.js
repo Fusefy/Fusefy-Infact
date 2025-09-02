@@ -118,7 +118,7 @@ Reveal.addEventListener('ready', function () {
     // Structured data for each step
     const stepsData = {
       1: {
-        title: "1.Requirement Gathering",
+        title: "1. Discovery",
         description: "Align stakeholders, capture business goals, and validate feasibility against system capabilities.",
         points: [
           "Engage with business stakeholders to capture objectives, KPIs, and constraints.",
@@ -130,7 +130,7 @@ Reveal.addEventListener('ready', function () {
         pointIcon: "fa-solid fa-check"
       },
       2: {
-        title: "2. Jira Stories Creation",
+        title: "2. ROI and Heatmap",
         description: "Break down business needs into epics, stories, and tasks with clear priorities and traceability.",
         points: [
           "Epics → Stories → Tasks Breakdown – Convert business needs into Epics, decompose into User Stories with acceptance criteria.",
@@ -142,7 +142,7 @@ Reveal.addEventListener('ready', function () {
         pointIcon: "fa-solid fa-check"
       },
       3: {
-        title: "3. Code Generation & Development",
+        title: "3. Project Plan",
         description: "Develop clean, modular, and secure code with CI/CD automation for consistency.",
         points: [
           "Standards & Best Practices – Write clean, modular code following SOLID principles.",
@@ -154,7 +154,7 @@ Reveal.addEventListener('ready', function () {
         pointIcon: "fa-solid fa-check"
       },
       4: {
-        title: "4. Deployment",
+        title: "4. Project Build",
         description: "Release applications through scalable, automated pipelines with rollback and progressive deployment strategies.",
         points: [
           "Environment Strategy – Deploy code progressively across Dev → QA → UAT → Prod with automated pipelines feature toggles, and rollback mechanisms.",
@@ -166,7 +166,7 @@ Reveal.addEventListener('ready', function () {
         pointIcon: "fa-solid fa-check"
       },
       5: {
-        title: "5.Monitoring & Observability",
+        title: "5. Audit Suite AI",
         description: "Ensure end-to-end observability with logs, metrics, alerts, and proactive incident response.",
         points: [
           "End-to-End Observability – Implement centralized logging (ELK, CloudWatch, Datadog), metrics (Prometheus, Grafana), and tracing (OpenTelemetry, Jaeger).",

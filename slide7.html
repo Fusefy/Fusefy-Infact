@@ -43,13 +43,39 @@
       color: var(--text-primary);
       box-sizing: border-box;
       width: 100%;
-      max-width: 1100px;
+      max-width: 1220px;
       margin: 1.5rem auto 0 auto;
       display: flex;
       flex-direction: column;
       gap: 2rem;
       transform: scale(0.9);
       transform-origin: top center;
+    }
+
+    /* Add this to your <style> block in slide7.html */
+    .privacy-disclosure-btn {
+      display: block;
+      width: 70%;
+      margin: 1rem 0 0 0;
+      padding: 0.6rem 0;
+      background-color: #fafafa;
+      color: #495057 !important;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(79, 63, 240, 0.08);
+      transition: background 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+    }
+
+    .privacy-disclosure-btn:hover,
+    .privacy-disclosure-btn:focus {
+      background-color: #d7d7d7;
+      box-shadow: 0 4px 16px rgba(237, 237, 238, 0.15);
     }
 
     /* Workflow Box */
@@ -371,9 +397,12 @@
       Modern Deployment Workflow
     </h1>
     <div style="position: relative; display: inline-block;">
-      <a href="javascript:void(0);" onclick="if(typeof Reveal !== 'undefined') { Reveal.slide(2); } else { window.location.href='index.html#/2'; }" style="position: absolute; left: -40px; top: 50%; transform: translateY(-50%);">
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="#1a73e8" style="cursor: pointer;">
-          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+      <a href="javascript:void(0);"
+        onclick="if(typeof Reveal !== 'undefined') { Reveal.slide(2); } else { window.location.href='index.html#/2'; }"
+        style="position: absolute; left: -40px; top: 50%; transform: translateY(-50%);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="#1a73e8"
+          style="cursor: pointer;">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
         </svg>
       </a>
       <img src="images/Logo.png" alt="Company Logo" class="company-logo" data-auto-animate
@@ -390,21 +419,24 @@
         <p class="fusefy-sub-title">Select a step to see the details.</p>
         <ul id="nav-list">
           <li class="fusefy-nav-item" data-step="1">
-            <i class="fa-solid fa-box-archive"></i> 1. Requirement Gathering
+            <i class="fa-solid fa-box-archive"></i> 1. Discovery
           </li>
           <li class="fusefy-nav-item" data-step="2">
-            <i class="fa-solid fa-person-running"></i> 2. Jira Stories Creation
+            <i class="fa-solid fa-person-running"></i> 2. ROI and Heatmap
           </li>
           <li class="fusefy-nav-item" data-step="3">
-            <i class="fa-solid fa-code"></i> 3. Code Generation & Development
+            <i class="fa-solid fa-code"></i> 3. Project Plan
           </li>
           <li class="fusefy-nav-item" data-step="4">
-            <i class="fa-solid fa-cloud-arrow-up"></i> 4. Deployment
+            <i class="fa-solid fa-cloud-arrow-up"></i> 4. Project Build
           </li>
           <li class="fusefy-nav-item" data-step="5">
-            <i class="fa-solid fa-circle-check"></i> 5. Monitoring & Observability
+            <i class="fa-solid fa-circle-check"></i> 5. Audit Suite AI
           </li>
         </ul>
+        <a href="https://app.storylane.io/share/e0pakklyyvjn" target="_blank" class="privacy-disclosure-btn">
+          Healthcare Privacy Disclosure →
+        </a>
       </div>
 
       <!-- Right Content Panel -->
@@ -422,35 +454,35 @@
             <div class="fusefy-flow-icon-wrapper">
               <i class="fa-solid fa-code fusefy-flow-icon"></i>
             </div>
-            <span class="fusefy-flow-text">Req Gathering</span>
+            <span class="fusefy-flow-text">Discovery</span>
           </div>
           <i class="fa-solid fa-arrow-right fusefy-flow-arrow"></i>
           <div class="fusefy-flow-step">
             <div class="fusefy-flow-icon-wrapper">
               <i class="fa-solid fa-box-archive fusefy-flow-icon"></i>
             </div>
-            <span class="fusefy-flow-text">Jira story</span>
+            <span class="fusefy-flow-text">ROI and Heatmap</span>
           </div>
           <i class="fa-solid fa-arrow-right fusefy-flow-arrow"></i>
           <div class="fusefy-flow-step">
             <div class="fusefy-flow-icon-wrapper">
               <i class="fa-solid fa-vial-circle-check fusefy-flow-icon"></i>
             </div>
-            <span class="fusefy-flow-text">Code Generation</span>
+            <span class="fusefy-flow-text">Project Plan</span>
           </div>
           <i class="fa-solid fa-arrow-right fusefy-flow-arrow"></i>
           <div class="fusefy-flow-step">
             <div class="fusefy-flow-icon-wrapper">
               <i class="fa-solid fa-circle-check fusefy-flow-icon"></i>
             </div>
-            <span class="fusefy-flow-text">Deploy</span>
+            <span class="fusefy-flow-text">Project Build</span>
           </div>
           <i class="fa-solid fa-arrow-right fusefy-flow-arrow"></i>
           <div class="fusefy-flow-step">
             <div class="fusefy-flow-icon-wrapper">
               <i class="fa-solid fa-rocket fusefy-flow-icon"></i>
             </div>
-            <span class="fusefy-flow-text">Monitor</span>
+            <span class="fusefy-flow-text">Audit Suite AI</span>
           </div>
         </div>
       </div>
