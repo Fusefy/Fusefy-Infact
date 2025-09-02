@@ -1,773 +1,93 @@
-<section class="index-slide" data-auto-animate>
-    <style>
-        /* ADDED: Ensures smooth scrolling within the page */
-        html {
-            scroll-behavior: smooth;
-        }
+<section class="fusefy-slide" data-auto-animate>
+  <style>
+    .fusefy-slide {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      padding: 6vh 8vw;
+      box-sizing: border-box;
+      font-family: "Inter", "Arial", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f8faff, #eef2f7);
+      text-align: center;
+    }
 
-        /* Tighten gap below the header only on this slide */
-        .index-slide .slide-header {
-            margin-bottom: 0.5rem;
-        }
 
-        /* Row holds the left heading + right content box */
-        .expertise-row {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            /* center the whole row under header */
-            display: flex;
-            align-items: flex-start;
-            /* top-align heading with box */
-            gap: 2rem;
-            /* Increased gap for better spacing */
-        }
 
-        /* Add space between the two rows */
-        .expertise-row:not(:last-child) {
-            margin-bottom: 1.5rem;
-        }
+    .fusefy-slide p {
+      font-size: 1.25rem;
+      color: #4b5563;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
 
-        /* Left-side heading (reused for both sections) */
-        .expertise-heading {
-            font-size: 1.7rem !important;
-            font-weight: bold;
-            color: #155596;
-            margin-top: 0.5rem;
-            /* Align text better with the top of the box */
-            line-height: 1.2;
-            text-align: left;
-            /* --- KEY CHANGE FOR ALIGNMENT --- */
-            flex: 0 0 240px;
-            /* Give a fixed width so both rows align perfectly */
-        }
+    .fusefy-slide ul {
+      text-align: left;
+      font-size: 1.15rem;
+      color: #374151;
+      line-height: 1.8;
+      max-width: 800px;
+      margin: 0 auto 2rem auto;
+      list-style-type: "✔ ";
+      padding-left: 1rem;
+    }
 
-        /* NEW: Style for the gold text in headings */
-        .expertise-heading .gold-text {
-            color: #D4AF37;
-            /* Gold color */
-        }
+    .fusefy-slide li {
+      margin-bottom: 1rem;
+    }
 
-        /* Right-side tabs box */
-        .tab-container {
-            flex: 1;
-            /* fill remaining width */
-            min-height: 420px;
-            height: auto;
-            /* auto height - no scroll needed */
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            overflow-y: visible;
-            /* remove scroll */
-        }
+    .highlight {
+      font-weight: 600;
+      color: #5A7EAC;
+    }
 
-        .tab-header {
-            display: flex;
-            border-bottom: 2px solid #e0e0e0;
-            background: #f5f9fc;
-            position: sticky;
-            /* keep header fixed when scrolling */
-            top: 0;
-            z-index: 2;
-        }
+    .demo-button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.9rem 2rem;
+      background: linear-gradient(135deg, #5A7EAC, #8DB3D9);
+      color: #fff !important;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 50px;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(90, 126, 172, 0.3);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      letter-spacing: 0.02em;
+    }
 
-        .tab-button {
-            flex: 1;
-            text-align: center;
-            padding: 0.8rem;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            outline: none;
-            font-size: 1rem;
-            background: transparent;
-            transition: all 0.3s ease;
-        }
+    .demo-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(90, 126, 172, 0.4);
+    }
+  </style>
 
-        .tab-button.active {
-            color: #155596;
-            border-bottom: 3px solid #00aaff;
-            background: #fff;
-        }
+  <header class="slide-header">
+    <h1>AI-Powered Teaching with Fusefy for Infact</h1>
+    <img src="images/Logo.png" alt="Company Logo" class="company-logo" />
+  </header>
 
-        .tab-content {
-            padding: 1rem;
-            /* Reduced padding */
-            display: none;
-        }
+  <p>
+    For <span class="highlight">Infact</span>, Fusefy is building an <span class="highlight">AI-powered solution</span> that empowers teachers with smarter classroom tools —
+    making learning more <span class="highlight">engaging</span> and
+    <span class="highlight">impactful</span>.
+  </p>
 
-        .tab-content.active {
-            display: block;
-        }
+  <ul>
+    <li>Dynamic teaching support with interactive AI assistance</li>
+    <li>Tailored lesson plan generation for any subject or grade</li>
+    <li>Ready-to-use, AI-curated presentations</li>
+    <li>Topic exploration with examples, case studies, and activities</li>
+  </ul>
 
-        /* Grid for cards */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            /* Change to 3 columns for better fit */
-            gap: 1rem;
-            /* Reduced gap */
-        }
+  <p style="text-align: left; max-width: 800px; margin: 0 auto 1.5rem auto;">
+    <strong>Together, we make education more personalized and effective.</strong>
+  </p>
 
-        /* --- Styles for the highlighted Healthcare card --- */
-        .healthcare-highlight {
-            background-color: #f7fbff;
-            border: 1px solid #cce5ff;
-            border-radius: 8px;
-            padding: 1rem 1.5rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
-        }
-
-        .healthcare-highlight h3 {
-            margin: 0;
-            font-size: 0.95rem;
-            font-weight: bold;
-            color: #333;
-            text-transform: uppercase;
-            flex-shrink: 0;
-        }
-
-        .healthcare-highlight p {
-            margin: 0;
-            color: #555;
-            font-size: 0.95rem;
-            line-height: 1.4;
-        }
-
-        /* --- Style for the details arrow link --- */
-        .details-arrow {
-            margin-left: auto;
-            right: 1.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #155596;
-            transition: transform 0.3s ease;
-            cursor: pointer;
-            /* Add cursor pointer */
-        }
-
-        .details-arrow:hover {
-            transform: scale(1.1);
-        }
-
-        .details-arrow svg {
-            width: 28px;
-            height: 28px;
-        }
-
-        .card {
-            padding: 0.6rem;
-            /* Reduced padding */
-            border-radius: 8px;
-            border: 1px solid #e5e7eb;
-            background: #fafafa;
-            transition: all 0.3s ease;
-            text-align: left;
-        }
-
-        .card:hover {
-            background: #f0f8ff;
-            transform: translateY(-3px);
-        }
-
-        .card h3 {
-            margin-top: 0;
-            margin-bottom: 0.2rem;
-            /* Reduced margin */
-            font-size: 0.8rem;
-            /* Smaller font size */
-            font-weight: bold;
-            color: #222;
-            text-transform: uppercase;
-        }
-
-        .card p {
-            color: #555;
-            font-size: 0.75rem;
-            /* Smaller font size */
-            line-height: 1.3;
-            margin-bottom: 0;
-        }
-
-        /* --- STYLES FOR MARKETPLACE SECTION --- */
-        .marketplace-container {
-            flex: 1;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            padding: 1.5rem 2rem;
-        }
-
-        .marketplace-columns {
-            display: flex;
-            justify-content: space-between;
-            gap: 2rem;
-        }
-
-        .marketplace-column {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .marketplace-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 0.9rem;
-            color: #374151;
-        }
-
-        .marketplace-item svg {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
-        }
-
-        /* Responsive: stack on small widths */
-        @media (max-width: 900px) {
-            .expertise-row {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .expertise-heading {
-                white-space: normal;
-                margin-bottom: 0.5rem;
-            }
-        }
-
-        /* ============== UPDATED STYLES FOR HEALTHCARE AI CARDS ============== */
-
-        .ai-innovations-container {
-            display: flex;
-            gap: 2.5rem;
-            /* Space between the two cards */
-            width: 100%;
-            max-width: 1300px;
-            /* Adjust as needed */
-            margin: 2.5rem auto 0;
-            /* Centering and top margin */
-            padding: 0 2rem;
-            box-sizing: border-box;
-        }
-
-        .ai-card {
-            flex: 1;
-            border-radius: 14px;
-            /* Slightly smaller radius */
-            padding: 1.5rem;
-            /* Smaller padding */
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-            background-color: #ffffff;
-            /* Make the box empty (white) */
-            border: 1px solid #e5e7eb;
-            /* A single, neutral border color */
-        }
-
-        .ai-card-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 0.75rem;
-            /* Tighter margin */
-        }
-
-        .ai-card-titles {
-            line-height: 1.2;
-        }
-
-        .ai-card-titles .company {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #6b7280;
-            /* Unified company name color */
-        }
-
-        .ai-card-titles .product {
-            font-size: 1.6rem;
-            /* Slightly smaller product name */
-            font-weight: 700;
-            color: #111827;
-            /* Unified product name color (dark gray) */
-        }
-
-        .ai-card .description {
-            font-size: 0.95rem;
-            /* Slightly smaller description */
-            color: #4b5563;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            /* Tighter margin */
-        }
-
-        .ai-card .key-features-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 0.8rem;
-            /* Tighter margin */
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-            /* Tighter gap */
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            background-color: #ffffff;
-            padding: 0.7rem 0.9rem;
-            /* Smaller padding */
-            border-radius: 10px;
-            border: 1px solid #e5e7eb;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: #2563eb;
-            /* Unified feature color (blue) */
-        }
-
-        .feature-item svg {
-            width: 24px;
-            height: 24px;
-        }
-    </style>
-
-    <header class="slide-header" data-id="header">
-        <h1 class="zoom-in" data-auto-animate data-auto-animate-duration="1.5"> Verticals & Categories We Serve </h1>
-        <img src="images/Logo.png" alt="Company Logo" class="company-logo" data-auto-animate
-            data-auto-animate-duration="1" />
-    </header>
-
-    <!-- Section 1: Heading on the LEFT, Box on the RIGHT -->
-    <div class="expertise-row">
-        <h2 class="expertise-heading" style="align-self: center;">OUR EXPERT<span class="gold-text">ISE</span></h2>
-        <div class="tab-container">
-            <div class="tab-header">
-                <button class="tab-button active" onclick="showTab('verticals')">Verticals</button>
-                <button class="tab-button" onclick="showTab('categories')">Categories</button>
-            </div>
-            <div id="verticals" class="tab-content active">
-                <div class="card-grid">
-                    <div class="card" style="position: relative;">
-                        <h3>Healthcare</h3>
-                        <img src="images/Health-Y.png" alt="Icon"
-                            style="position: absolute; top: -13px; right: 8px; width: 35px; height: 35px;" />
-                        <p>Streamlining patient care and administrative workflows.</p>
-                        <div style="position: absolute; bottom: 8px; right: 8px; color: #155596; cursor: pointer;"
-                            onclick="window.location.href = '#page-4a'">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="card" style="position: relative;">
-                        <h3>Finance</h3>
-                        <img src="images/Finance-Y.webp" alt="Icon"
-                            style="position: absolute; top: -13px; right: 8px; width: 45px; height: 45px;" />
-                        <p>Automating financial operations and enhancing security.</p>
-                    </div>
-                    <div class="card" style="position: relative;">
-                        <h3>Real Estate</h3>
-                        <img src="images/Realestate-Y.jpg" alt="Icon"
-                            style="position: absolute; top: -13px; right: 8px; width: 45px; height: 45px;" />
-                        <p>Simplifying property management and client interactions.</p>
-                    </div>
-                    <div class="card" style="position: relative;">
-                        <h3>Logistics</h3>
-                        <img src="images/Logistics-Y.webp" alt="Icon"
-                            style="position: absolute; top: -13px; right: 8px; width: 45px; height: 45px;" />
-                        <p>Optimizing supply chains and tracking from end to end.</p>
-                    </div>
-                    <div class="card" style="position: relative;">
-                        <h3>Education</h3>
-                        <img src="images/Education-Y.png" alt="Icon"
-                            style="position: absolute; top: -13px; right: 8px; width: 40px; height: 40px;" />
-                        <p>Personalizing learning experiences and managing institutions.</p>
-                    </div>
-                    <div class="card" style="position: relative;">
-                        <h3>HR</h3>
-                        <img src="images/HR_2.png" alt="Icon"
-                            style="position: absolute; top: -13px; right: 8px; width: 35px; height: 35px;" />
-                        <p>Improving employee lifecycle management and talent acquisition.</p>
-                    </div>
-                    <div class="card" style="position: relative;">
-                        <h3>Retail & E-commerce</h3>
-                        <img src="images/Realestate-Y.jpg" alt="Icon"
-                            style="position: absolute; top: -13px; right: 8px; width: 45px; height: 45px;" />
-                        <p>Enhancing customer shopping experiences and inventory.</p>
-                    </div>
-                    <div class="card" style="position: relative;">
-                        <h3>Manufacturing</h3>
-                        <img src="images/Manufacturing -Y.png" alt="Icon"
-                            style="position: absolute; top: -13px; right: 8px; width: 35px; height: 35px;" />
-                        <p>Boosting production efficiency and quality control.</p>
-                    </div>
-                    <div class="card" style="position: relative;">
-                        <h3>BI Agent</h3>
-                        <img src="images/BI-Y.png" alt="Icon"
-                            style="position: absolute; top: -13px; right: 8px; width: 45px; height: 45px;" />
-                        <p>Data-driven insights for decisions.</p>
-                        <div style="position: absolute; bottom: 8px; right: 8px; color: #155596; cursor: pointer;"
-                            onclick="if(typeof Reveal !== 'undefined') { Reveal.slide(7); } else { window.location.href='index.html#/7'; }">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="categories" class="tab-content">
-                <div class="card-grid">
-                    <div class="card" style="position: relative;">
-                        <h3>BI Agents</h3>
-                        <img src="images/BI-Y.png" alt="Icon"
-                            style="position: absolute; top: -13px; right: 8px; width: 40px; height: 40px;" />
-                        <p>Delivering actionable insights from complex data sets.</p>
-                    </div>
-                    <div class="card" style="position: relative;">
-                        <h3>Voice Agents</h3>
-                        <img src="images/Voice Agent.png" alt="Icon"
-                            style="position: absolute; top: -13px; right: 8px; width: 40px; height: 40px;" />
-                        <p>Providing natural, conversational voice-based assistance.</p>
-                    </div>
-                    <div class="card" style="position: relative;">
-                        <h3>Customer Support Agents</h3>
-                        <p>Resolving customer queries with speed and accuracy.</p>
-                    </div>
-
-                    <div class="card" style="position: relative;">
-                        <h3>Claims Processing Agents</h3>
-                        <img src="images/Claims Processing Agents -Y.webp" alt="Icon"
-                            style="position: absolute; top: -13px; right: 8px; width: 35px; height: 35px;" />
-                        <p>Automating the validation and processing of claims.</p>
-                    </div>
-                    <div class="card" style="position: relative;">
-                        <h3>CRM Agents</h3>
-                        <img src="images/CRM.png" alt="Icon"
-                            style="position: absolute; top: -13px; right: 8px; width: 35px; height: 35px;" />
-                        <p>Managing customer relationships and sales pipelines.</p>
-                    </div>
-                    <div class="card" style="position: relative;">
-                        <h3>Knowledge Search Agents</h3>
-                        <img src="images/KN.png" alt="Icon"
-                            style="position: absolute; top: -13px; right: 8px; width: 35px; height: 35px;" />
-                        <p>Finding and retrieving relevant information instantly.</p>
-                    </div>
-                    <div class="card" style="position: relative;">
-                        <h3>HCM Agents</h3>
-                        <img src="images/HCM.webp" alt="Icon"
-                            style="position: absolute; top: -13px; right: 8px; width: 45px; height: 45px;" />
-                        <p>Streamlining human capital management processes.</p>
-                    </div>
-                    <div class="card" style="position: relative;">
-                        <h3>ERP Agents</h3>
-                        <img src="images/ERP Agents-Y.png" alt="Icon"
-                            style="position: absolute; top: -13px; right: 8px; width:35px; height: 35px;" />
-                        <p>Integrating and managing core business operations.</p>
-                    </div>
-                    <div class="card" style="position: relative;">
-                        <h3>LLM FINE-TUNING</h3>
-                        <img src="images/LLM FINE-TUNING - Y.avif" alt="Icon"
-                            style="position: absolute; top: -13px; right: 8px; width: 35px; height: 35px;" />
-                        <p>Replacing vendor tools and SaaS subscriptions for RPA, OCR, and automation with custom
-                            Agentic AI workflows..</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Section 2: Marketplace Section -->
-    <div class="expertise-row">
-        <h2 class="expertise-heading">OUR AI MARKET<span class="gold-text">PLACE</span></h2>
-        <div class="marketplace-container">
-            <div class="marketplace-columns">
-                <div class="marketplace-column">
-                    <div class="marketplace-item"><svg viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="11" fill="#3B82F6" />
-                            <path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg><span>Interview agent</span></div>
-                    <div class="marketplace-item"><svg viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="11" fill="#3B82F6" />
-                            <path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg><span>Claim reimbursement agent</span></div>
-                    <div class="marketplace-item"><svg viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="11" fill="#3B82F6" />
-                            <path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg><span>Teams Reminder Flow using Lists & Power Automate</span></div>
-                    <div class="marketplace-item"><svg viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="11" fill="#3B82F6" />
-                            <path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg><span>Automation platform n8n</span></div>
-                </div>
-                <div class="marketplace-column">
-                    <div class="marketplace-item"><svg viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="11" fill="#3B82F6" />
-                            <path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg><span>Order processing agent</span></div>
-                    <div class="marketplace-item"><svg viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="11" fill="#3B82F6" />
-                            <path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg><span>Data quality and Anomaly agent</span></div>
-                    <div class="marketplace-item"><svg viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="11" fill="#3B82F6" />
-                            <path d="M7.5 12.5L10.5 15.5L16.5 9.5" stroke="white" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg><span>Onboarding agent</span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ====================================================================== -->
-    <!-- NEW PAGE (4-A) WITHIN THE SAME SLIDE -->
-    <!-- ====================================================================== -->
-    <div id="page-4a" style="padding-top: 0%; min-height: 100vh; scroll-margin-top: 20px;">
-        <header class="slide-header" style="position: relative;">
-            <h1 class="zoom-in"> Deep Dive into Insurance Payers (Commercial & Private) </h1>
-            <img src="images/Logo.png" alt="Company Logo" class="company-logo" />
-            <!-- Added up arrow for navigation back to main slide -->
-            <div style="position: absolute; top: 10px; right: 100px; color: #155596; cursor: pointer; z-index: 100;"
-                onclick="window.location.href = 'index.html#/3'; showMainContent()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="18 15 12 9 6 15"></polyline>
-                </svg>
-            </div>
-        </header>
-        <!-- New Heading Section (centered, matching image style) -->
-        <div
-            style="width: 100%; background: #f7f8fa; padding: 1rem 0 1.5rem 0; margin-top: 1.5rem; border-radius: 18px;">
-            <h2 style="text-align: center; font-size: 2.8rem; font-weight: 700; color: #232d39; margin-bottom: 0.5rem;">
-                AI-Powered Healthcare Innovations </h2>
-            <div style="text-align: center; font-size: 1.35rem; color: #7a8699;"> Transforming Patient Care and Personal
-                Wellness </div>
-        </div>
-        <!-- ============== NEW HEALTHCARE AI CARDS SECTION ============== -->
-        <div class="ai-innovations-container">
-            <!-- Card 1: PatientSurge AI -->
-            <div class="ai-card">
-                <div class="ai-card-header">
-                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M2 20V12.2C2 12.0895 2.08954 12 2.2 12H5.5L8 4L11.5 16L14 9L16.5 12H21.8C21.9105 12 22 12.0895 22 12.2V20H2Z"
-                            fill="#A5B4FC" />
-                        <path d="M22 20H2V21C2 21.5523 2.44772 22 3 22H21C21.5523 22 22 21.5523 22 21V20Z"
-                            fill="#4F46E5" />
-                        <path d="M5.5 12H2.2C2.08954 12 2 12.0895 2 12.2V15H5.5V12Z" fill="#4F46E5" />
-                        <path
-                            d="M5.5 12L8 4L11.5 16L14 9L16.5 12H21.8C21.9105 12 22 12.0895 22 12.2V15H16.5L14 9L11.5 16L8 4L5.5 12Z"
-                            stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <rect x="7" y="18" width="4" height="2" rx="1" fill="#A5B4FC" />
-                    </svg>
-                    <div class="ai-card-titles">
-                        <div class="company">Equality Healthcare</div>
-                        <div class="product">PatientSurge AI</div>
-                    </div>
-                </div>
-                <p class="description">
-                    An agent forecasts surges in patient admissions to dynamically allocate staff and equipment,
-                    ensuring resources are available during peak demand. It also uses real-time patient data to
-                    prioritize tasks, such as flagging high-risk cases for immediate clinical attention.
-                </p>
-                <div class="key-features-title">Key Features:</div>
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3 3v18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round"></path>
-                            <path d="M7 14l5-5 4 4 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round"></path>
-                        </svg>
-                        <span>Forecast Admission Surges</span>
-                    </div>
-                    <div class="feature-item">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round"></path>
-                            <circle cx="8.5" cy="7.5" r="4" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round"></circle>
-                            <path d="M20 8v6m3-3h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round"></path>
-                        </svg>
-                        <span>Dynamic Staff Allocation</span>
-                    </div>
-                    <div class="feature-item">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round"></path>
-                        </svg>
-                        <span>Optimize Equipment Use</span>
-                    </div>
-                    <div class="feature-item">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            </path>
-                            <line x1="12" y1="9" x2="12" y2="13" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round"></line>
-                            <line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round"></line>
-                        </svg>
-                        <span>Flag High-Risk Cases</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 2: Wellness Copilot -->
-            <div class="ai-card">
-                <div class="ai-card-header">
-                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                            stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                            fill="#A5B4FC"></path>
-                        <path d="M8 11.2353L12 14.2353L16 11.2353" stroke="#2563EB" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                    <div class="ai-card-titles">
-                        <div class="company">MVP Healthcare</div>
-                        <div class="product">Wellness Copilot</div>
-                    </div>
-                </div>
-                <p class="description">
-                    Instead of providing a static workout or meal plan, an agentic AI system continuously gathers and
-                    processes real-time data to create and adjust a hyper-personalized plan.
-                </p>
-                <div class="key-features-title">Key Features:</div>
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2.5 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round"></path>
-                            <path d="M21.5 22v-6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round"></path>
-                            <path
-                                d="M8.5 2.5a9.001 9.001 0 00-5.35 2.62M3.12 10.5A9.01 9.01 0 0012 21.5c4.14 0 7.6-2.82 8.66-6.5"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            </path>
-                        </svg>
-                        <span>Real-Time Data Processing</span>
-                    </div>
-                    <div class="feature-item">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="5" y="2" width="14" height="20" rx="2" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round"></rect>
-                            <line x1="12" y1="18" x2="12.01" y2="18" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round"></line>
-                        </svg>
-                        <span>Hyper-Personalized Plans</span>
-                    </div>
-                    <div class="feature-item">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <line x1="12" y1="2" x2="12" y2="22" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round"></line>
-                            <line x1="2" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round"></line>
-                            <line x1="5" y1="18" x2="5" y2="22" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round"></line>
-                            <line x1="19" y1="18" x2="19" y2="22" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round"></line>
-                            <line x1="5" y1="2" x2="5" y2="6" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round"></line>
-                            <line x1="19" y1="2" x2="19" y2="6" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round"></line>
-                        </svg>
-                        <span>Dynamic Workout Adjustment</span>
-                    </div>
-                    <div class="feature-item">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            </path>
-                            <path d="M22 12L12 12L12 2L6 8" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                        <span>Adaptive Meal Planning</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Add the custom JavaScript for navigation -->
-        <script>
-            // Function to show the main content and hide the healthcare page
-            function showMainContent() {
-                // Show main content
-                document.querySelector('header.slide-header[data-id="header"]').style.display = 'block';
-                document.querySelectorAll('.expertise-row').forEach(row => {
-                    row.style.display = 'flex';
-                });
-                // Hide healthcare page
-                document.getElementById('page-4a').style.display = 'none';
-                // Reset tabs
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-                document.getElementById('verticals').classList.add('active');
-                document.querySelector('.tab-button:first-child').classList.add('active');
-            }
-
-            // When page loads, check if we need to hide/show certain elements
-            document.addEventListener('DOMContentLoaded', function() {
-                // Check if we're directly accessing a specific section via hash
-                if (window.location.hash === '#page-4a') {
-                    // Hide main content
-                    document.querySelector('header.slide-header[data-id="header"]').style.display = 'none';
-                    document.querySelectorAll('.expertise-row').forEach(row => {
-                        row.style.display = 'none';
-                    });
-                    // Show healthcare page
-                    document.getElementById('page-4a').style.display = 'block';
-                } else {
-                    // Ensure proper display when loading the main page directly
-                    showMainContent();
-                }
-            });
-
-            // Listen for hash changes to handle navigation
-            window.addEventListener('hashchange', function() {
-                if (window.location.hash === '#page-4a') {
-                    // Hide main content
-                    document.querySelector('header.slide-header[data-id="header"]').style.display = 'none';
-                    document.querySelectorAll('.expertise-row').forEach(row => {
-                        row.style.display = 'none';
-                    });
-                    // Show healthcare page
-                    document.getElementById('page-4a').style.display = 'block';
-                } else if (window.location.hash === '' || window.location.hash === '#') {
-                    showMainContent();
-                }
-            });
-        </script>
-    </div>
+  <a href="#" class="demo-button">▶ Watch Demo</a>
 </section>

@@ -1,351 +1,317 @@
-<section class="index-slide-fusefy" data-auto-animate>
+<section class="index-slide" data-auto-animate>
   <style>
-    /* --- ORIGINAL STYLES (UNCHANGED) --- */
-    .index-slide-fusefy {
-      position: relative;
+    /* General Section Font */
+    .ai-adoption-section {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
-    .tagline-fusefy {
-      position: absolute;
-      top: 70px;
-      left: 5%;
-      transform: translateX(-50%);
-      text-align: center;
-      font-size: 29px;
-      font-weight: bold;
-      color: #052260;
-      line-height: 1.4;
-      width: 90%;
-    }
-
-    .tagline-fusefy span {
-      color: #0a3ab6;
-    }
-
-    .subtext-fusefy {
-      position: absolute;
-      top: 195px;
-      left: 15%;
-      transform: translateX(-50%);
-      text-align: center;
-      font-size: 17px;
-      color: #3b3a3a;
-      line-height: 1.6;
-      width: 80%;
-      max-width: 900px;
-    }
-
-    /* Timeline */
-    .timeline-fusefy {
-      position: absolute;
-      top: 280px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 55%;
-      height: 2px;
-      background: #dcdfe6;
-    }
-
-    .timeline-fusefy .circle-fusefy {
-      position: absolute;
-      top: -10px;
-      width: 20px;
-      height: 20px;
-      background: #fff;
-      border: 2px solid #dcdfe6;
-      border-radius: 50%;
-    }
-
-    .timeline-fusefy .circle-fusefy:nth-child(1) {
-      left: 0%;
-      border-color: #f97316;
-    }
-
-    .timeline-fusefy .circle-fusefy:nth-child(2) {
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .timeline-fusefy .circle-fusefy:nth-child(3) {
-      right: 0%;
-      border-color: #2563eb;
-    }
-
-    /* Step buttons */
-    .steps-fusefy {
-      position: absolute;
-      top: 270px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      width: 80%;
-      max-width: 1000px;
-    }
-
-    .step-fusefy {
-      flex: 0 1 300px;
-      text-align: center;
-      padding: 14px 18px;
-      border-radius: 10px;
-      font-weight: bold;
-      font-size: 16px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .step-fusefy.orange {
-      background: #f97316;
-      color: #fff;
-    }
-
-    .step-fusefy.white {
-      background: #fff;
-      border: 1px solid #ddd;
-      color: #000;
-    }
-
-    .step-fusefy.blue {
-      background: #2563eb;
-      color: #fff;
-    }
-
-    /* --- NEW SMALL FEATURES SECTION --- */
-    .stats-fusefy {
-      position: absolute;
-      top: 420px;
-      left: 50%;
-      transform: translateX(-50%);
+    /* Main Wrapper */
+    .ai-adoption-wrapper {
+      background: linear-gradient(to right, #f0f6ff 30%, #ffffff 70%);
+      padding: 60px 40px;
+      margin-top: 40px;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      width: 80%;
-      max-width: 1000px;
-      margin-top: 20px;
-    }
-
-    .stat-card {
-      background: #f8fbfd;
-      border-radius: 10px;
-      padding: 14px 22px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-      min-width: 200px;
-      font-size: 15px;
-      font-weight: 600;
-      color: #1b1b1b;
-    }
-
-    .stat-card .icon {
-      color: #2196f3;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    /* --- UPDATED FEATURE SECTION (TWO BIG BOXES) --- */
-    .features-fusefy {
-      position: absolute;
-      top: 370px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      justify-content: center;
-      align-items: stretch;
-      gap: 5%;
-      width: 70%;
-      max-width: 920px;
-    }
-
-    .feature-fusefy {
-      flex: 0 1 400px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
-      padding: 20px;
-      height: auto;
+      box-sizing: border-box;
       text-align: left;
-      border: 1px solid #eee;
+      overflow: hidden;
     }
 
-    .feature-fusefy.old-way {
-      background: #fff5f5;
-      border: 1px solid #fbcaca;
+    .ai-adoption-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      width: 100%;
+      gap: 60px;
     }
 
-    .feature-fusefy.new-way {
-      background: #f5fff8;
-      border: 1px solid #b7f1c8;
+    /* LEFT - Intro Section */
+    .intro-text {
+      flex: 1;
+      max-width: 400px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeSlideUp 1.2s ease-out forwards;
+      animation-delay: 0.3s;
     }
 
-    .feature-fusefy h3 {
-      margin: 0 0 12px;
-      font-size: 18px;
+    .blue-line {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(to right, #0052ff, #a2c1ff);
+      margin-bottom: 20px;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: growLine 1s ease-out forwards;
+      animation-delay: 0.2s;
+    }
+
+    .intro-text h2 {
+      font-size: 36px;
       font-weight: 700;
+      color: #1c2e4a;
+      line-height: 1.3;
+      margin: 0 0 20px 0;
     }
 
-    .feature-fusefy.old-way h3 {
-      color: #d32f2f;
+    .intro-text p {
+      font-size: 16px;
+      color: #5a677d;
+      line-height: 1.6;
     }
 
-    .feature-fusefy.new-way h3 {
-      color: #1b5e20;
+    .no-hype {
+      color: #0052ff;
+      font-weight: 600;
     }
 
-    .feature-fusefy ul {
-      list-style: none;
-      padding: 0;
+    /* RIGHT - Steps Flow */
+    .steps-flow {
+      flex: 1.2;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      opacity: 0;
+      transform: translateX(40px);
+      animation: fadeSlideLeft 1s ease-out forwards;
+    }
+
+    /* Step Animations (delay each step) */
+    .step-item:nth-child(1) { animation-delay: 0.6s; }
+    .step-item:nth-child(3) { animation-delay: 1.2s; }
+    .step-item:nth-child(5) { animation-delay: 1.8s; }
+
+    .step-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transform: scale(0.5);
+      opacity: 0;
+      animation: popIn 0.8s ease-out forwards;
+    }
+
+    .step-item:nth-child(1) .step-icon { animation-delay: 0.7s; }
+    .step-item:nth-child(3) .step-icon { animation-delay: 1.3s; }
+    .step-item:nth-child(5) .step-icon { animation-delay: 1.9s; }
+
+    .icon-ideation { background-color: #0052ff; }
+    .icon-foundry { background-color: #192b69; }
+    .icon-audit { background-color: #f7a600; }
+
+    .step-content h3 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+    }
+
+    .title-ideation { color: #0052ff; }
+    .title-foundry { color: #192b69; }
+    .title-audit { color: #f7a600; }
+
+    .step-content p {
+      font-size: 16px;
+      color: #5a677d;
+      line-height: 1.6;
       margin: 0;
     }
 
-    .feature-fusefy ul li {
+    /* Arrows with bounce effect */
+    .arrow {
+      height: 40px;
+      width: 64px;
       display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-      font-size: 15px;
-      color: #333;
-    }
-
-    .feature-fusefy.old-way ul li::before {
-      content: "✘";
-      color: #d32f2f;
-      font-weight: bold;
-    }
-
-    .feature-fusefy.new-way ul li::before {
-      content: "✔";
-      color: #1b5e20;
-      font-weight: bold;
-    }
-
-    /* --- NEW ANIMATION STYLES --- */
-    @keyframes fadeInScale {
-      from {
-        opacity: 0;
-        transform: scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-    
-    @keyframes growFromCenter {
-      from {
-        transform: translateX(-50%) scaleX(0);
-      }
-      to {
-        transform: translateX(-50%) scaleX(1);
-      }
-    }
-
-    .tagline-fusefy,
-    .subtext-fusefy,
-    .timeline-fusefy,
-    .timeline-fusefy .circle-fusefy,
-    .step-fusefy,
-    .stat-card,
-    .feature-fusefy {
+      margin: 8px 0;
       opacity: 0;
+      animation: fadeIn 1s ease-out forwards, bounce 1.5s infinite ease-in-out;
     }
 
-    .tagline-fusefy {
-      animation: fadeInScale 0.8s ease-out forwards;
-      animation-delay: 1.6s;
+    .arrow:nth-of-type(1) { animation-delay: 1s, 2s; }
+    .arrow:nth-of-type(2) { animation-delay: 1.6s, 2.6s; }
+
+    /* Animations */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .subtext-fusefy {
-      animation: fadeInScale 0.8s ease-out forwards;
-      animation-delay: 1.9s;
+    @keyframes fadeSlideLeft {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
-    .timeline-fusefy {
-      animation: growFromCenter 0.7s ease-out forwards;
-      animation-delay: 2.3s;
+    @keyframes popIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
 
-    .timeline-fusefy .circle-fusefy {
-      animation: fadeInScale 0.5s ease-out forwards;
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
-    .timeline-fusefy .circle-fusefy:nth-child(1) { animation-delay: 2.7s; }
-    .timeline-fusefy .circle-fusefy:nth-child(2) { animation-delay: 2.8s; }
-    .timeline-fusefy .circle-fusefy:nth-child(3) { animation-delay: 2.9s; }
 
-    .step-fusefy {
-      animation: fadeInScale 0.6s ease-out forwards;
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
-    .steps-fusefy .step-fusefy:nth-child(1) { animation-delay: 3.2s; }
-    .steps-fusefy .step-fusefy:nth-child(2) { animation-delay: 3.4s; }
-    .steps-fusefy .step-fusefy:nth-child(3) { animation-delay: 3.6s; }
 
-    .stat-card {
-      animation: fadeInScale 0.6s ease-out forwards;
+    @keyframes growLine {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
     }
-    .stats-fusefy .stat-card:nth-child(1) { animation-delay: 3.8s; }
-    .stats-fusefy .stat-card:nth-child(2) { animation-delay: 4.0s; }
-    .stats-fusefy .stat-card:nth-child(3) { animation-delay: 4.2s; }
-    .stats-fusefy .stat-card:nth-child(4) { animation-delay: 4.4s; }
 
-    .feature-fusefy {
-      animation: fadeInScale 0.6s ease-out forwards;
+    /* Responsive */
+    @media (max-width: 992px) {
+      .ai-adoption-wrapper { padding: 40px 20px; }
+      .ai-adoption-container { flex-direction: column; text-align: center; }
+      .intro-text { margin-bottom: 50px; max-width: 100%; }
+      .blue-line { margin-left: auto; margin-right: auto; }
+      .steps-flow { align-items: center; }
+      .step-item { flex-direction: column; text-align: center; align-items: center; gap: 15px; }
     }
-    .features-fusefy .feature-fusefy:nth-child(1) { animation-delay: 4.7s; }
-    .features-fusefy .feature-fusefy:nth-child(2) { animation-delay: 4.9s; }
   </style>
 
-  <header class="slide-header" data-id="header">
-    <h1 class="zoom-in" data-auto-animate data-auto-animate-duration="1.5">What is Fusefy ?</h1>
-    <img src="images/Logo.png" alt="Company Logo" class="company-logo" data-auto-animate
-      data-auto-animate-duration="1" />
-  </header>
-
-  <!-- Main tagline -->
-  <div class="tagline-fusefy">
-    Launch Agentic AI solutions in <span>Days, Not Months, On Your </span><br />
-    Platforms with <span>AI Adoption As Service <br> (AIaaS)</span>
+  <header class="slide-header" data-id="header" style="display: flex; align-items: center; justify-content: space-between;">
+  <h1 class="zoom-in" data-auto-animate data-auto-animate-duration="1.5" style="margin: 0;">
+    3 Steps to AI Success
+  </h1>
+  <div style="display: flex; align-items: center;">
+    <!-- Slide 7 Navigation Button - now BEFORE the logo -->
+    <a href="javascript:void(0);"
+       onclick="if(typeof Reveal !== 'undefined') { Reveal.slide(6); } else { window.location.href='index.html#/6'; }"
+       style="display: inline-block; margin-right: 12px; vertical-align: middle;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="#1a73e8" style="cursor: pointer;">
+        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+      </svg>
+    </a>
+    <img
+      src="images/Logo.png"
+      alt="Company Logo"
+      class="company-logo"
+      data-auto-animate
+      data-auto-animate-duration="1"
+      style="vertical-align: middle;"
+    />
   </div>
+</header>
 
-  <!-- Sub paragraph -->
-  <div class="subtext-fusefy">
-    Turn your ideas into secure, explainable AI agents and workflows inside Jira—no new tools,
-    just faster go-to-market with the platforms you already trust.
-  </div>
+  <!-- Animated AI Adoption Section -->
+  <div class="ai-adoption-wrapper">
+    <div class="ai-adoption-container">
+      <!-- Intro -->
+      <div class="intro-text">
+        <div class="blue-line"></div>
+        <h2>3 Steps for Rapid<br>Enterprise AI Adoption<br>with ROI</h2>
+        <p>A pragmatic, <span class="no-hype">no-hype</span> approach to help enterprises adopt AI efficiently and at scale.</p>
+      </div>
 
+      <!-- Steps -->
+      <div class="steps-flow">
+        <!-- Step 1 -->
+        <div class="step-item">
+          <div class="step-icon icon-ideation">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 
+                  2 0 0 1 0 2.83 2 2 0 0 
+                  1-2.83 0l-.06-.06a1.65 1.65 
+                  0 0 0-1.82-.33 1.65 1.65 0 
+                  0 0-1 1.51V21a2 2 0 0 
+                  1-2 2 2 2 0 0 1-2-2v-.09A1.65 
+                  1.65 0 0 0 9 19.4a1.65 1.65 
+                  0 0 0-1.82.33l-.06.06a2 2 0 
+                  0 1-2.83 0 2 2 0 0 1 
+                  0-2.83l.06-.06a1.65 1.65 0 
+                  0 0 .33-1.82 1.65 1.65 0 
+                  0 0-1.51-1H3a2 2 0 0 
+                  1-2-2 2 2 0 0 1 2-2h.09A1.65 
+                  1.65 0 0 0 4.6 9a1.65 1.65 
+                  0 0 0-.33-1.82l-.06-.06a2 
+                  2 0 0 1 0-2.83 2 2 0 0 
+                  1 2.83 0l.06.06a1.65 1.65 
+                  0 0 0 1.82.33H9a1.65 1.65 
+                  0 0 0 1-1.51V3a2 2 0 0 
+                  1 2-2 2 2 0 0 1 2 
+                  2v.09a1.65 1.65 0 0 
+                  0 1 1.51 1.65 1.65 0 0 
+                  0 1.82-.33l.06-.06a2 
+                  2 0 0 1 2.83 0 2 2 0 0 
+                  1 0 2.83l-.06.06a1.65 
+                  1.65 0 0 0-.33 1.82V9a1.65 
+                  1.65 0 0 0 1.51 1H21a2 
+                  2 0 0 1 2 2 2 2 0 0 
+                  1-2 2h-.09a1.65 1.65 0 
+                  0 0-1.51 1z">
+              </path>
+            </svg>
+          </div>
+          <div class="step-content">
+            <h3 class="title-ideation">Fusefy AI Ideation Studio</h3>
+            <p>Seamlessly engage with business and identify high ROI use cases and build roadmap.</p>
+          </div>
+        </div>
 
-  <!-- Step buttons -->
-  <div class="steps-fusefy">
-    <div class="step-fusefy orange">16 +Hours </div>
-    <div class="step-fusefy white">2+ Weeks</div>
-    <div class="step-fusefy blue">1+ month production launch</div>
-  </div>
+        <!-- Arrow -->
+        <div class="arrow">
+          <svg width="18" height="30" viewBox="0 0 18 30" fill="#e0e0e0">
+            <path d="M8 0H10V20H15L9 29L3 20H8V0Z" />
+          </svg>
+        </div>
 
+        <!-- Step 2 -->
+        <div class="step-item">
+          <div class="step-icon icon-foundry">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <path
+                d="M12 15.5a3.5 3.5 0 0 0 3.5-3.5c0-1.93-1.57-3.5-3.5-3.5a3.5 3.5 0 
+                0 0-2.47 1.03">
+              </path>
+            </svg>
+          </div>
+          <div class="step-content">
+            <h3 class="title-foundry">Fusefy AI Foundry</h3>
+            <p>Build your ideas in any AI platform of your choice rapidly with state of art low-code models.</p>
+          </div>
+        </div>
 
-  <!-- Updated Feature Cards -->
-  <div class="features-fusefy">
-    <div class="feature-fusefy old-way">
-      <h3>AI modernization</h3>
-      <ul>
-        <li>Ditch rigid, expensive RPA tools and  subscriptions.</li>
-        <li>Stop siloed, manual workflows.</li>
-        <li>Uplift your OCR engines AI with latest GenAI models.</li>
-        <li>End vendor lock-in forever.</li>
-        <!-- <li>Custom connectors, scripts, and APIs</li> -->
-      </ul>
-    </div>
+        <!-- Arrow -->
+        <div class="arrow">
+          <svg width="18" height="30" viewBox="0 0 18 30" fill="#e0e0e0">
+            <path d="M8 0H10V20H15L9 29L3 20H8V0Z" />
+          </svg>
+        </div>
 
-    <div class="feature-fusefy new-way">
-      <h3>Agentic AI Workflows</h3>
-      <ul>
-        <li>Goal-oriented AI automation</li>
-        <li>Custom LLMs to Private → LLMs Proprietary data fuels your AI.</li>
-        <li>Your AI, your workflows</li>
-        <li>Your workflows adapt instantly</li>
-        <li>Total control of your workflows.</li>
-      </ul>
+        <!-- Step 3 -->
+        <div class="step-item">
+          <div class="step-icon icon-audit">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <div class="step-content">
+            <h3 class="title-audit">Fusefy AI Audit Suite</h3>
+            <p>Continuously measure model performance, security and safety features to comply with regulatory and security standards.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
